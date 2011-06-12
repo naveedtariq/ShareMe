@@ -1,0 +1,19 @@
+%span.span-24.last.title
+  %h2= title "Set your password"
+= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f|
+  = devise_error_messages!
+  = f.hidden_field :invitation_token
+  %div.span-24.last
+    = f.label :name, :class => "title span-5"
+    = f.text_field :name, :class => "text column"
+  %div.span-24.last
+    = f.label :phone, :class => "title span-5"
+    = f.text_field :phone, :class => "text column"
+
+  %div.span-24.last
+    = f.label :password, :class => "title span-5"
+    = f.password_field :password
+  %div.span-24.last
+    = f.label :password_confirmation, :class => "title span-5"
+    = f.password_field :password_confirmation
+  %p= f.submit "Set my password"

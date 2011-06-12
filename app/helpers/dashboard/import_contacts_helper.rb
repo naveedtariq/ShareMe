@@ -1,0 +1,2 @@
+module Dashboard::ImportContactsHelper
+end

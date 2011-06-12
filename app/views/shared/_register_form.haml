@@ -1,0 +1,16 @@
+= form_for((@user||User.new), :as => :user, :url => registration_path(:user)) do |f|
+  %fieldset.column
+    %label.column.span-8.last
+      Gets yours: Its FREE
+
+    %div.column
+      = f.email_field :email, :class => "", :"data-stub" => t("stub_your_email"), :value => t("stub_your_email")
+    %div.column
+      = f.text_field :name, :class => "", :"data-stub" => t("stub_your_name"), :value => t("stub_your_name")
+    %button.jquery-button.register-button.right.column
+      Register
+
+
+    %div.span-8.column.facebook
+      = link_to "", omniauth_authorize_path(:user, :facebook), :class => "column facebook-link", :title =>"Facebook"
+

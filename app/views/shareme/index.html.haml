@@ -1,0 +1,36 @@
+%span.span-24.last.title
+  Your 4 digit ShareMe pin shares your most basic contact information with anyone and everyone you choose!
+%section.column.span-14.left-column
+  %span.prepend-1.span-11
+    Got the wrong email or phone number? A missed connection? Now just ShareMe ~ heck it's only 4 digit
+  = image_tag "share-me-content.png", :class => "column", :alt => "ShareMe it"
+  %span.prepend-1.span-12
+    How wrong can someone be when writing down your 4 digits ShareMe pin # instead of your phone # and or E-mail?
+    Now just ShareMe. Correct details all the time, every time!
+
+%section.column.span-10.right-column.last
+  %article.search-form.column.span-10.last
+    = form_tag shareme_code_path do
+      %fieldset.column
+        %label.column.span-9.last.get-their
+          = image_tag "getstheir.png", :class => "column", :alt => "Get Their ShareMe"
+        = text_field_tag :code, t("stub_enter_pin"), :class => "column", :"data-stub" => t("stub_enter_pin")
+        %button.jquery-button.find-button.column
+          Find
+
+
+  %article.getsfree-form.column.span-8.last
+    = render :partial => "shared/register_form"
+%section.column.span-23.last.prepend-1.bottom-content
+  %article.column.oneblock.last
+    %header.column
+      Testimonials
+    How wrong can someone be when writing down your 4 digits ShareMe pin # instead of your phone.
+  %article.column.oneblock.last
+    %header.column
+      Testimonials
+    How wrong can someone be when writing down your 4 digits ShareMe pin # instead of your phone.
+  %article.column.oneblock.last
+    %header.column
+      Testimonials
+    How wrong can someone be when writing down your 4 digits ShareMe pin # instead of your phone.

@@ -1,0 +1,15 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  send_an_invitation: Send an invitation
+  save: Save
+  sign_up: Sign up
+  sing_in: Sing ip
+  show: Show
+  delete: Delete
+  successfully: Successfully
+  confirm_delete: Delete?
+  stub_enter_pin: ENTER CONTACTS SHAREME PIN HERE
+  stub_your_email: YOUR EMAIL
+  stub_your_name: YOUR NAME

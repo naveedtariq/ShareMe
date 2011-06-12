@@ -1,0 +1,65 @@
+- content_for :head do
+  = javascript_include_tag "http://maps.google.com/maps/api/js?v=3.3&sensor=false"
+%span.span-24.last.title
+  %h2= title "Map"
+  = render "shared/user_menu"
+%section
+  %div#map{:style => "height: 500px;"}
+%div{:style => "display:none; position: absolute;", :id => "map-tooltip"}
+  %div{:id => "map-tooltip-content"}
+  = link_to "Info" , "", :class =>  " bottom map-tooltip-link", :id =>  "map-tooltip-user-info"
+  = link_to "close" , "", :class =>  " prepend-3 bottom last map-tooltip-link", :id =>  "map-tooltip-close"
+
+
+:javascript
+  $(function(){
+
+  $("#map-tooltip-close").click(function(){
+    $("#map-tooltip").hide(); return false;
+  });
+
+  var geocoder = new google.maps.Geocoder();
+  var center = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
+
+  var map = new google.maps.Map( document.getElementById("map"), {
+                              "center": center,	zoom: 2, "mapTypeId": google.maps.MapTypeId.ROADMAP 	});
+
+  var tooltip = function(marker){
+    var scale = Math.pow(2, map.getZoom());
+    var nw = new google.maps.LatLng( map.getBounds().getNorthEast().lat(), map.getBounds().getSouthWest().lng() );
+    var worldCoordinateNW = map.getProjection().fromLatLngToPoint(nw);
+    var worldCoordinate = map.getProjection().fromLatLngToPoint(marker.getPosition());
+    var pixelOffset = new google.maps.Point(
+            Math.floor((worldCoordinate.x - worldCoordinateNW.x) * scale),
+            Math.floor((worldCoordinate.y - worldCoordinateNW.y) * scale)
+       );
+
+    $("#map-tooltip").css({left: pixelOffset.x+50, top: pixelOffset.y+90})
+    $("#map-tooltip-content").html(marker.userInfo);
+    $("#map-tooltip-user-info").attr("href", marker.url);
+    $("#map-tooltip").show();
+
+  };
+
+
+    var user_data = #{@contacts_data.to_json};
+
+   var geocoder = new google.maps.Geocoder();
+
+    for (_i = 0, _len = user_data.length; _i < _len; _i++) {
+      (function(data){
+        geocoder.geocode( {'address': data["address"], 'language': 'en'}, function(results, status){
+           if (status == "OK"){
+             var position = new google.maps.LatLng(results[0].geometry.location.ua, results[0].geometry.location.wa);
+             map.setCenter(position);
+             var marker = new google.maps.Marker({ position: position,
+                                                        map: map, title: data["title"],
+                                                  draggable: false, userInfo: data["info"], url: data["url"] });
+                 google.maps.event.addListener(marker, 'click', function() {tooltip(marker); });
+           };
+        });
+      })(user_data[_i])
+     }
+
+
+  });

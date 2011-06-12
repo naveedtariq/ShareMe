@@ -1,0 +1,26 @@
+!!!
+%html{ :lang => "en" }
+  %head
+    = display_meta_tags :site => Settings.app_name, :description => 'ShareMe', :keywords => 'ShareMe'
+    = stylesheet_link_tag :all
+    = stylesheet_link_tag 'compiled/screen.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'compiled/style.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'compiled/print.css', :media => 'print'
+    = stylesheet_link_tag 'compiled/jqrowl.css', :media => 'screen, projection'
+    /[if IE]
+      = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
+
+    = javascript_include_tag :defaults
+    = javascript_include_tag "jquery.reveal"
+    = csrf_meta_tag
+    = yield :head
+  %body
+
+    %section.wrap-header
+      = render :partial => "shared/header_layout"
+    %section.wrap
+      .container
+        %section.span-24.column#content
+          = yield
+    %section.wrap-footer
+      = render :partial => "shared/footer"

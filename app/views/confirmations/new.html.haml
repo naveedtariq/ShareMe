@@ -1,0 +1,15 @@
+%span.span-24.last.title
+  %h2= title "Resend confirmation instructions"
+= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
+  = devise_error_messages!
+  %div.span-22.last
+    = f.label :email, :class => "title span-9 column"
+    = f.email_field :email, :class => "text column"
+  %div.span-22.last
+    %p.span-10.prepend-8.column
+      %button.jquery-button.conformition-button
+        Resend confirmation instructions
+  %p
+    %p.span-7.column
+    %p.column
+      = render :partial => "devise/shared/links"

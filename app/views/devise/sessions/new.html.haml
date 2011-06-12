@@ -1,0 +1,31 @@
+%span.span-24.last.title
+  - unless shareme_code.blank?
+    %h4.span-22.last
+      = "Are You Human? #{ shareme_code } wants to ShareMe!"
+    %h4.span-22.last
+      = "To get #{ shareme_code } contact details please confirm you are in fact human and not a Robot, Alien or Gremlin!"
+  - else
+    %span= title "Sign in"
+
+= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  %div.span-22.last
+    = f.label :email, :class => "title span-9 column"
+    = f.email_field :email, :class => "text column"
+  %div.span-22.last
+    = f.label :password, :class => "title span-9 column"
+    = f.password_field :password, :class => "text column"
+  - if devise_mapping.rememberable?
+    %div.span-22.last
+      = f.label :remember_me, :class => "title span-9 column"
+      = f.check_box :remember_me, :class => "column"
+
+  %div.span-22.last
+    %p.span-9.prepend-9.column
+      %button.jquery-button.sign-in-button
+        = t("sign_in")
+      %button{ :class => "jquery-button sign-in-button", :type => "button", :id => "signup-button"}
+        = t("sign_up")
+  %p
+    %p.span-7.column
+    %p.column
+      = render :partial => "devise/shared/links"

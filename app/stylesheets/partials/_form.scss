@@ -1,0 +1,83 @@
+// Only apply the blueprint form styles to forms with
+// a class of "bp". This makes it easier to style
+// forms from scratch if you need to.
+
+form {
+  @include blueprint-form; 
+}
+
+.float-left {
+  float:left !important;
+}
+input {
+  float:left !important;
+}
+select {
+  float:left !important;
+  height:24px;
+  margin: {
+    top: 10px !important;
+    bottom: 9px !important;
+  }
+}
+textarea {
+  float:left !important;
+}
+input[type="file"] {
+  height:25px;
+  margin: {
+    top: 10px;
+    bottom: 9px;
+  }
+}
+.login-form {
+  margin-top: 60px;
+  textarea {
+    height:80px !important;
+  }
+  p {
+    width: 280px;
+    line-height: 20px;
+    height:22px;
+    float:left;
+    margin: 0 0 0 5px;
+  }
+  #user_avatar {
+    line-height: 42px;
+    height: 42px; 
+  }
+  label {
+    line-height: 40px;
+  }
+  #user_short_description_input {
+    label {
+      line-height: 76px;
+    }
+  }
+  #user_description_input {
+    label {
+      line-height: 76px;
+    }
+  }
+}
+.reg-form {
+  @extend .login-form;
+}
+.textarea {
+  height:106px !important;
+}
+form {
+  div {
+    a {
+      float:right;
+      margin:10px 5px;
+      line-height:26px;
+    }
+  }
+}
+#user_new {
+  .login_remember {
+    line-height: 25px;
+    margin-left: 5px;
+  }
+}

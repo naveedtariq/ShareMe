@@ -1,0 +1,26 @@
+%span.span-24.last.title
+  = title "Public user profile"
+  = render "shared/user_menu"
+
+%section.span-24.column.left-column
+
+  %table
+    %tr
+      %td Name
+      %td= @user.full_name
+    %tr
+      %td ShareMe code
+      %td= @user.code
+    %tr
+      %td Phone number
+      %td= @user.phone
+    %tr
+      %td email
+      %td= @user.email
+    %tr
+      %td Company
+      %td= with_blank_tmpl @user.profile_company
+    %tr
+      %td Address
+      %td= with_blank_tmpl @user.address
+

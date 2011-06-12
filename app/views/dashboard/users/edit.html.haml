@@ -1,0 +1,32 @@
+%span.span-24.last.title
+  %h2= title "My Account"
+  = link_to "My Account",  dashboard_users_path
+  = render "shared/user_menu"
+= form_for(current_user, :url => dashboard_users_path, :html => {:method => :put}) do |f|
+  - current_user.profile || current_user.build_profile
+  =  error_messages!(f.object)
+  = f.fields_for :profile  do |profile_fields|
+    %div.span-20.last
+      = profile_fields.label :first_name, :class => "span-5"
+      = profile_fields.text_field :first_name
+
+    %div.span-20.last
+      = profile_fields.label :last_name, :class => "span-5"
+      = profile_fields.text_field :last_name
+
+    %div.span-20.last
+      = f.label :phone, :class => "span-5"
+      = f.phone_field :phone, :class => "required text"
+
+    %div.span-20.last
+      = profile_fields.label :company, :class => "span-5"
+      = profile_fields.text_field :company
+
+    %div.span-20.last
+      = f.label :address, :class => "span-5"
+      = f.text_field :address
+    %div.span-22.last
+      %p.span-5.prepend-5.column
+        %button.jquery-button.button-length-100= t "save"
+
+

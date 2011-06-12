@@ -1,0 +1,14 @@
+en:
+  controllers:
+    profile_updated: "ShareMe profile updated"
+  dhb: # dashboard
+    codes:
+      create:
+        notice: Congrats! You just got a new ShareMe. Tell your friends.
+    contacts:
+      destroy:
+        not_found: Contact not found
+      create:
+        success: Contact added.
+        not_found: Contact not found
+        invalid_captcha: Invalid captcha

@@ -1,0 +1,22 @@
+---
+defaults: &defaults
+  app_name: ShareMe
+  encryption_key: '123456'
+  recaptcha:
+    pub: 6LfzDsQSAAAAAD9FbWYc_3hyLxWyEHhXAn3G8DDT
+    priv: 6LfzDsQSAAAAALmwyOfQSoVk_k_RMzPa3zqhSE-L
+  facebook:
+    app_id: 176485969058177
+    app_secret: d5883469ab10f4752067ea15b9aabf8d
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  encryption_key: 'JE<mmksadqwIDSAl'
+  facebook:
+    app_id: 188878237826676
+    app_secret: 19f61a5fd23ff9447881e7a49e8a7091

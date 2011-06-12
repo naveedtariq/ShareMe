@@ -1,0 +1,12 @@
+%span.span-24.last.title
+  %h2= title "Send invitation"
+  = render "shared/user_menu"
+= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:id => ""} do |f|
+  = devise_error_messages!
+  %div.span-20.last
+    = f.label :email, :class => "span-5"
+    = f.email_field :email
+  %div.span-22.last
+    %p.span-5.prepend-5.column
+      %button.jquery-button.button-length-250
+        = t "send_an_invitation"

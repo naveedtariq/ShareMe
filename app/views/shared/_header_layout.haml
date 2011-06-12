@@ -1,0 +1,7 @@
+%div.container
+  %header.span-24.column#header
+    %span.column.prepend-4.last
+      Simplify how you connect
+    = link_to root_path, :class => "span-8 last", :title => "Our Logo" do
+      = image_tag "logo.png", :class => "column", :alt => "OurLogo"
+  = render :partial => "shared/flash_notify"

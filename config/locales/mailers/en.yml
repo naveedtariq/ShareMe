@@ -1,0 +1,5 @@
+en:
+  mailers:
+    notification:
+      subject:
+        change_code: "User %{user_name} changed ShareMe code."

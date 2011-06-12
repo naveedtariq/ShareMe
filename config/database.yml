@@ -1,0 +1,19 @@
+development:
+  adapter: sqlite3
+  encoding: utf8
+  reconnect: false
+  database: share-me_development
+  pool: 5
+  username: root
+  password: 
+  host: localhost
+
+production:
+  adapter: sqlite3
+  encoding: utf8
+  reconnect: false
+  database: share-me_production
+  pool: 5
+  username: root
+  password: 
+  host: localhost

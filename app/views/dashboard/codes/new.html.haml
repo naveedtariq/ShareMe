@@ -1,0 +1,17 @@
+%span.span-24.last.title
+  %h2 Generation of ShareMe code
+  = render "shared/user_menu"
+= form_for(@user, :url => dashboard_codes_path, :html => {:method => :post}) do |f|
+  =  error_messages!(f.object)
+  %div.span-20.last
+    = f.label :code, "New code", :class => "title span-9 column"
+    = f.text_field :code, :maxlength => 4, :class => "text required"
+  %div.span-20.last
+    = label_tag :similar_code, "Similar code", :class => "title span-9 column"
+    %ul.span-5
+      - @simular_code.each do |s_code|
+        %li= link_to s_code, "", :class => "select-code"
+  %div.span-22.last
+    %p.span-5.prepend-12.column
+      %button.jquery-button.button-length-100
+        = t "save"

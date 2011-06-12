@@ -1,0 +1,19 @@
+%span.span-24.last.title
+  %h2= title "Please fill the form with all mandatory data"
+= form_for(@user, :url => finish_register_path, :html => {:method => :put}) do |f|
+  = error_messages!(f.object)
+  %div.span-20.last
+    = f.label :phone, :class => "span-5 title"
+    = f.phone_field :phone, :class => "text required"
+  %div.span-20.last
+    = f.label :password, :class => "span-5 title"
+    = f.password_field :password, :class => "text required"
+  %div.span-20.last
+    = f.label :password_confirmation, "Password (again)", :class => "span-5 title"
+    = f.password_field :password_confirmation, :class => "text required"
+  %div.span-22.last
+    %p.span-5.prepend-5.column
+      %button.jquery-button.button-length-100= t "save"
+
+
+

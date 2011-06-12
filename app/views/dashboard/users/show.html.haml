@@ -1,0 +1,35 @@
+%span.span-24.last.title
+  %h2= title "My Account"
+  = link_to "Edit", edit_dashboard_users_path, :class => "small sub"
+  |
+  = render "shared/user_menu"
+%section.span-24.column.left-column
+  %div.span-20
+    %span ShareMe code:
+    %em= current_user.code.upcase
+  %div.span-20
+    %span Full name:
+    %em= current_user.full_name
+  %div.span-20
+    %span Email:
+    %em= current_user.email
+  %div.span-20
+    %span Phone Number:
+    %em= current_user.phone
+  %div.span-20
+    %span Company Name:
+    %em= current_user.profile_company
+
+  %div.span-20
+    %span Adress:
+    %em= current_user.address
+  -# - [ :google, :facebook, :twitter, :skype, :linkedin ].each do |soc_account|
+  -#   %div
+  -#     %span
+  -#       = link_to "Add #{soc_account.to_s.titleize} account:", ""
+  -#       = current_user.profile.try(:"#{soc_account}_account")
+
+%section.span-24.column.left-column
+  %div.span-20
+  %label
+    Quick statistic

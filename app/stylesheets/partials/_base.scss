@@ -1,0 +1,79 @@
+// Here is where you can define your constants for your application and to configure the blueprint framework.
+// Feel free to delete these if you want keep the defaults:
+@import "compass/reset";
+@import "compass/utilities";
+
+$blueprint-grid-columns: 25;
+$blueprint-container-size: 1000px;
+$blueprint-grid-margin: 0px;
+
+// Use this to calculate the width based on the total width.
+// Or you can set $blueprint-grid-width to a fixed value and unset $blueprint-container-size -- it will be calculated for you.
+$blueprint-grid-width: 40px;
+
+
+.html5-new-block {
+  display: block;
+}
+header {
+  @extend .html5-new-block;
+ }
+nav {
+  @extend .html5-new-block;
+}
+section {
+  @extend .html5-new-block;
+}
+article {
+  @extend .html5-new-block;
+}
+aside {
+  @extend .html5-new-block;
+}
+footer {
+  @extend .html5-new-block;
+}
+
+html {
+background-color: none;
+}
+* {
+  font: {
+    family: "Trebuchet MS", Verdana, sans-serif;
+    weight: normal;
+    size: 14px;
+  }
+}
+li {
+list-style-type: none;
+}
+ul {
+list-style-type:none;
+}
+ol {
+list-style-type:none;
+}
+button[type="submit"] {
+  float:right;
+  margin: 20px 0;
+}
+label {
+  line-height:44px;
+  float: left;
+}
+aside {
+  li {
+    float:right;
+    height:36px;
+    margin:5px;
+    a {
+      font-size:12px;
+    }
+  }
+}
+.alert {
+  position: absolute;
+}
+.notice {
+  position: absolute;
+}

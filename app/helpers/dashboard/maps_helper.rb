@@ -1,0 +1,3 @@
+module Dashboard::MapsHelper
+
+end

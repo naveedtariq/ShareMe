@@ -1,0 +1,20 @@
+%span.span-24.last.title
+  %h2= title "Change your password"
+= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
+  %fieldset
+    = devise_error_messages!
+    = f.hidden_field :reset_password_token
+    %div.span-22.last
+      = f.label :password, "New password", :class => "title span-9 column"
+      = f.password_field :password, :class => "text column"
+    %div.span-20.last
+      = f.label :password_confirmation, "Confirm new password", :class => "title span-9 column"
+      = f.password_field :password_confirmation, :class => "text column"
+    %div.span-22.last
+      %p.span-5.prepend-12.column
+        %button.jquery-button.sign-in-button
+          Change my password
+    %p
+      %p.span-7.column
+      %p.column
+        = render :partial => "devise/shared/links"

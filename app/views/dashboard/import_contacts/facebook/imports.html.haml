@@ -1,0 +1,36 @@
+%span.span-24.last.title
+  %h2= title "Import from Facebook"
+  = render "shared/user_menu"
+
+= form_tag dashboard_facebook_invite_path do
+  %fieldset
+    %div
+      = link_to "Select All", "", :id => "select_all_check"
+      = link_to "Deselect All", "", :id => "deselect_all_check"
+    %table
+      - @contacts.each do |contact|
+        %tr.border
+          %td= check_box_tag :"users[]", contact.id
+          %td= contact.full_name
+
+    %div.span-22.last
+      %p.span-5.prepend-5.column
+        %button.jquery-button.button-length-250
+          = t "Send Invite"
+      %p.span-5.prepend-5.column
+        %span.span-3.jquery-button
+          = link_to "Skip", dashboard_contacts_path
+
+:javascript
+  $(function(){
+   $("#select_all_check").click(function(){
+     $("[name='users[]']").attr("checked", true)
+     return false;
+   });
+
+   $("#deselect_all_check").click(function(){
+     $("[name='users[]']").attr("checked", false)
+     return false;
+   });
+
+  });

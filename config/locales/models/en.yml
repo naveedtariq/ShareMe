@@ -1,0 +1,22 @@
+en:
+  activerecord:
+    models:
+      user: User
+    attributes:
+      user:
+        phone: Phone number
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              confirmation: "ShareMe detected incorrect passwords. Please try again...2nd time lucky."
+            confirmation_token:
+              invalid: inactive
+            email:
+              blank: Sorry no shady/blank emails allowed
+              invalid: Sorry no shady/blank emails allowed
+            code:
+              taken: " '%{value}' already exists. Select one of the variants from the list or enter a new code."
+            phone:
+              blank: Everyone (well nearly everyone) has a phone number. Please ShareMe.

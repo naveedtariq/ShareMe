@@ -1,0 +1,16 @@
+- unless controller_name == "users"
+  = link_to "My Account", dashboard_root_path, :class => "menu-upper-level"
+  |
+- unless controller_name == "contacts"
+  = link_to "Contacts", dashboard_contacts_path, :class => "menu-upper-level"
+  |
+- unless controller_name == "maps"
+  = link_to "Contacts on Map", dashboard_maps_path, :class => "menu-upper-level"
+  |
+- unless controller_name == "codes"
+  = link_to "Regeneration of ShareMe code", new_dashboard_codes_path, :class => "menu-upper-level"
+  |
+- unless controller_name == "invitations"
+  = link_to "Inviting Friends", new_user_invitation_path, :class => "menu-upper-level"
+  |
+= link_to "Logout", destroy_user_session_path, :class => "menu-upper-level"

@@ -1,0 +1,14 @@
+%span.span-24.last.title
+  %h2= title "Upload contacts"
+  = render "shared/user_menu"
+= form_for(:contacts, :url => dashboard_upload_contacts_path, :html => {:method => :post, :multipart => true}) do
+  %div.span-20.last
+    = label_tag :file, "File (only .xls)", :class => "title large span-5"
+    = file_field_tag :file
+
+  %div.span-22.last
+    %p.span-5.prepend-5.column
+      %button.jquery-button.button-length-200= t "upload"
+
+
+

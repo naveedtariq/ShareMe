@@ -1,0 +1,17 @@
+%span.span-24.last.title
+  %span= title "Add User to my contacts"
+  = render "shared/user_menu"
+
+= form_for(:contacts, :url => dashboard_contacts_path, :html => {:method => :post}) do
+
+  %div.span-12
+    = label_tag :shareme_code, "ShareMe code", :class => "span-5 title large"
+    = text_field_tag :shareme_code, '', :maxlength => 4, :class => "text required"
+
+  %div.span-10.last
+    = recaptcha_tags
+
+  %div.span-22.last
+    %p.span-5.prepend-5.column
+      %button.jquery-button.button-length-200= t "submit"
+

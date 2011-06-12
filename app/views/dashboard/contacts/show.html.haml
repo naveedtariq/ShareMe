@@ -1,0 +1,15 @@
+%span.span-24.last.title
+  - title "Contacts"
+  %span= link_to "Contacts", dashboard_contacts_path
+  = render "shared/user_menu"
+
+%section.span-24.column.left-column
+  %div.span-20
+    %span Name:
+    %em= @contact.associated_user.try(:full_name) || @contact.name
+  %div.span-20
+    %span Email:
+    %em= @contact.associated_user.try(:email) || @contact.email
+  %div.span-20
+    %span ShareMe code:
+    %em= @contact.associated_user.try(:code)

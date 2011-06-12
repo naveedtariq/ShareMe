@@ -1,0 +1,20 @@
+%span.span-24.last.title
+  %h2 Contacts
+  = link_to "Add Contact", new_dashboard_contact_path, :class => "small"
+  |
+  = link_to "Upload contacts", new_dashboard_upload_contacts_path, :class => "small"
+  |
+  = link_to "Import contacts", dashboard_import_contacts_path, :class => "small"
+  |
+  = render "shared/user_menu"
+
+%table
+  - @contacts.each do |contact|
+    %tr
+      %td= contact.name
+      %td= contact.email
+      %td
+        = link_to t("show"), dashboard_contact_path(contact)
+        = link_to t("delete"), dashboard_contact_path(contact), :method => :delete, :confirm => t('confirm_delete')
+
+
