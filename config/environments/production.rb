@@ -51,7 +51,7 @@ config.action_mailer.default_content_type = "text/html"
   config.action_mailer.perform_deliveries = true
 
   config.action_mailer.delivery_method = :smtp
-config.action_mailer.default_url_options = { :host => "http://shareme.me" }
+config.action_mailer.default_url_options = { :host => "http://demo.shareme.me" }
 
   config.action_mailer.smtp_settings = {
     :address => "smtp.gmail.com",
@@ -60,7 +60,7 @@ config.action_mailer.default_url_options = { :host => "http://shareme.me" }
     :authentication => :plain,
     :user_name => "aabaassit@gmail.com",
     :password => "New_1234",
-    :enable_starttls_auto => false
+    :enable_starttls_auto => true
   }
 
 
