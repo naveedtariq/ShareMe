@@ -1,10 +1,9 @@
 source 'http://rubygems.org'
 
 gem 'rails',                 '3.0.7'
-gem 'bundler',               '~> 1.0.13'
+#gem 'bundler',               '~> 1.0.13'
 gem 'rack',                  '1.2.2'
 gem 'sqlite3'
-
 gem 'devise',                '~> 1.3.4'
 gem 'devise_invitable',      '~> 0.4.0'
 gem 'omniauth',              '~> 0.2.5'
