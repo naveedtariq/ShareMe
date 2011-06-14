@@ -22,9 +22,9 @@ Informer::Application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    :address => "ssl://smtp.gmail.com",
+    :address => "smtp.gmail.com",
     :port => 587,
-    :domain => "shareme.com",
+    :domain => "shareme.me",
     :authentication => :plain,
     :user_name => "aabaassit@gmail.com",
     :password => "New_1234",
