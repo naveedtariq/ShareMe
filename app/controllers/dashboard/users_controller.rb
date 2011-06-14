@@ -17,4 +17,9 @@ class Dashboard::UsersController < Dashboard::ApplicationController
     end
   end
 
+  def update_signin_fb_flag
+    current_user.update_attribute(:first_signin_fb,false)
+    return render :text=>""
+  end
+
 end

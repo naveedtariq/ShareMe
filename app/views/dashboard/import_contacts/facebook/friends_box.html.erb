@@ -1,0 +1,66 @@
+<script type="text/javascript">
+var importContactsFromFacebook = function(totalCheckBoxes){
+$('#submitContacts').remove();
+$('#closeModalBtn').css("display", "none");
+  params = "";
+  selected = $('#scroll-list :checked');
+  for(var i=0; i < selected.size(); i=i+1)
+  {
+    fbName = $('#users\\['+selected[i].value+'\\]').val();
+    params = params + "users\[" + selected[i].value + "\]=" + fbName + "&"
+  }
+
+	$.ajax({
+		type: 'POST',
+		url: '/dashboard/imports/facebook/',
+    data: params,
+		success: function(data) {
+      alert(data);
+      $('.close-reveal-modal').click();
+		}
+	});
+  return false;
+}
+$(function(){
+
+  //$("#import-contacts").reveal();
+  $('#import-contacts-submit').click(function(e){
+    e.preventDefault();
+    importContactsFromFacebook('<%= @friends.length %>');
+  });
+
+});
+function selectAllCheckBoxes(formId){
+  if($("#selectAll").is(':checked')){
+    $("form#"+formId+" input[type='checkbox']").attr('checked', true);
+	}else{
+    $("form#"+formId+" input[type='checkbox']").attr('checked', false);
+	}
+}
+</script>
+<div id="import-contacts">
+  <h6>Import your Friends from Facebook</h6>
+  <div id="formData">
+    <form name='fbForm' id='fbForm' >
+      <label id="select-all-contacts" class="with-checkbox">
+        <input type='checkbox' name='selectAll' id='selectAll' onclick="selectAllCheckBoxes('fbForm')" /> Select All Contacts
+      </label>
+      <div id="scroll-list">
+        <ul>
+          <% @friends.each_with_index do |friend, index| %>
+          <li>
+            <input type="hidden" id="users[<%= friend[:identifier] %>]" name="users[<%= friend[:identifier] %>]" value="<%= friend[:name] %>" />
+           <!-- image_tag friend_pic -->
+            <img src="<%= friend[:picture] %>" />
+            <label class="with-checkbox">
+              <input type='checkbox' name='<%= index %>' id='<%= index %>' value='<%= friend[:identifier] %>' /> <%= friend[:name] %>
+            </label>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <input class="submit" type="button" id="import-contacts-submit"/>
+    </form>
+  </div>
+  <a class="close-reveal-modal" onclick="$('#import-contacts').remove();">&#215;</a>
+</div>

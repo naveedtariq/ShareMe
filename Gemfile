@@ -31,7 +31,7 @@ gem 'httparty',              '~> 0.7.7'
 
 group :development, :test, :cucumber do
   gem "rails-erd"
-  gem  RUBY_VERSION =~ /1.9/ ? 'ruby-debug19' : 'ruby-debug'
+  gem  'ruby-debug19'
   gem 'unicorn'
   gem "capybara",             "0.4.1.2"
   gem "rspec",                "2.6.0"
