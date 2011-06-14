@@ -38,7 +38,6 @@ class ImportContact::Facebook
     def import(user, options)
       @facebook_connect = new(user, options)
       @friends = @facebook_connect.auth.friends.map{ |v|  options[:contact_uids].include?(v.identifier.to_s) ? v : nil }.compact
-
       @agent = Mechanize.new { |a| a.log = Rails.logger }
       @page = @agent.get("http://www.facebook.com/login.php")
       @login_form = @page.forms[0]
@@ -49,15 +48,14 @@ class ImportContact::Facebook
       @contacts = []
         @friends.map do |friend|
         @info = friend.fetch
-        @info_link = @info.link =~ /\?/ ? "#{@info.link}&sk=info" : "#{@info.link}?sk=info"
+        #@info_link = @info.link =~ /\?/ ? "#{@info.link}&sk=info" : "#{@info.link}?sk=info"
+        @info_link = "http://www.facebook.com/profile.php?id="+@info.identifier+"&sk=info"
         @page = @agent.get(@info_link.gsub("http", "https"))
         @email = @page.body.to_s.match(/([\w\.%\+\-]+)&#64;([\w\-]+\.)+([\w]{2,})/).to_s.to_s.gsub('&#64;', '@')
         if @email.present?
           @contacts << Contact.add_contact(user, { :email => @email, :name => @info.name, :skip_invitation => true})
         end
       end
-
-      return @contacts.to_json
     end
 
 

@@ -11442,3 +11442,483 @@ response-header: date => Thu, 09 Jun 2011 16:38:59 GMT
 gunzip body
 status: 200
 Completed 200 OK in 28016ms (Views: 33.3ms | ActiveRecord: 2.0ms)
+DEPRECATION WARNING: ActionMailer::Base.default_content_type=value is deprecated, use default :content_type => value instead. (called from <top (required)> at /home/abid/Projects/ShareMe/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-14 09:57:34 +0500
+  Processing by SharemeController#index as HTML
+Rendered shared/_register_form.haml (4.1ms)
+Rendered shared/_flash_notify.haml (1.6ms)
+Rendered shared/_header_layout.haml (5.0ms)
+Rendered shared/_footer.haml (1.5ms)
+Rendered shareme/index.html.haml within layouts/application (414.9ms)
+Completed 200 OK in 475ms (Views: 474.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/facebook" for 127.0.0.1 at 2011-06-14 09:57:45 +0500
+
+
+Started GET "/auth/facebook" for 127.0.0.1 at 2011-06-14 09:58:23 +0500
+
+
+Started GET "/" for 127.0.1.1 at 2011-06-14 09:58:30 +0500
+  Processing by SharemeController#index as HTML
+Rendered shared/_register_form.haml (175.7ms)
+Rendered shared/_flash_notify.haml (1.6ms)
+Rendered shared/_header_layout.haml (4.2ms)
+Rendered shared/_footer.haml (1.5ms)
+Rendered shareme/index.html.haml within layouts/application (193.9ms)
+Completed 200 OK in 198ms (Views: 197.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/facebook" for 127.0.1.1 at 2011-06-14 09:58:32 +0500
+
+
+Started GET "/auth/facebook/callback?code=T9AtdceMfvjhZnr5gCCPrt_9AWu99UU_iUuFSgVIMgI.eyJpdiI6IkFkd3dtMWJDTTNnOVNma1YzOEk0R3cifQ.4vnO6LqK50M2Oe8otJK4m_BaODtGANR-GRpjgCbzEO84EP-DVsMEcMm88qPkqDYY4rPL4WJk7nF6n2LktVAcHnOFk9sJ5JHxKzEagSJ6VQ-ydK7kHaGYZOd5aFxZmLus" for 127.0.1.1 at 2011-06-14 09:58:51 +0500
+  Processing by OmniauthCallbacksController#facebook as HTML
+  Parameters: {"code"=>"T9AtdceMfvjhZnr5gCCPrt_9AWu99UU_iUuFSgVIMgI.eyJpdiI6IkFkd3dtMWJDTTNnOVNma1YzOEk0R3cifQ.4vnO6LqK50M2Oe8otJK4m_BaODtGANR-GRpjgCbzEO84EP-DVsMEcMm88qPkqDYY4rPL4WJk7nF6n2LktVAcHnOFk9sJ5JHxKzEagSJ6VQ-ydK7kHaGYZOd5aFxZmLus"}
+  [1m[36mSQL (1.0ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mUserToken Load (0.3ms)[0m  SELECT "user_tokens".* FROM "user_tokens" WHERE "user_tokens"."provider" = 'facebook' AND "user_tokens"."uid" = '100001962331158' LIMIT 1
+
+***** Debugger requested, but was not available (ensure ruby-debug is listed in Gemfile/installed as gem): Start server with --debugger to enable *****
+  [1m[36mUser Load (1.9ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 10 LIMIT 1[0m
+  [1m[35mAREL (19.5ms)[0m  UPDATE "users" SET "last_sign_in_at" = '2011-06-09 15:24:29.463701', "current_sign_in_at" = '2011-06-14 04:58:57.639935', "current_sign_in_ip" = '127.0.1.1', "sign_in_count" = 9, "updated_at" = '2011-06-14 04:58:57.640392' WHERE "users"."id" = 10
+  [1m[36mAREL (0.1ms)[0m  [1mUPDATE "contacts" SET "name" = 'wajwaj', "email" = 'naveed.tariq@hotmail.com' WHERE ("contacts".associated_user_id = 10)[0m
+Redirected to http://shareme.com:3000/dashboard/users
+Completed 302 Found in 658ms
+
+
+Started GET "/dashboard/users" for 127.0.1.1 at 2011-06-14 09:58:57 +0500
+  Processing by Dashboard::UsersController#show as HTML
+  [1m[35mUser Load (1.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 10 LIMIT 1
+Rendered shared/_user_menu.haml (2.7ms)
+  [1m[36mProfile Load (1.5ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE ("profiles".user_id = 10) LIMIT 1[0m
+Rendered dashboard/import_contacts/_facebook.html.haml (4.1ms)
+Rendered dashboard/users/show.html.haml within layouts/application (113.0ms)
+Completed   in 302ms
+
+ActionView::Template::Error (undefined method `first_signin_fb' for #<User:0x00000005341d18>):
+    47: 
+    48: %div.reveal-modal{:id=>'friends_list'}
+    49: 
+    50: %input{:type=>"hidden",:id=>"first_fb_signin",:value=>"#{current_user.first_signin_fb}"}
+    51: 
+    52: :javascript
+    53:   $(function(){
+  app/views/dashboard/users/show.html.haml:50:in `_app_views_dashboard_users_show_html_haml__4563102845649262391_43492220__1629898732612856387'
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.8ms)
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (7.2ms)
+DEPRECATION WARNING: ActionMailer::Base.default_content_type=value is deprecated, use default :content_type => value instead. (called from <top (required)> at /home/abid/Projects/ShareMe/config/environment.rb:5)
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+Migrating to DeviseCreateUsers (20110429050546)
+Migrating to AddSecretColumnsToUser (20110429050707)
+Migrating to CreateProfiles (20110429063434)
+Migrating to CreateUserTokens (20110430082454)
+Migrating to DeviseInvitableAddToUsers (20110501045713)
+Migrating to CreateContacts (20110503120149)
+Migrating to ChangeLinkedinInProfile (20110504122511)
+Migrating to MovePhoneToUserFromProfile (20110504125028)
+Migrating to AddFilledToUser (20110505055506)
+Migrating to AddFieldToUserToken (20110505135322)
+Migrating to ChangeSecondNameOnLastName (20110505143408)
+Migrating to MoveAddressToUser (20110511072322)
+Migrating to AddMissingIndex (20110527130414)
+Migrating to AddFirstTimeSigninFromFacebook (20110612194932)
+  [1m[35mSQL (0.0ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.5ms)[0m  [1mALTER TABLE "users" ADD "first_signin_fb" boolean DEFAULT 'false'[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110612194932')
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("contacts")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_contacts_on_associated_user_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_contacts_on_email')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_contacts_on_user_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("profiles")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_profiles_on_user_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("user_tokens")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_user_tokens_on_user_id')[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("users")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_users_on_invited_by_id')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_users_on_invitation_token')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_users_on_authentication_token')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_users_on_unlock_token')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_users_on_confirmation_token')[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_info('index_users_on_reset_password_token')
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_info('index_users_on_email')[0m
+DEPRECATION WARNING: ActionMailer::Base.default_content_type=value is deprecated, use default :content_type => value instead. (called from <top (required)> at /home/abid/Projects/ShareMe/config/environment.rb:5)
+
+
+Started GET "/auth/facebook/callback?code=3HH-hvEk2oqTSk9GmdJJvh4sYgKOK64CeLwcSzr2hUQ.eyJpdiI6IjlqUHNyejBSYVBhNFRKMlBCYUdDN2cifQ.pFHJozkT9sBdJTC7nMlzlQ4XmzAyJCN9v09E4UWM8tYwGZV5Ud0_hxHrqUFGUmlofov_oQUKw5M77xri9Nhu9j2TkPKhzdlGwWGHuiVmpGOyFvihKoxJa3tZj_K6FKlL" for 127.0.1.1 at 2011-06-14 10:02:42 +0500
+  Processing by OmniauthCallbacksController#facebook as HTML
+  Parameters: {"code"=>"3HH-hvEk2oqTSk9GmdJJvh4sYgKOK64CeLwcSzr2hUQ.eyJpdiI6IjlqUHNyejBSYVBhNFRKMlBCYUdDN2cifQ.pFHJozkT9sBdJTC7nMlzlQ4XmzAyJCN9v09E4UWM8tYwGZV5Ud0_hxHrqUFGUmlofov_oQUKw5M77xri9Nhu9j2TkPKhzdlGwWGHuiVmpGOyFvihKoxJa3tZj_K6FKlL"}
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mUserToken Load (0.4ms)[0m  SELECT "user_tokens".* FROM "user_tokens" WHERE "user_tokens"."provider" = 'facebook' AND "user_tokens"."uid" = '100001962331158' LIMIT 1
+  [1m[36mUser Load (1.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 10 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 10 LIMIT 1
+  [1m[36mAREL (0.2ms)[0m  [1mUPDATE "contacts" SET "name" = 'wajwaj', "email" = 'naveed.tariq@hotmail.com' WHERE ("contacts".associated_user_id = 10)[0m
+  [1m[35mProfile Load (1.2ms)[0m  SELECT "profiles".* FROM "profiles" WHERE ("profiles".user_id = 10) LIMIT 1
+  [1m[36mAREL (0.2ms)[0m  [1mUPDATE "contacts" SET "name" = 'wajwaj', "email" = 'naveed.tariq@hotmail.com' WHERE ("contacts".associated_user_id = 10)[0m
+  [1m[35mSQL (0.2ms)[0m  SELECT 1 FROM "users" WHERE ("users"."email" = 'naveed.tariq@hotmail.com') AND ("users".id <> 10) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT 1 FROM "users" WHERE ("users"."code" = 'VXZW') AND ("users".id <> 10) LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE (encrypted_phone = '56glCu0jLUfBJwhIegVkNQ==
+' and id != 10) LIMIT 1
+  [1m[36mAREL (0.3ms)[0m  [1mINSERT INTO "user_tokens" ("user_id", "provider", "uid", "created_at", "updated_at", "token", "secret", "nickname") VALUES (10, 'facebook', '100001962331158', '2011-06-14 05:02:50.147481', '2011-06-14 05:02:50.147481', '176485969058177|2f2dc51dd753e903d682e26a.1-100001962331158|W9qI9U8aQ0WWOIJdxTkoaeNCM7s', NULL, 'profile.php?id=100001962331158')[0m
+  [1m[35mAREL (0.1ms)[0m  UPDATE "contacts" SET "name" = 'wajwaj', "email" = 'naveed.tariq@hotmail.com' WHERE ("contacts".associated_user_id = 10)
+Redirected to http://shareme.com:3000/dashboard/users
+Completed 302 Found in 2830ms
+
+
+Started GET "/dashboard/users" for 127.0.1.1 at 2011-06-14 10:02:50 +0500
+  Processing by Dashboard::UsersController#show as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 10 LIMIT 1[0m
+Rendered shared/_user_menu.haml (2.7ms)
+  [1m[35mProfile Load (1.3ms)[0m  SELECT "profiles".* FROM "profiles" WHERE ("profiles".user_id = 10) LIMIT 1
+Rendered dashboard/import_contacts/_facebook.html.haml (3.5ms)
+Rendered shared/_flash_notify.haml (1.7ms)
+Rendered shared/_header_layout.haml (4.7ms)
+Rendered shared/_footer.haml (1.8ms)
+Rendered dashboard/users/show.html.haml within layouts/application (330.5ms)
+Completed 200 OK in 445ms (Views: 334.3ms | ActiveRecord: 6.9ms)
+DEPRECATION WARNING: ActionMailer::Base.default_content_type=value is deprecated, use default :content_type => value instead. (called from <top (required)> at /home/abid/Projects/ShareMe/config/environment.rb:5)
+DEPRECATION WARNING: ActionMailer::Base.default_content_type=value is deprecated, use default :content_type => value instead. (called from <top (required)> at /home/abid/Projects/ShareMe/config/environment.rb:5)
+DEPRECATION WARNING: ActionMailer::Base.default_content_type=value is deprecated, use default :content_type => value instead. (called from <top (required)> at /home/abid/Projects/ShareMe/config/environment.rb:5)
+
+
+Started GET "/" for 127.0.0.1 at 2011-06-14 10:22:40 +0500
+  Processing by SharemeController#index as HTML
+Rendered shared/_register_form.haml (4.5ms)
+Rendered shared/_flash_notify.haml (1.6ms)
+Rendered shared/_header_layout.haml (5.3ms)
+Rendered shared/_footer.haml (1.5ms)
+Rendered shareme/index.html.haml within layouts/application (350.3ms)
+Completed 200 OK in 483ms (Views: 483.0ms | ActiveRecord: 0.0ms)
+  [1m[36mAREL (122.3ms)[0m  [1mDELETE FROM "users" WHERE 1=1[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mAREL (164.1ms)[0m  DELETE FROM "user_tokens" WHERE 1=1
+
+
+Started GET "/auth/facebook" for 127.0.0.1 at 2011-06-14 10:23:19 +0500
+
+
+Started GET "/" for 127.0.1.1 at 2011-06-14 10:23:29 +0500
+  Processing by SharemeController#index as HTML
+Rendered shared/_register_form.haml (121.7ms)
+Rendered shared/_flash_notify.haml (1.6ms)
+Rendered shared/_header_layout.haml (4.2ms)
+Rendered shared/_footer.haml (1.4ms)
+Rendered shareme/index.html.haml within layouts/application (140.0ms)
+Completed 200 OK in 144ms (Views: 143.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/facebook" for 127.0.1.1 at 2011-06-14 10:23:32 +0500
+
+
+Started GET "/auth/facebook/callback?code=PdaChTMW_VAz9yHWDz9ORLjseyehQv5yUFFcVyY2tQg.eyJpdiI6Im42Uk9abncyekJKTFdRX1pZVmlXbHcifQ.djbQ3gA-gQ_kxzoVQpYiFpYN5rIeiDzlKR5hXCxEQJMypJkymYqucxnkC4R-HPGezW-R7R086Na9iNlHgLSLpZVFb838Lw-RGNsg2vNAm81HiV4c4AkAPZT_rAB2oNeV" for 127.0.1.1 at 2011-06-14 10:23:57 +0500
+  Processing by OmniauthCallbacksController#facebook as HTML
+  Parameters: {"code"=>"PdaChTMW_VAz9yHWDz9ORLjseyehQv5yUFFcVyY2tQg.eyJpdiI6Im42Uk9abncyekJKTFdRX1pZVmlXbHcifQ.djbQ3gA-gQ_kxzoVQpYiFpYN5rIeiDzlKR5hXCxEQJMypJkymYqucxnkC4R-HPGezW-R7R086Na9iNlHgLSLpZVFb838Lw-RGNsg2vNAm81HiV4c4AkAPZT_rAB2oNeV"}
+  [1m[36mSQL (0.5ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mUserToken Load (0.1ms)[0m  SELECT "user_tokens".* FROM "user_tokens" WHERE "user_tokens"."provider" = 'facebook' AND "user_tokens"."uid" = '100001962331158' LIMIT 1
+
+***** Debugger requested, but was not available (ensure ruby-debug is listed in Gemfile/installed as gem): Start server with --debugger to enable *****
+
+***** Debugger requested, but was not available (ensure ruby-debug is listed in Gemfile/installed as gem): Start server with --debugger to enable *****
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."email" = 'abid@osminvention.com' LIMIT 1[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."code" = 'LLX2' LIMIT 1
+  [1m[36mAREL (0.7ms)[0m  [1mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "sign_in_count", "current_sign_in_at", "last_sign_in_at", "current_sign_in_ip", "last_sign_in_ip", "password_salt", "confirmation_token", "confirmed_at", "confirmation_sent_at", "failed_attempts", "unlock_token", "locked_at", "authentication_token", "created_at", "updated_at", "encrypted_name", "code", "invitation_token", "invitation_sent_at", "invitation_limit", "invited_by_id", "invited_by_type", "encrypted_phone", "filled", "encrypted_address", "first_signin_fb") VALUES ('abid@osminvention.com', '$2a$10$HNOvDUJSy12Mj3ELlhiVyO5nIMELA4fwOYiqfCNjWBGDRAYJoF.W2', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2011-06-14 05:24:02.657318', NULL, 0, NULL, NULL, NULL, '2011-06-14 05:24:02.657537', '2011-06-14 05:24:02.657537', '6PpBIPmHu7ryvKFdjGfPDA==
+', 'LLX2', NULL, NULL, NULL, NULL, NULL, NULL, 'f', NULL, 'f')[0m
+  [1m[35mAREL (23.1ms)[0m  UPDATE "contacts" SET "name" = 'Abid Mahmood', "email" = 'abid@osminvention.com' WHERE ("contacts".associated_user_id = 17)
+  [1m[36mAREL (0.2ms)[0m  [1mUPDATE "contacts" SET "name" = 'Abid Mahmood', "email" = 'abid@osminvention.com' WHERE ("contacts".associated_user_id = 17)[0m
+  [1m[35mProfile Load (0.2ms)[0m  SELECT "profiles".* FROM "profiles" WHERE ("profiles".user_id = 17) LIMIT 1
+  [1m[36mAREL (0.2ms)[0m  [1mUPDATE "users" SET "encrypted_address" = 'XnQPQJ+m/u7hx06m94ItWAUaF4GSEueuq861EbPYmaI=
+', "updated_at" = '2011-06-14 05:24:05.318483' WHERE "users"."id" = 17[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO "profiles" ("user_id", "encrypted_first_name", "encrypted_last_name", "encrypted_company", "encrypted_google_account", "encrypted_google_password", "encrypted_facebook_account", "encrypted_facebook_password", "encrypted_twitter_account", "encrypted_twitter_password", "encrypted_skype_account", "encrypted_skype_password", "encrypted_linkedin_account", "encrypted_linkedin_password", "created_at", "updated_at") VALUES (17, 'CD27LaOv4LsEhgluX2iWuw==
+', 'aa3XHAWlZ94zyLzsUlTrug==
+', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-06-14 05:24:05.319857', '2011-06-14 05:24:05.319857')
+  [1m[36mAREL (0.1ms)[0m  [1mUPDATE "contacts" SET "name" = 'Abid Mahmood', "email" = 'abid@osminvention.com' WHERE ("contacts".associated_user_id = 17)[0m
+  [1m[35mAREL (0.2ms)[0m  UPDATE "users" SET "first_signin_fb" = 't', "updated_at" = '2011-06-14 05:24:05.440535' WHERE "users"."id" = 17
+  [1m[36mAREL (0.1ms)[0m  [1mINSERT INTO "user_tokens" ("user_id", "provider", "uid", "created_at", "updated_at", "token", "secret", "nickname") VALUES (17, 'facebook', '100001962331158', '2011-06-14 05:24:05.441868', '2011-06-14 05:24:05.441868', '176485969058177|2f2dc51dd753e903d682e26a.1-100001962331158|W9qI9U8aQ0WWOIJdxTkoaeNCM7s', NULL, 'profile.php?id=100001962331158')[0m
+  [1m[35mAREL (0.1ms)[0m  UPDATE "contacts" SET "name" = 'Abid Mahmood', "email" = 'abid@osminvention.com' WHERE ("contacts".associated_user_id = 17)
+  [1m[36mUser Load (55.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 17 LIMIT 1[0m
+Redirected to http://shareme.com:3000/dashboard/users
+Completed 302 Found in 3277ms
+
+
+Started GET "/dashboard/users" for 127.0.1.1 at 2011-06-14 10:24:05 +0500
+  Processing by Dashboard::UsersController#show as HTML
+  [1m[35mUser Load (1.8ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 17 LIMIT 1
+Redirected to http://shareme.com:3000/register/finish
+Completed 302 Found in 170ms
+
+
+Started GET "/register/finish" for 127.0.1.1 at 2011-06-14 10:24:05 +0500
+  Processing by RegistrationsController#finish as HTML
+  [1m[36mUser Load (1.8ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 17 LIMIT 1[0m
+Rendered shared/_flash_notify.haml (1.6ms)
+Rendered shared/_header_layout.haml (4.4ms)
+Rendered shared/_footer.haml (1.4ms)
+Rendered registrations/finish.html.haml within layouts/application (18.8ms)
+Completed 200 OK in 215ms (Views: 43.7ms | ActiveRecord: 85.1ms)
+
+
+Started POST "/register/finish" for 127.0.1.1 at 2011-06-14 10:24:28 +0500
+  Processing by RegistrationsController#finish as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"INu/V2Vw6Jd/+0wyhf8EUC5Tij8lVP6M+Z6Basky5tg=", "user"=>{"phone"=>"3333666999", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[35mUser Load (1.9ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 17 LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT 1 FROM "users" WHERE ("users"."email" = 'abid@osminvention.com') AND ("users".id <> 17) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT 1 FROM "users" WHERE ("users"."code" = 'LLX2') AND ("users".id <> 17) LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE (encrypted_phone = '7I2PK2yP+jdHW452Kwd7og==
+' and id != 17) LIMIT 1[0m
+  [1m[35mAREL (0.2ms)[0m  UPDATE "users" SET "encrypted_phone" = '7I2PK2yP+jdHW452Kwd7og==
+', "encrypted_password" = '$2a$10$k63KZYIbpIHFCO8GQtD5weGWfGILwy4kfTYNJnBJgG/nnZ3GsgWTa', "updated_at" = '2011-06-14 05:24:29.046510' WHERE "users"."id" = 17
+  [1m[36mAREL (0.1ms)[0m  [1mUPDATE "contacts" SET "name" = 'Abid Mahmood', "email" = 'abid@osminvention.com' WHERE ("contacts".associated_user_id = 17)[0m
+  [1m[35mAREL (0.3ms)[0m  UPDATE "users" SET "filled" = 't', "updated_at" = '2011-06-14 05:24:29.149837' WHERE "users"."id" = 17
+  [1m[36mAREL (0.1ms)[0m  [1mUPDATE "contacts" SET "name" = 'Abid Mahmood', "email" = 'abid@osminvention.com' WHERE ("contacts".associated_user_id = 17)[0m
+Redirected to http://shareme.com:3000/dashboard/users
+Completed 302 Found in 437ms
+
+
+Started GET "/dashboard/users" for 127.0.1.1 at 2011-06-14 10:24:29 +0500
+  Processing by Dashboard::UsersController#show as HTML
+  [1m[35mUser Load (1.6ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 17 LIMIT 1
+Rendered shared/_user_menu.haml (2.8ms)
+  [1m[36mProfile Load (1.6ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE ("profiles".user_id = 17) LIMIT 1[0m
+Rendered dashboard/import_contacts/_facebook.html.haml (4.1ms)
+Rendered shared/_flash_notify.haml (1.8ms)
+Rendered shared/_header_layout.haml (4.5ms)
+Rendered shared/_footer.haml (1.5ms)
+Rendered dashboard/users/show.html.haml within layouts/application (120.5ms)
+Completed 200 OK in 308ms (Views: 132.2ms | ActiveRecord: 3.1ms)
+
+
+Started POST "/dashboard/friends/facebook" for 127.0.1.1 at 2011-06-14 10:24:40 +0500
+  Processing by Dashboard::ImportContacts::FacebookController#friends as 
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"INu/V2Vw6Jd/+0wyhf8EUC5Tij8lVP6M+Z6Basky5tg=", "email"=>"abid@osminvention.com", "password"=>"[FILTERED]"}
+  [1m[35mUser Load (1.7ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 17 LIMIT 1
+  [1m[36mUserToken Load (0.3ms)[0m  [1mSELECT "user_tokens".* FROM "user_tokens" WHERE "user_tokens"."provider" = 'facebook' AND ("user_tokens".user_id = 17) ORDER BY user_tokens.id DESC LIMIT 1[0m
+Net::HTTP::Get: /login.php
+request-header: accept => */*
+request-header: user-agent => WWW-Mechanize/1.0.0 (http://rubyforge.org/projects/mechanize/)
+request-header: connection => keep-alive
+request-header: keep-alive => 300
+request-header: accept-encoding => gzip,identity
+request-header: accept-language => en-us,en;q=0.5
+request-header: host => www.facebook.com
+request-header: accept-charset => ISO-8859-1,utf-8;q=0.7,*;q=0.7
+Read 0 bytes
+response-header: cache-control => private, no-cache, no-store, must-revalidate
+response-header: expires => Sat, 01 Jan 2000 00:00:00 GMT
+response-header: location => http://m.facebook.com/login.php?refsrc=http%3A%2F%2Fwww.facebook.com%2Flogin.php&w2m&_rdr
+response-header: p3p => CP="Facebook does not have a P3P policy. Learn why here: http://fb.me/p3p"
+response-header: pragma => no-cache
+response-header: set-cookie => datr=nPD2TcImSIJC5dMZGkJ6uhpy; expires=Thu, 13-Jun-2013 05:24:44 GMT; path=/; domain=.facebook.com; httponly, lsd=8wvDV; path=/; domain=.facebook.com
+response-header: content-type => text/html; charset=utf-8
+response-header: x-fb-server => 10.36.202.191
+response-header: x-cnection => close
+response-header: date => Tue, 14 Jun 2011 05:24:44 GMT
+response-header: content-length => 0
+saved cookie: datr=nPD2TcImSIJC5dMZGkJ6uhpy
+saved cookie: lsd=8wvDV
+status: 302
+follow redirect to: http://m.facebook.com/login.php?refsrc=http%3A%2F%2Fwww.facebook.com%2Flogin.php&w2m&_rdr
+Net::HTTP::Get: /login.php?refsrc=http%3A%2F%2Fwww.facebook.com%2Flogin.php&w2m&_rdr
+request-header: accept => */*
+request-header: user-agent => WWW-Mechanize/1.0.0 (http://rubyforge.org/projects/mechanize/)
+request-header: connection => keep-alive
+request-header: keep-alive => 300
+request-header: accept-encoding => gzip,identity
+request-header: accept-language => en-us,en;q=0.5
+request-header: host => m.facebook.com
+request-header: accept-charset => ISO-8859-1,utf-8;q=0.7,*;q=0.7
+request-header: cookie => datr=nPD2TcImSIJC5dMZGkJ6uhpy; lsd=8wvDV
+request-header: referer => http://www.facebook.com/login.php
+Read 555 bytes
+Read 2003 bytes
+Read 2350 bytes
+Read 2360 bytes
+response-header: cache-control => private, no-cache, no-store, must-revalidate
+response-header: content-type => application/xhtml+xml; charset=utf-8
+response-header: expires => Sat, 01 Jan 2000 00:00:00 GMT
+response-header: p3p => CP="Facebook does not have a P3P policy. Learn why here: http://fb.me/p3p"
+response-header: pragma => no-cache
+response-header: x-frame-options => DENY
+response-header: set-cookie => datr=nPD2TcImSIJC5dMZGkJ6uhpy; expires=Thu, 13-Jun-2013 05:24:45 GMT; path=/; domain=.facebook.com; httponly, reg_fb_gate=http%3A%2F%2Fm.facebook.com%2Flogin.php%3Frefsrc%3Dhttp%253A%252F%252Fwww.facebook.com%252Flogin.php%26w2m%26_rdr; path=/; domain=.facebook.com, reg_fb_ref=http%3A%2F%2Fm.facebook.com%2Flogin.php%3Frefsrc%3Dhttp%253A%252F%252Fwww.facebook.com%252Flogin.php%26w2m%26_rdr; path=/; domain=.facebook.com
+response-header: content-encoding => gzip
+response-header: x-fb-server => 10.36.95.111
+response-header: x-cnection => close
+response-header: transfer-encoding => chunked
+response-header: date => Tue, 14 Jun 2011 05:24:45 GMT
+gunzip body
+saved cookie: datr=nPD2TcImSIJC5dMZGkJ6uhpy
+saved cookie: reg_fb_gate=http%3A%2F%2Fm.facebook.com%2Flogin.php%3Frefsrc%3Dhttp%253A%252F%252Fwww.facebook.com%252Flogin.php%26w2m%26_rdr
+saved cookie: reg_fb_ref=http%3A%2F%2Fm.facebook.com%2Flogin.php%3Frefsrc%3Dhttp%253A%252F%252Fwww.facebook.com%252Flogin.php%26w2m%26_rdr
+status: 200
+query: "lsd=&post_form_id=d828cff7806be41d8c9b8be4a948bd43&charset_test=%E2%82%AC%2C%C2%B4%2C%E2%82%AC%2C%C2%B4%2C%E6%B0%B4%2C%D0%94%2C%D0%84&version=1&ajax=0&width=0&pxr=0&gps=0&email=abid%40osminvention.com&pass=mahmood12"
+Net::HTTP::Post: /login.php?m=m&refsrc=http%3A%2F%2Fwww.facebook.com%2Flogin.php&refid=9
+request-header: accept => */*
+request-header: user-agent => WWW-Mechanize/1.0.0 (http://rubyforge.org/projects/mechanize/)
+request-header: connection => keep-alive
+request-header: keep-alive => 300
+request-header: accept-encoding => gzip,identity
+request-header: accept-language => en-us,en;q=0.5
+request-header: host => www.facebook.com
+request-header: accept-charset => ISO-8859-1,utf-8;q=0.7,*;q=0.7
+request-header: cookie => datr=nPD2TcImSIJC5dMZGkJ6uhpy; lsd=8wvDV; reg_fb_gate=http%3A%2F%2Fm.facebook.com%2Flogin.php%3Frefsrc%3Dhttp%253A%252F%252Fwww.facebook.com%252Flogin.php%26w2m%26_rdr; reg_fb_ref=http%3A%2F%2Fm.facebook.com%2Flogin.php%3Frefsrc%3Dhttp%253A%252F%252Fwww.facebook.com%252Flogin.php%26w2m%26_rdr
+request-header: referer => http://m.facebook.com/login.php?refsrc=http%3A%2F%2Fwww.facebook.com%2Flogin.php&w2m&_rdr
+request-header: content-type => application/x-www-form-urlencoded
+request-header: content-length => 215
+Read 0 bytes
+response-header: cache-control => private, no-cache, no-store, must-revalidate
+response-header: content-type => application/xhtml+xml; charset=utf-8
+response-header: expires => Sat, 01 Jan 2000 00:00:00 GMT
+response-header: location => http://m.facebook.com/home.php?refsrc=http%3A%2F%2Fwww.facebook.com%2Flogin.php&refid=9&m_sess=soACmK90-1zCv1FCj&_rdr
+response-header: p3p => CP="Facebook does not have a P3P policy. Learn why here: http://fb.me/p3p"
+response-header: pragma => no-cache
+response-header: set-cookie => datr=nPD2TcImSIJC5dMZGkJ6uhpy; expires=Thu, 13-Jun-2013 05:24:48 GMT; path=/; domain=.facebook.com; httponly, L=2; path=/; domain=.facebook.com; httponly, lsd=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domain=.facebook.com; httponly, m_user=abid%40osminvention.com%3A100001962331158%3A4O4mLt4DHJeSbZzq%3A0%3Av_1%2Cajax_0%2Cwidth_0%2Cpxr_0%2Cgps_0%3A1308029088; expires=Mon, 12-Sep-2011 05:24:48 GMT; path=/; domain=.facebook.com; httponly, reg_fb_gate=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domain=.facebook.com; httponly, reg_fb_ref=https%3A%2F%2Fwww.facebook.com%2Flogin.php%3Fm%3Dm%26refsrc%3Dhttp%253A%252F%252Fwww.facebook.com%252Flogin.php%26refid%3D9; path=/; domain=.facebook.com, W=1308029088; path=/; domain=.facebook.com
+response-header: x-fb-server => 10.27.52.131
+response-header: x-cnection => close
+response-header: date => Tue, 14 Jun 2011 05:24:48 GMT
+response-header: content-length => 0
+saved cookie: datr=nPD2TcImSIJC5dMZGkJ6uhpy
+saved cookie: L=2
+saved cookie: lsd=deleted
+saved cookie: m_user=abid%40osminvention.com%3A100001962331158%3A4O4mLt4DHJeSbZzq%3A0%3Av_1%2Cajax_0%2Cwidth_0%2Cpxr_0%2Cgps_0%3A1308029088
+saved cookie: reg_fb_gate=deleted
+saved cookie: reg_fb_ref=https%3A%2F%2Fwww.facebook.com%2Flogin.php%3Fm%3Dm%26refsrc%3Dhttp%253A%252F%252Fwww.facebook.com%252Flogin.php%26refid%3D9
+saved cookie: W=1308029088
+status: 302
+follow redirect to: http://m.facebook.com/home.php?refsrc=http%3A%2F%2Fwww.facebook.com%2Flogin.php&refid=9&m_sess=soACmK90-1zCv1FCj&_rdr
+Net::HTTP::Get: /home.php?refsrc=http%3A%2F%2Fwww.facebook.com%2Flogin.php&refid=9&m_sess=soACmK90-1zCv1FCj&_rdr
+request-header: accept => */*
+request-header: user-agent => WWW-Mechanize/1.0.0 (http://rubyforge.org/projects/mechanize/)
+request-header: connection => keep-alive
+request-header: keep-alive => 300
+request-header: accept-encoding => gzip,identity
+request-header: accept-language => en-us,en;q=0.5
+request-header: host => m.facebook.com
+request-header: accept-charset => ISO-8859-1,utf-8;q=0.7,*;q=0.7
+request-header: cookie => datr=nPD2TcImSIJC5dMZGkJ6uhpy; reg_fb_ref=https%3A%2F%2Fwww.facebook.com%2Flogin.php%3Fm%3Dm%26refsrc%3Dhttp%253A%252F%252Fwww.facebook.com%252Flogin.php%26refid%3D9; L=2; m_user=abid%40osminvention.com%3A100001962331158%3A4O4mLt4DHJeSbZzq%3A0%3Av_1%2Cajax_0%2Cwidth_0%2Cpxr_0%2Cgps_0%3A1308029088; W=1308029088
+request-header: referer => https://www.facebook.com/login.php?m=m&refsrc=http%3A%2F%2Fwww.facebook.com%2Flogin.php&refid=9
+Read 912 bytes
+Read 2360 bytes
+Read 3808 bytes
+Read 5285 bytes
+Read 5295 bytes
+response-header: cache-control => private, no-cache, no-store, must-revalidate
+response-header: content-type => text/html; charset=utf-8
+response-header: expires => Sat, 01 Jan 2000 00:00:00 GMT
+response-header: p3p => CP="Facebook does not have a P3P policy. Learn why here: http://fb.me/p3p"
+response-header: pragma => no-cache
+response-header: x-frame-options => DENY
+response-header: set-cookie => L=2; path=/; domain=.facebook.com; httponly, W=1308029088; path=/; domain=.facebook.com
+response-header: content-encoding => gzip
+response-header: x-fb-server => 10.36.78.124
+response-header: x-cnection => close
+response-header: transfer-encoding => chunked
+response-header: date => Tue, 14 Jun 2011 05:24:49 GMT
+gunzip body
+saved cookie: L=2
+saved cookie: W=1308029088
+status: 200
+
+***** Debugger requested, but was not available (ensure ruby-debug is listed in Gemfile/installed as gem): Start server with --debugger to enable *****
+  [1m[35mAREL (0.3ms)[0m  UPDATE "users" SET "first_signin_fb" = 'f', "updated_at" = '2011-06-14 05:24:51.784085' WHERE "users"."id" = 17
+  [1m[36mAREL (0.1ms)[0m  [1mUPDATE "contacts" SET "name" = 'Abid Mahmood', "email" = 'abid@osminvention.com' WHERE ("contacts".associated_user_id = 17)[0m
+Rendered dashboard/import_contacts/facebook/friends_box.html.erb (1.9ms)
+Completed 200 OK in 11252ms (Views: 23.2ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/images/buttons/import-contacts.png" for 127.0.1.1 at 2011-06-14 10:24:51 +0500
+
+ActionController::RoutingError (No route matches "/images/buttons/import-contacts.png"):
+  
+
+Rendered /usr/local/ruby/lib/ruby/gems/1.9.1/gems/actionpack-3.0.7/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/dashboard/users/edit" for 127.0.1.1 at 2011-06-14 10:27:06 +0500
+  Processing by Dashboard::UsersController#edit as HTML
+  [1m[35mUser Load (1.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 17 LIMIT 1
+Rendered shared/_user_menu.haml (2.7ms)
+  [1m[36mProfile Load (1.7ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE ("profiles".user_id = 17) LIMIT 1[0m
+Rendered shared/_flash_notify.haml (1.6ms)
+Rendered shared/_header_layout.haml (4.3ms)
+Rendered shared/_footer.haml (1.4ms)
+Rendered dashboard/users/edit.html.haml within layouts/application (117.3ms)
+Completed 200 OK in 335ms (Views: 153.6ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/dashboard/contacts" for 127.0.1.1 at 2011-06-14 10:27:09 +0500
+  Processing by Dashboard::ContactsController#index as HTML
+  [1m[35mUser Load (54.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 17 LIMIT 1
+Rendered shared/_user_menu.haml (2.6ms)
+  [1m[36mContact Load (0.2ms)[0m  [1mSELECT "contacts".* FROM "contacts" WHERE ("contacts".user_id = 17)[0m
+Rendered shared/_flash_notify.haml (1.5ms)
+Rendered shared/_header_layout.haml (4.0ms)
+Rendered shared/_footer.haml (1.3ms)
+Rendered dashboard/contacts/index.html.haml within layouts/application (19.0ms)
+Completed 200 OK in 233ms (Views: 50.3ms | ActiveRecord: 54.3ms)
+
+
+Started GET "/dashboard/import_contacts" for 127.0.1.1 at 2011-06-14 10:27:11 +0500
+  Processing by Dashboard::ImportContactsController#index as HTML
+  [1m[35mUser Load (1.6ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 17 LIMIT 1
+Rendered shared/_user_menu.haml (2.8ms)
+Rendered dashboard/import_contacts/_facebook.html.haml (3.2ms)
+Rendered dashboard/import_contacts/_twitter.html.haml (3.2ms)
+Rendered shared/_flash_notify.haml (3.7ms)
+Rendered shared/_header_layout.haml (59.5ms)
+Rendered shared/_footer.haml (3.2ms)
+Rendered dashboard/import_contacts/index.html.haml within layouts/application (83.9ms)
+Completed 200 OK in 215ms (Views: 100.9ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/dashboard/friends/facebook" for 127.0.1.1 at 2011-06-14 10:27:23 +0500
+  Processing by Dashboard::ImportContacts::FacebookController#friends as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"INu/V2Vw6Jd/+0wyhf8EUC5Tij8lVP6M+Z6Basky5tg=", "login"=>"", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (1.5ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 17 LIMIT 1[0m
+Redirected to http://shareme.com:3000/dashboard/import_contacts
+Completed 302 Found in 173ms
+
+
+Started GET "/dashboard/import_contacts" for 127.0.1.1 at 2011-06-14 10:27:23 +0500
+  Processing by Dashboard::ImportContactsController#index as HTML
+  [1m[35mUser Load (1.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 17 LIMIT 1
+Rendered shared/_user_menu.haml (2.9ms)
+Rendered dashboard/import_contacts/_facebook.html.haml (3.5ms)
+Rendered dashboard/import_contacts/_twitter.html.haml (3.1ms)
+Rendered shared/_flash_notify.haml (1.7ms)
+Rendered shared/_header_layout.haml (4.5ms)
+Rendered shared/_footer.haml (1.4ms)
+Rendered dashboard/import_contacts/index.html.haml within layouts/application (26.2ms)
+Completed 200 OK in 203ms (Views: 31.5ms | ActiveRecord: 1.5ms)

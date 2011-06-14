@@ -1,0 +1,13 @@
+%h3{:style => "text-align: left;"}
+  = image_tag "social-icons/facebook_32.png"
+%section
+  = form_tag dashboard_facebook_friends_path, {:id=>'form_fb'} do
+    %div.span-15.last
+      = label_tag :email, nil, :class => "span-3 title"
+      = text_field_tag  :email, "", :class => "text"
+    %div.span-15.last
+      = label_tag :password, nil, :class => "span-3 title"
+      = password_field_tag  :password, "", :class => "text"
+    %button.social-button{:id => 'fb_btn'}
+      = image_tag "social-icons/facebook_64.png"
+    %hr

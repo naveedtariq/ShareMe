@@ -33,3 +33,48 @@
   %div.span-20
   %label
     Quick statistic
+
+%div.reveal-modal{:id=>'fb_friends_invite'}
+  %h2 'Invite Facebook friends?'
+  %p Do you want to invite your Facebook friends?
+  %input#invite_yes{:type=>'button', :value=>'Yes', :class=>'jquery-button sign-in-button'}
+  %input#invite_no{:type=>'button', :value=>'No', :class=>'jquery-button sign-in-button'}
+  %a.close-reveal-modal &#215;
+
+%div.reveal-modal{:id=>'fb_credentials',:style=>"width=600px;"}
+  = render :partial => "dashboard/import_contacts/facebook"
+  %a.close-reveal-modal &#215;
+
+%div.reveal-modal{:id=>'friends_list'}
+
+%input{:type=>"hidden",:id=>"first_fb_signin",:value=>"#{current_user.first_signin_fb}"}
+
+:javascript
+  $(function(){
+    var fb_invite = $('#first_fb_signin').val();
+    if(fb_invite == "true")
+    {
+      $('#fb_friends_invite').reveal();
+    }
+    $("#invite_yes").click(function(){
+      $('.close-reveal-modal').click();
+      $('#fb_credentials').reveal();
+    });
+    $("#invite_no").click(function(){
+      $('.close-reveal-modal').click();
+    });
+    $("#fb_btn").click(function(){
+      params = $('#form_fb').serialize();
+      $.ajax({
+        type: 'POST',
+        url: '/dashboard/friends/facebook',
+        data: params,
+        success: function(data) {
+          $('.close-reveal-modal').click();
+          $('#friends_list').html(data);
+          $('#friends_list').reveal();
+        }
+      });
+      return false;
+    });
+  });

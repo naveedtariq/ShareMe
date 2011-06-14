@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110527130414) do
+ActiveRecord::Schema.define(:version => 20110612194932) do
 
   create_table "contacts", :force => true do |t|
     t.integer  "user_id",            :null => false
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20110527130414) do
     t.string   "encrypted_phone"
     t.boolean  "filled",                                :default => false
     t.string   "encrypted_address"
+    t.boolean  "first_signin_fb",                       :default => false
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

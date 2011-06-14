@@ -27,7 +27,7 @@ Informer::Application.routes.draw do
   #
   namespace :dashboard do
     root :to => "users#show"
-    resource :users, :only => [:show, :edit, :update]
+    resource :users, :only => [:show, :edit, :update,:update_signin_fb_flag]
     resource :codes, :only => [:new, :create]
     resources :contacts, :only => [:index, :show, :new, :create, :destroy] do
       get :level2

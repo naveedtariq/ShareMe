@@ -16,14 +16,14 @@ $('#closeModalBtn').css("display", "none");
     data: params,
 		success: function(data) {
       alert(data);
-      document.location = data;
+      $('.close-reveal-modal').click();
 		}
 	});
   return false;
 }
 $(function(){
 
-  $("#import-contacts").reveal();
+  //$("#import-contacts").reveal();
   $('#import-contacts-submit').click(function(e){
     e.preventDefault();
     importContactsFromFacebook('<%= @friends.length %>');
@@ -38,11 +38,7 @@ function selectAllCheckBoxes(formId){
 	}
 }
 </script>
-<span class='span-24 last title'>
-  <h2>Import from Facebook</h2>
-  <%= render :partial=>"shared/user_menu" %>
-</span>
-<div id="import-contacts" class="reveal-modal">
+<div id="import-contacts">
   <h6>Import your Friends from Facebook</h6>
   <div id="formData">
     <form name='fbForm' id='fbForm' >
@@ -66,5 +62,5 @@ function selectAllCheckBoxes(formId){
       <input class="submit" type="button" id="import-contacts-submit"/>
     </form>
   </div>
-  <a class="close-reveal-modal" onclick="$('#import-contacts').remove();document.location='/dashboard/contacts'">&#215;</a>
+  <a class="close-reveal-modal" onclick="$('#import-contacts').remove();">&#215;</a>
 </div>

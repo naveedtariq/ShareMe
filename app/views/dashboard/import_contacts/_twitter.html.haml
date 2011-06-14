@@ -1,0 +1,13 @@
+%h3{:style => "text-align: left;"}
+  = image_tag "social-icons/twitter_32.png"
+%section.span-24.last
+  = form_tag dashboard_facebook_friends_path do
+    %div.span-15.last
+      = label_tag :login, nil, :class => "span-3 title"
+      = text_field_tag  :login, "", :class => "text"
+    %div.span-15.last
+      = label_tag :password, nil, :class => "span-3 title"
+      = password_field_tag  :password, "", :class => "text"
+    %button.social-button
+      = image_tag "social-icons/twitter_64.png"
+    %hr
