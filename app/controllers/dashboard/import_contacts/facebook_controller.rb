@@ -12,7 +12,7 @@ class Dashboard::ImportContacts::FacebookController < Dashboard::ImportContacts:
         if ImportContact::Facebook.auth_mechanize?(auth_params)
           @friends = @import_contact.friends
           if request.xhr?
-            debugger
+            #debugger
             current_user.update_attribute(:first_signin_fb, false)
             render 'friends_box' and return
           end

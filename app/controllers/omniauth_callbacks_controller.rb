@@ -13,7 +13,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   protected
 
   def omniauth_sign_in
-debugger
+#debugger
     #todo merge by email if signing in with a new account for which we already have a user (match on email)
     return false unless preexisting_authorization_token
 
@@ -25,7 +25,7 @@ debugger
 
 
   def omniauth_sign_up
-debugger
+#debugger
     user = unless omniauth_data.recursive_find_by_key("email").blank?
              User.find_or_initialize_by_email(:email => omniauth_data.recursive_find_by_key("email"))
            else

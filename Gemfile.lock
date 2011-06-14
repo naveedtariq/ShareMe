@@ -317,6 +317,3 @@ DEPENDENCIES
   spreadsheet
   sqlite3
   unicorn
-
-METADATA
-  version: 1.0.6

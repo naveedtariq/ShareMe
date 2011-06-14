@@ -18,5 +18,5 @@ production:
   <<: *defaults
   encryption_key: 'JE<mmksadqwIDSAl'
   facebook:
-    app_id: 188878237826676
-    app_secret: 19f61a5fd23ff9447881e7a49e8a7091
+    app_id: 226475647380192
+    app_secret: 5dc7184704ad497e2ef8df1c81901d37
