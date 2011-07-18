@@ -1,0 +1,11 @@
+<div id="account_verification">
+	<h2>Activate your account</h2>
+
+	<div id="confirm_form">
+		<% form_for @user, :url => activate_path(@user.id), :html => { :method => :post } do |form| %>
+			<%= form.error_messages %>
+			<br />
+			<%= render :partial => "form", :locals => { :form => form }%>
+		<% end %>
+	</div>
+</div>

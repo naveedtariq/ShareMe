@@ -1,0 +1,184 @@
+<!--home main contents wrapper starts here-->
+
+<div id="layout_wrapper">
+
+<div class="left_contents"> 
+
+<!--Featured Section starts here-->
+
+
+
+<div class="featured_section">
+
+<h2>HOW <span>Share Me</span> WILL MAKE YOUR LIFE SIMPLER</h2>
+
+<img src="images/abuot_share_me_thumb.jpg" alt="ABOUT SHARE ME" />
+
+<img src="images/how_share_me_works_thumb.jpg" alt="HOW SHARE ME WORKS" />
+
+<img src="images/how_share_me_helps_thumb.jpg" alt="HOW SHARE ME HELPS?" />
+
+<a href="#" class="moreBtnWhite">more scenarios</a> </div>
+
+<!--Featured Section ends here--> 
+
+
+
+<!--Introductory Section starts here-->
+
+<div class="intructory_section">
+
+<div class="col_1">
+
+<h2>About <span>Share Me</span></h2>
+
+<p>Share Me allows you to accumalate all your basic, personal, professional and social information into a convenient, easily accessible, unique 4-digit code. That however does not mean you are letting the world access all your important information through a single code. This is where our intuitive security settings come to your help; letting you choose exactly who sees what, and when.</p>
+
+<a href="#" class="moreBtnYellow">Full details</a> </div>
+
+<div class="col_2">
+
+<h2>HOW <span>Share Me</span> WORKS</h2>
+
+<p>Share Me allows you to accumalate all your basic, personal, professional and social information into a convenient, easily accessible, unique 4-digit code. That however does not mean you are letting the world access all your important information through a single code. This is where our intuitive security settings come to your help; letting you choose exactly who sees what, and when.</p>
+
+<a href="#" class="moreBtnYellow">Full details</a> </div>
+
+<div class="col_3">
+
+<h2>How <span>Share Me</span> Works</h2>
+
+<p>Share Me allows you to accumalate all your basic, personal, professional and social information into a convenient, easily accessible, unique 4-digit code. That however does not mean you are letting the world access all your important information through a single code. This is where our intuitive security settings come to your help; letting you choose exactly who sees what, and when.</p>
+
+<a href="#" class="moreBtnYellow">Full details</a> </div>
+
+</div>
+
+
+
+<!--Introductory Section ends here--> 
+
+
+
+</div>
+
+<!--Left contents section ends here--> 
+
+
+
+<!--home page right sidebar section starts here-->
+
+<div class="rightBar"> 
+
+<% unless flash.blank? %>
+<div id="home-page-notification" >
+	<%= flash[:notice] %>
+</div>
+
+<% end %>
+<!--Enter share me code section starts here-->
+
+
+
+<div class="enter_share_code">
+
+<h2>ENTER <span>SHARE ME</span> CODE</h2>
+
+<form action="" method="get" id="shareCode">
+
+<!--maxlength Limit i fixed for Inputs for 2 digits - Change it to suit your needs and check share_me_custom.js for limit numeric value-->
+
+
+
+<input name="" type="text" maxlength="2" class="digits"/>
+
+<input name="" type="text" maxlength="2"  class="digits"/>
+
+<input name="" type="text" maxlength="2"  class="digits"/>
+
+<input name="" type="text" maxlength="2"  class="digits"/>
+
+<input name="" type="button"  class="yellowInputBtn" value="search"/>
+
+</form>
+
+</div>
+
+<!--Enter share me code section end here--> 
+
+
+
+<!--Get Share me code section starts here-->
+
+
+
+<div class="get_share_code">
+
+<h2> get your <span>SHARE ME</span> CODE</h2>
+
+<%= form_for @user do |uf| %>
+
+<label>E-mail:</label>
+
+<input name="user[email]" type="text" class="textField"/>
+
+<label>Name:</label>
+
+<input name="user[name]" type="text"  class="textField"/>
+
+<input type="submit" class="blackInputBtn" value="Register">
+
+<% end %>
+</div>
+
+<!--Get Share me code section ends here--> 
+
+
+
+<!--Connect with section starts here-->
+
+
+
+<ul class="connect_with_socials">
+
+<p>Or connect with</p>
+
+<li><a class="social-fb tipsy" href="#" title="Facebook"></a></li>
+
+<li><a class="social-twitt tipsy" href="#" title="Twitter"></a></li>
+
+<li><a class="social-linkedin tipsy" href="#" title="LinkedIn"></a></li>
+
+<li><a class="social-myspace tipsy" href="#" title="Myspace"></a></li>
+
+</ul>
+
+<!--Connect with section ends here--> 
+
+
+
+<!--Already Member section starts here-->
+
+
+
+<div class="already_a_member">
+
+<p>Already a Member ?</p>
+
+<a href="/user_sessions/new?height=142&width=299&modal=true" class="blackInputBtn thickbox">Sign In</a>  
+
+
+
+</div>
+
+<!--Already Member section ends here--> 
+
+
+
+</div>
+
+<!--home page right sidebar section ends here--> 
+
+
+
+</div>

@@ -1,0 +1,18 @@
+
+<div class="get_share_code_signin_popup">
+<h2> get your <span>SHARE ME</span> CODE</h2>
+
+<%= form_for @user do |uf| %>
+<%= uf.error_messages %>
+<label>E-mail:</label>
+
+<input name="users[email]" type="text" class="textField"/>
+
+<label>Name:</label>
+
+<input name="users[name]" type="text"  class="textField"/>
+
+<input type="submit" class="blackInputBtn" value="Register">
+
+<% end %>
+</div>

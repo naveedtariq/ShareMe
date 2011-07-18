@@ -1,0 +1,22 @@
+
+<div class="get_share_code_signin_popup">
+
+<h2> Sign in to <span>SHARE ME</span></h2>
+<%= form_for @user_session do |f| %>
+<%= f.error_messages %>
+<label>Username:</label>
+
+<input type="text" class="textField" name="user_session[login]">
+
+<label>Password:</label>
+
+<input type="password" class="textField" name="user_session[password]">
+
+<input type="button" onclick="tb_remove()" value="Cancel" class="blackInputBtnCancel"/>
+
+
+
+<input type="submit" value="Sign in"  class="blackInputBtn"/>
+
+<% end %>
+</div>

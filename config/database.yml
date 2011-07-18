@@ -1,0 +1,20 @@
+# SQLite version 3.x
+#   gem install sqlite3
+development:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: share-me_development
+  username: root
+  password: root
+  host: localhost
+
+production:
+  adapter: sqlite3
+  encoding: utf8
+  reconnect: false
+  database: share-me_production
+  username: root
+  password: 
+  host: localhost
+
