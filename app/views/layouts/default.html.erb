@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 <head>
@@ -16,20 +17,26 @@
 <%= javascript_include_tag "thickbox" %>
 <%= yield :top_js %>
 </head>
+
 <body>
-	<div id="layout_wrapper_outer">
+	<div id="layout_wrapper_outer"> 
 		<div id="header">
-			<%= render :partial => "layouts/shared/offline_menu" %>
+			<%= render :partial => "layouts/shared/default_menu" %>
 		</div>
 		<div class="clear"></div>
 
-		<%= yield %>
-
+		<div id="layout_wrapper">
+			<div class="leftBar">
+				<%= render :partial => "layouts/shared/main_menu" %>	
+	    </div>	
+			<div class="right_contents">
+				<%= yield %>
+			</div>
+		</div>
 		<div class="clear"></div>
 		<!--footer Section starts here-->
 		<div class="footer_contents">
 			<%= render :partial => "layouts/shared/footer" %>
 		</div>
-		<!--footer Section ends here-->
 	</div>
 </body>

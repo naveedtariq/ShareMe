@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
 		c.validates_length_of_password_confirmation_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
 		c.validate_login_field = false  #don't validate email field with additional validations
 	end
+
+	include ExampleProfile
+
 	def active?
 		active
 	end
@@ -38,9 +41,10 @@ class User < ActiveRecord::Base
 	end
 
 	def signup!(params)
-		self.login = params[:user][:name]
-		self.email = params[:user][:email]
-		self.name = params[:user][:name]
+		self.update_attributes params[:user]
+#		self.login = params[:user][:name]
+#		self.email = params[:user][:email]
+#		self.name = params[:user][:name]
 		save_without_session_maintenance
 	end
 

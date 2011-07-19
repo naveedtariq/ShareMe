@@ -314,7 +314,7 @@ input.blackInputBtn {
   font-weight: normal;
   height: 26px;
   line-height: 27px;
-  margin: 5px 8px 0 0;
+  margin: 5px 8px 12px 0;
   padding: 0 13px;
   text-decoration: none;
   text-transform: uppercase;
@@ -506,7 +506,7 @@ span{
   margin: 0 0 12px;
   padding: 5px 10px;
   text-align: left;
-  width: 157px;
+  width: 160px;
 }
 .enter_share_code span {
   color: #FFBA00;
@@ -522,14 +522,14 @@ span{
   float: left;
   position: relative;
   width: 252px;
-  height: 133px;
+  /*height: 133px;*/
 }
 .get_share_code h2 {
   background-color: #FFBA00;
   margin-bottom: 10px;
   padding: 5px;
   text-align: center;
-  width: 243px;
+/*  width: 243px;*/
 }
 .get_share_code label {
   color: #000000;
@@ -672,9 +672,10 @@ a.social-myspace{
   background-color: #FFFFFF;
   border: 1px solid #FFE400;
   float: left;
-  height: 135px;
+/*  height: 135px;*/
   position: relative;
   width: 327px;
+  /*width: 100%;*/
 }
 .get_share_code_register_popup {
   background-color: #FFFFFF;

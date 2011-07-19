@@ -1,0 +1,120 @@
+<div class="profile_featured_section">
+	<h2><span>YOUR </span>CONTACT INFORMATION</h2>
+	<table width="600" border="0" id="userInfoTbl">
+		<tr>
+			<td width="200"><strong>ShareMe Code</strong></td>
+			<td><%= current_user.code %></td>
+		</tr>
+		<tr>
+			<td width="200"><strong>First Name</strong></td>
+			<td><%= current_user.name %></td>
+		</tr>
+		<tr>
+			<td width="200"><strong>Last Name</strong></td>
+			<td><%= current_user.name %></td>
+		</tr>
+		<tr>
+			<td width="200"><strong>Company Name</strong></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td width="200"><strong>Company Address</strong></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td width="200">&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="200"><strong>Email </strong></td>
+			<td><%= current_user.email %></td>
+		</tr>
+		<tr>
+			<td width="200"><strong>Phone Number </strong></td>
+			<td><%= current_user.phone %></td>
+		</tr>
+		<tr>
+			<td width="200"> <strong>Fax</strong></td>
+			<td><%= current_user.phone %></td>					
+		</tr>
+	</table> 
+	<%= link_to "Sign Out","/logout",{:class=>"moreBtnPlain"} %>
+</div>
+
+<!--Profile Section ends here--> 
+
+
+
+
+
+<!--Facebook APIs Widget Section starts here--> 
+
+
+
+<div class="social_APIs_widgets">
+
+<h2>YOUR <span>Facebook Feedback</span></h2>
+
+<div class="APIs_contents">
+
+<p>You are currently not connected to Facebook.</p>
+
+</div>
+
+<a href="#" class="connect_with_facebook_btn"></a></td>
+
+
+
+</div>
+
+<!--Facebook APIs Widget Section ends here--> 
+
+
+
+<!--Twitter APIs Widget Section starts here--> 
+
+
+
+<div class="social_APIs_widgets">
+
+<h2>YOUR <span>Twitter Feedback</span></h2>
+
+<div class="APIs_contents">
+
+<p>You are currently not connected to Facebook.</p>
+
+</div>
+
+<a href="#" class="connect_with_twitter_btn"></a></td>
+
+
+
+</div>
+
+<!--Twitter APIs Widget Section ends here--> 
+
+
+
+
+
+<!--Linkedin APIs Widget Section starts here--> 
+
+
+
+<div class="social_APIs_widgets">
+
+<h2>YOUR <span>LinkedIN Feedback</span></h2>
+
+<div class="APIs_contents">
+
+<p>You are currently not connected to Facebook.</p>
+
+</div>
+
+<a href="#" class="connect_with_linkedin_btn"></a></td>
+
+
+
+</div>
+
+<!--Linkedin APIs Widget Section ends here--> 

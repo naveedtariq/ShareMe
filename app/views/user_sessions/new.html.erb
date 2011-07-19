@@ -1,12 +1,13 @@
-
 <div class="get_share_code_signin_popup">
 
 <h2> Sign in to <span>SHARE ME</span></h2>
-<%= form_for @user_session do |f| %>
+<%= form_for @user_session, :id=>"form-sign-in" do |f| %>
 <%= f.error_messages %>
+<div id="error-explanation"></div>
+<br />
 <label>Username:</label>
 
-<input type="text" class="textField" name="user_session[login]">
+<input type="text" class="textField" name="user_session[email]">
 
 <label>Password:</label>
 
@@ -16,7 +17,7 @@
 
 
 
-<input type="submit" value="Sign in"  class="blackInputBtn"/>
+<input id="sign-in" type="submit" value="Sign in"  class="blackInputBtn" onclick="javascript:signIn();return false;"/>
 
 <% end %>
 </div>

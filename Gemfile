@@ -8,6 +8,9 @@ gem 'rails', '3.0.9'
 gem 'mysql'
 gem 'authlogic'
 gem 'rails3-generators'
+gem "oauth"
+gem "oauth2"
+gem "authlogic-connect"
 
 # Use unicorn as the web server
 # gem 'unicorn'

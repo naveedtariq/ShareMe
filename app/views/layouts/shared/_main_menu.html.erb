@@ -1,0 +1,13 @@
+<div class="profile_section"> <img src="images/user_thumb.jpg" alt="Profile User Thumbnail" />
+	<h2><%= current_user.name %></h2>
+	<small>Lahore, Pakistan</small> <a href="#" class="editProfile">Edit Profile</a>
+	<ul class="left_navigation">
+		<li>
+			<%= link_to "Home", user_home_path,{:title=>"Home",:class=>"activeLeft"} %>
+		</li>
+		<li><a href="#">Contacts</a></li>
+		<li><a href="#">Groups</a></li>
+		<li><a href="#">Settings</a></li>
+		<li><a href="#">Socialify</a></li>
+	</ul>
+</div>

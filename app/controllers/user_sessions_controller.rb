@@ -8,22 +8,29 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-	puts params
     @user_session = UserSession.new(params[:user_session])
-    if @user_session.save
-      flash[:notice] = "Login successful!"
-      redirect_back_or_default users_path
-    else
-	puts "i was here"
-	puts @user_session.errors.inspect
-      render :action => :new
-    end
+		@user_session.save do |result|
+			if result 
+				if request.xhr?
+					render :json => {:result=>"success",:message =>"Login successful!"}	
+				else
+					flash[:notice] = "Login successful!"
+					redirect_back_or_default user_home_path 
+				end
+			else
+				if request.xhr?
+					render :json => {:result=>"failure",:message=>"There are errors with the following fields",:error=>@user_session.errors.full_messages}
+				else
+					render :action => :new
+				end
+			end
+		end
   end
 
   def destroy
     current_user_session.destroy
     flash[:notice] = "Logout successful!"
-    redirect_back_or_default new_user_session_url
+    redirect_back_or_default "/" 
   end
 
 end
