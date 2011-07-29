@@ -197,7 +197,7 @@
 <div class="get_share_code">
 
 <h2> get your <span>SHARE ME</span> CODE</h2>
-<%= form_tag "/users", :id=> "sign_up_form" do |uf| %>
+<%= form_tag authenticate_path, {:id=> "sign_up_form", :method => :post } do |uf| %>
 
 <label>E-mail:</label>
 
@@ -209,8 +209,8 @@
 
 <input id="register-btn" type="button" class="blackInputBtn register" value="Register">
 
-</div>
 <% end %>
+</div>
 <input id="signup-btn" alt="#TB_inline?height=179&width=252&inlineId=signup-form" class="thickbox" type="button" value="show" style="visibility:hidden" />
 
 <!--Get Share me code section ends here--> 
@@ -225,11 +225,10 @@
 
 <p>Or connect with</p>
 
-<li><a class="social-fb tipsy" href="#" title="Facebook" onclick="javascript:$('#oauth-form').submit();return false;"></a>
-<form action="users/" method="POST" id="oauth-form">
-<%= hidden_field_tag "oauth_provider", "facebook" %>
-<%= hidden_field_tag "authentication_type","user" %>
-</form>
+<%= form_tag authenticate_path, {:id=> "oauth_form", :method => :post } do |uf| %>
+<li><a class="social-fb tipsy" href="#" title="Facebook" onclick="javascript:$('#oauth_form').submit();return false;"></a>
+<%= hidden_field_tag "oauth_provider", "twitter" %>
+<%= hidden_field_tag "authentication_type","session" %>
 </li>
 
 <li><a class="social-twitt tipsy" href="#" title="Twitter"></a></li>
@@ -239,7 +238,7 @@
 <li><a class="social-myspace tipsy" href="#" title="Myspace"></a></li>
 
 </ul>
-
+<% end %>
 <!--Connect with section ends here--> 
 
 

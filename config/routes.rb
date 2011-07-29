@@ -4,15 +4,17 @@ ShareMe::Application.routes.draw do
   get "activations/create"
 
 #  get "user_sessions/new"
-	resources :user_sessions
-	resources :users
 
+  match 'authenticate' => 'user_sessions#create', :as => :authenticate, :via => :post
 	match 'login' => "user_sessions#new",      :as => :login
 	match 'logout' => "user_sessions#destroy", :as => :logout
 	root :to  => 'home#index'
 	match '/register/:activation_code', :controller => 'activations', :action => 'new', :as => :register
 	match '/activate/:id', :controller => 'activations', :action => 'create', :as => :activate
 	match '/user_home', :controller => 'users', :action => 'user_home', :as => :user_home
+
+	resources :user_sessions
+	resources :users
 	 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,11 +1,11 @@
 connect:
   twitter:
-    key: "my_key"
-    secret: "my_secret"
+    key: "JInLkOAb4c20sJYpatg"
+    secret: "bJmZLu71qtzZUDFsqvcb1ID08QT4yt08kYISVbFvY"
     label: "Twitter"
   facebook:
-    key: "251625571516094"
-    secret: "b034c76e328858690d954e5c404c6e64"
+    key: "176485969058177"
+    secret: "d5883469ab10f4752067ea15b9aabf8d"
     label: "Facebook"
   google:
     key: "my_key"
