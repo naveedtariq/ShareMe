@@ -4,9 +4,10 @@ connect:
     secret: "bJmZLu71qtzZUDFsqvcb1ID08QT4yt08kYISVbFvY"
     label: "Twitter"
   facebook:
-    key: "176485969058177"
-    secret: "d5883469ab10f4752067ea15b9aabf8d"
+    key: "251625571516094"
+    secret: "b034c76e328858690d954e5c404c6e64"
     label: "Facebook"
+    scope: "email, offline_access, user_work_history, user_location, user_hometown, read_stream"
   google:
     key: "my_key"
     secret: "my_secret"
@@ -16,11 +17,11 @@ connect:
     secret: "my_secret"
     label: "Yahoo"
   myspace:
-    key: "my_key"
-    secret: "my_secret"
+    key: "4fd2d9671b24416db03311f27a78ab97"
+    secret: "9f8976f2ce3c4c589d970cd6c21e14c2e5434f346f704f0eadd2318fe8d99be7"
   vimeo:
     key: "my_key"
     secret: "my_secret"
   linked_in:
-    key: "my_key"
-    secret: "my_secret"
+    key: "i7zw7rjdks5n"
+    secret: "zMu9y04KIUDZT5gI"

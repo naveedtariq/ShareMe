@@ -39,6 +39,7 @@ class AccessToken < ActiveRecord::Base
     end
     
     def settings(site, hash = {})
+			hash[:scope] = self.credentials[:scope]
       @settings = hash.merge(:site => site)
     end
     

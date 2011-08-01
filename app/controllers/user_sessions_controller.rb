@@ -15,11 +15,7 @@ class UserSessionsController < ApplicationController
 					render :json => {:result=>"success",:message =>"Login successful!"}	
 				else
 					flash[:notice] = "Login successful!"
-					puts "yahnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
-#					puts current_user.inspect + "((((((((((((((((((("
-#					puts @user_session.inspect + "((((((((((((((((((("
 					redirect_to current_user ? user_home_path : login_url
-#					redirect_back_or_default user_home_path 
 				end
 			else
 				if request.xhr?

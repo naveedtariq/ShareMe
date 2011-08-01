@@ -7,15 +7,15 @@
 		</tr>
 		<tr>
 			<td width="200"><strong>First Name</strong></td>
-			<td><%= current_user.name %></td>
+			<td><%= current_user.profile[:first_name] %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Last Name</strong></td>
-			<td><%= current_user.name %></td>
+			<td><%= current_user.profile[:last_name] %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Company Name</strong></td>
-			<td></td>
+			<td><%= current_user.profile[:company_name]  %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Company Address</strong></td>
@@ -27,7 +27,7 @@
 		</tr>
 		<tr>
 			<td width="200"><strong>Email </strong></td>
-			<td><%= current_user.email %></td>
+			<td><%= current_user.profile[:email] %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Phone Number </strong></td>
@@ -53,12 +53,16 @@
 
 <div class="social_APIs_widgets">
 
-<h2>YOUR <span>Facebook Feedback</span></h2>
+<h2>YOUR <span>Facebook Feed</span></h2>
 
 <div class="APIs_contents">
-
+<% unless current_user.facebook %>
 <p>You are currently not connected to Facebook.</p>
-
+<% else %>
+<% current_user.fb_status_feed.each do |fb_status| %>
+	<p class="fb_status"><%= fb_status["message"] %> --- <%= (fb_status["likes"].blank? ? 0 : fb_status["likes"]["data"].length )%> people like this.</p>
+<% end %>
+<% end %>
 </div>
 
 <a href="#" class="connect_with_facebook_btn"></a></td>
@@ -81,7 +85,13 @@
 
 <div class="APIs_contents">
 
-<p>You are currently not connected to Facebook.</p>
+<% unless current_user.twitter %>
+<p>You are currently not connected to twitter.</p>
+<% else %>
+<% current_user.tweets.each do |tweet| %>
+	<p class="fb_status"><%= tweet["text"] %> </p>
+<% end %>
+<% end %>
 
 </div>
 

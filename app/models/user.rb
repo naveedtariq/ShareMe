@@ -11,20 +11,19 @@ class User < ActiveRecord::Base
 
 
 
-  acts_as_authentic do |config|
-    config.validate_email_field    = false
-    config.validate_login_field    = false
-    config.validate_password_field = false
-  end
-#	acts_as_authentic do |c|
-#		c.login_field = "email"
-#	  c.validates_length_of_password_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
-#		c.validates_length_of_password_confirmation_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
-#		c.validate_login_field = false  #don't validate email field with additional validations
-#	end
+#  acts_as_authentic do |config|
+#    config.validate_email_field    = false
+#    config.validate_login_field    = false
+#    config.validate_password_field = false
+#  end
+	acts_as_authentic do |c|
+		c.login_field = "email"
+	  c.validates_length_of_password_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
+		c.validates_length_of_password_confirmation_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
+		c.validate_login_field = false  #don't validate email field with additional validations
+	end
 
-	include ExampleProfile
-
+	include SocialProfile
 	def test
 		if (self.new_record?) && (!self.access_tokens.empty?)
 			self.active = true	

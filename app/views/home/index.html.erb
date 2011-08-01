@@ -79,6 +79,10 @@
 					}
 				});
 		}
+		function social_connect(id) {
+			$('#oauth_provider_'+id).attr('checked','checked');
+			$('#oauth_form').submit();
+		}
 	</script>
 <% end %>
 <% unless current_user.blank? %>
@@ -226,16 +230,27 @@
 <p>Or connect with</p>
 
 <%= form_tag authenticate_path, {:id=> "oauth_form", :method => :post } do |uf| %>
-<li><a class="social-fb tipsy" href="#" title="Facebook" onclick="javascript:$('#oauth_form').submit();return false;"></a>
-<%= hidden_field_tag "oauth_provider", "twitter" %>
 <%= hidden_field_tag "authentication_type","session" %>
+
+<li>
+<a class="social-fb tipsy" href="#" title="Facebook" onclick="social_connect('facebook');return false;"></a>
+<%#= hidden_field_tag "oauth_provider", "facebook" %>
+<input type="radio" value="facebook" name="oauth_provider" id="oauth_provider_facebook" style="display: none;">
 </li>
 
-<li><a class="social-twitt tipsy" href="#" title="Twitter"></a></li>
+<li><a class="social-twitt tipsy" href="#" title="Twitter" onclick="social_connect('twitter');return false;"></a>
 
-<li><a class="social-linkedin tipsy" href="#" title="LinkedIn"></a></li>
+<input type="radio" value="twitter" name="oauth_provider" id="oauth_provider_twitter" style="display: none;">
+</li>
 
-<li><a class="social-myspace tipsy" href="#" title="Myspace"></a></li>
+<li>
+<a class="social-linkedin tipsy" href="#" title="LinkedIn" onclick="social_connect('linked_in');return false;"></a>
+<input type="radio" value="linked_in" name="oauth_provider" id="oauth_provider_linked_in" style="display: none;">
+</li>
+
+<li><a class="social-myspace tipsy" href="#" title="Myspace" onclick="social_connect('myspace');return false;"></a>
+<input type="radio" value="myspace" name="oauth_provider" id="oauth_provider_myspace" style="display: none;">
+</li>
 
 </ul>
 <% end %>
