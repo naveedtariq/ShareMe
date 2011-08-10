@@ -1,3 +1,7 @@
+<% unless email_present  %>
+  <%= form.label :email, "Email" %>
+  <%= form.text_field :email,:class=>"input_fields" %><br />
+<% end %>
 <%= form.label :phone, "Phone No." %>
 <%= form.text_field :phone,:class=>"input_fields" %><br />
 <%= form.label :password, "Set your password" %>

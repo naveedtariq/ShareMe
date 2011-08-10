@@ -12,10 +12,12 @@ class UsersController < ApplicationController
 
 	def create
   	@user = User.new params[:user]
-		 
+		@user.is_local = true
+
 		@user.save do |result|
 			if result 
 				@user.deliver_activation_instructions!
+
 				if request.xhr?
 					puts "i was in ajax request"
 					flash[:notice] = "Congratulations! The way you communicate just got upgraded. A simple 4 digit ShareMe is all you will ever need, check your email now."

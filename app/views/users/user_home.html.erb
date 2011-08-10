@@ -7,15 +7,15 @@
 		</tr>
 		<tr>
 			<td width="200"><strong>First Name</strong></td>
-			<td><%= current_user.profile[:first_name] %></td>
+			<td><%= current_user.f_name.blank? ? current_user.social_profile[:first_name] : current_user.f_name %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Last Name</strong></td>
-			<td><%= current_user.profile[:last_name] %></td>
+			<td><%= current_user.l_name.blank? ? current_user.social_profile[:last_name] : current_user.l_name   %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Company Name</strong></td>
-			<td><%= current_user.profile[:company_name]  %></td>
+			<td><%= current_user.social_profile[:company_name]  %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Company Address</strong></td>
@@ -27,7 +27,7 @@
 		</tr>
 		<tr>
 			<td width="200"><strong>Email </strong></td>
-			<td><%= current_user.profile[:email] %></td>
+			<td><%= current_user.email.blank? ? current_user.social_profile[:email] : current_user.email %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Phone Number </strong></td>
@@ -81,16 +81,16 @@
 
 <div class="social_APIs_widgets">
 
-<h2>YOUR <span>Twitter Feedback</span></h2>
+<h2>YOUR <span>Twitter Tweets</span></h2>
 
 <div class="APIs_contents">
 
 <% unless current_user.twitter %>
-<p>You are currently not connected to twitter.</p>
+  <p>You are currently not connected to twitter.</p>
 <% else %>
-<% current_user.tweets.each do |tweet| %>
-	<p class="fb_status"><%= tweet["text"] %> </p>
-<% end %>
+  <% current_user.tweets.each do |tweet| %>
+    <p class="fb_status"><%= tweet["text"] %> </p>
+  <% end %>
 <% end %>
 
 </div>

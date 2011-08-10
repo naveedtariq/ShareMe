@@ -2,10 +2,10 @@
 db/*.sqlite3
 log/*.log
 tmp/
-*.swo
+*.sw*
 *.swj
 *.swl
 *.swm
 *.swp
 *.rb~
-
+config/database.yml

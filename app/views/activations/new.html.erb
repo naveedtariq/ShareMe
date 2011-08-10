@@ -5,7 +5,8 @@
 		<% form_for @user, :url => activate_path(@user.id), :html => { :method => :post } do |form| %>
 			<%= form.error_messages %>
 			<br />
-			<%= render :partial => "form", :locals => { :form => form }%>
+      <% is_email_present = !@user.email.blank? %>
+			<%= render :partial => "form", :locals => { :form => form,:email_present => is_email_present }%>
 		<% end %>
 	</div>
 </div>

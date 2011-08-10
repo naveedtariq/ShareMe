@@ -11,6 +11,7 @@ gem 'rails3-generators'
 gem "oauth"
 gem "oauth2"
 gem "authlogic-connect"
+#gem "ruby-debug"
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -32,5 +33,5 @@ gem "authlogic-connect"
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 # group :development, :test do
-#   gem 'webrat'
+#   gem 'ruby-debug'
 # end

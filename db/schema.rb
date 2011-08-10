@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110719123354) do
+ActiveRecord::Schema.define(:version => 20110808085844) do
 
   create_table "access_tokens", :force => true do |t|
     t.integer  "user_id"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(:version => 20110719123354) do
   end
 
   add_index "access_tokens", ["key"], :name => "index_access_tokens_on_key", :unique => true
+
+  create_table "profiles", :force => true do |t|
+    t.string   "company_name"
+    t.string   "company_address"
+    t.string   "phone"
+    t.string   "fax"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -53,9 +63,12 @@ ActiveRecord::Schema.define(:version => 20110719123354) do
     t.string   "perishable_token",                      :null => false
     t.boolean  "active",             :default => false, :null => false
     t.string   "name"
-    t.integer  "phone"
+    t.string   "phone"
     t.string   "code"
     t.integer  "active_token_id"
+    t.string   "f_name"
+    t.string   "l_name"
+    t.boolean  "is_local",           :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

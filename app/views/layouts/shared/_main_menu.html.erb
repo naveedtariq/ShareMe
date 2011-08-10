@@ -1,7 +1,7 @@
 <div class="profile_section"> 
-<img src="<%= current_user.profile[:photo] %>" alt="Profile User Thumbnail" />
+<img src="<%= current_user.social_profile[:photo] %>" alt="Profile User Thumbnail" />
 	<h2><%= current_user.name %></h2>
-	<small><%= current_user.profile[:location] %></small> <a href="#" class="editProfile">Edit Profile</a>
+	<small><%= current_user.social_profile[:location] %></small> <a href="#" class="editProfile">Edit Profile</a>
 	<ul class="left_navigation">
 		<li>
 			<%= link_to "Home", user_home_path,{:title=>"Home",:class=>"activeLeft"} %>
