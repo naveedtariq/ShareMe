@@ -9,10 +9,8 @@ class ActivationsController < ApplicationController
 	def create
   	@user = User.find(params[:id])
 	  raise Exception if @user.active? && @user.is_local
-puts params.inspect + "8888888888888888888888888888888888888888888888888888888888888888888888888888888888\n\n"
 		if @user.activate!(params)
 	  	@user.deliver_activation_confirmation!
-      @user.build_profile(@user)
       @user.update_name
       @user.save
 

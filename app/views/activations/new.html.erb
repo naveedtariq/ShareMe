@@ -5,7 +5,11 @@
 		<% form_for @user, :url => activate_path(@user.id), :html => { :method => :post } do |form| %>
 			<%= form.error_messages %>
 			<br />
-      <% is_email_present = !@user.email.blank? %>
+      <% if @user.email.blank? && (@user.social_profile.blank? || @user.social_profile[:email].blank?) %>
+        <% is_email_present = false %>
+      <% else %>
+        <% is_email_present = true %>
+      <% end %>
 			<%= render :partial => "form", :locals => { :form => form,:email_present => is_email_present }%>
 		<% end %>
 	</div>

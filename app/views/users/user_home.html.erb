@@ -1,3 +1,14 @@
+
+<% content_for :top_js do %>
+  <script type="text/javascript">
+    
+		function social_connect(id) {
+			$('#oauth_provider_'+id).attr('checked','checked');
+			$('#oauth_form').submit();
+		}
+  </script>
+<% end %>
+
 <div class="profile_featured_section">
 	<h2><span>YOUR </span>CONTACT INFORMATION</h2>
 	<table width="600" border="0" id="userInfoTbl">
@@ -15,11 +26,11 @@
 		</tr>
 		<tr>
 			<td width="200"><strong>Company Name</strong></td>
-			<td><%= current_user.social_profile[:company_name]  %></td>
+			<td><%= (current_user.profile.blank? || current_user.profile.company_name.blank?)? current_user.social_profile[:company_name] : current_user.profile.company_name %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Company Address</strong></td>
-			<td></td>
+			<td><%= (current_user.profile.blank? || current_user.profile.company_address.blank?)? ""  : current_user.profile.company_address %></td>
 		</tr>
 		<tr>
 			<td width="200">&nbsp;</td>
@@ -31,11 +42,11 @@
 		</tr>
 		<tr>
 			<td width="200"><strong>Phone Number </strong></td>
-			<td><%= current_user.phone %></td>
+			<td><%= (current_user.profile.blank? || current_user.profile.phone.blank?)? ""  : current_user.profile.phone %></td>
 		</tr>
 		<tr>
 			<td width="200"> <strong>Fax</strong></td>
-			<td><%= current_user.phone %></td>					
+			<td><%= (current_user.profile.blank? || current_user.profile.fax.blank?)? ""  : current_user.profile.fax %></td>
 		</tr>
 	</table> 
 	<%= link_to "Sign Out","/logout",{:class=>"moreBtnPlain"} %>
@@ -65,7 +76,9 @@
 <% end %>
 </div>
 
-<a href="#" class="connect_with_facebook_btn"></a></td>
+<% unless current_user.facebook %>
+  <a href="#" class="connect_with_facebook_btn"></a></td>
+<% end %>
 
 
 
@@ -94,9 +107,14 @@
 <% end %>
 
 </div>
-
-<a href="#" class="connect_with_twitter_btn"></a></td>
-
+<% unless current_user.twitter %>
+  <%= form_tag authenticate_path, {:id=> "oauth_form", :method => :post } do |uf| %>
+    <%= hidden_field_tag "authentication_type","user" %>
+    <input type="radio" value="twitter" name="oauth_provider" id="oauth_provider_twitter" style="display: none;">
+    <input type="text" value="<%= current_user.email %>" name="user[email]" style="display: none;">
+  <% end %>
+  <a href="#" class="connect_with_twitter_btn" onclick="javascript:social_connect('twitter');return false;"></a></td>
+<% end %>
 
 
 </div>

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	layout "default", :except=> [:new, :create]
 
 	before_filter :require_no_user, :only => [:new, :create]
-	before_filter :require_user, :only => [:user_home]
+	before_filter :require_user, :only => [:user_home,:edit,:update]
 
 
 	def new
@@ -41,4 +41,17 @@ class UsersController < ApplicationController
 
 	def user_home
 	end
+
+  def edit
+    @user = User.find_by_id(params[:id])
+    @profile = @user.profile
+  end
+
+  def update
+    @user = User.find_by_id(params[:id])
+    @user.update_attributes(params[:user])
+    @user.profile.update_attributes(params[:profile_attributes])
+    redirect_to "/" and return
+#    render :action => :user_home
+  end
 end

@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
 
 
-  has_one :profile
+  has_one :profile, :dependent => :destroy
   accepts_nested_attributes_for :profile, :allow_destroy => true
 
 
@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
 		if (self.new_record?) && (!self.access_tokens.empty?)
 			self.active = true
 			self.name = self.social_profile[:name]
-#      self.is_local = false
 		end
 	end
 
@@ -40,6 +39,9 @@ class User < ActiveRecord::Base
     self.email = params[:user][:email] if params[:user][:email]
     self.update_info_from_social_profile if !self.is_local
     self.is_local = true
+    self.build_profile
+    self.profile.update_profile(self)
+    self.profile.save
 		save
 	end
 

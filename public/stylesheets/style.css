@@ -699,7 +699,7 @@ a.social-myspace{
   text-align: right;
   width: 113px;
 }
-.get_share_code_signin_popup input.textField, .get_share_code_register_popup input.textField {
+.get_share_code_signin_popup input.textField, .get_share_code_register_popup input.textField, .profile-table input.textField {
   background: url("../images/input_pattern_yellow.jpg") repeat scroll 0 0 transparent;
   border: medium none;
   float: left;
@@ -777,7 +777,7 @@ table#userInfoTbl {
 }
 table#userInfoTbl td {
 	padding: 2px;
-	
+  vertical-align: middle;
 	
 }
 

@@ -14,8 +14,9 @@ ShareMe::Application.routes.draw do
 	match '/user_home', :controller => 'users', :action => 'user_home', :as => :user_home
 
 	resources :user_sessions
-	resources :users
-  resources :profiles
+	resources :users do
+    resources :profiles
+  end
 	 
   # The priority is based upon order of creation:
   # first created -> highest priority.
