@@ -12,11 +12,14 @@ ShareMe::Application.routes.draw do
 	match '/register/:activation_code', :controller => 'activations', :action => 'new', :as => :register
 	match '/activate/:id', :controller => 'activations', :action => 'create', :as => :activate
 	match '/user_home', :controller => 'users', :action => 'user_home', :as => :user_home
+  match 'search/(:code)', :controller => 'contacts', :action => "search", :as => :search
+  match 'import_contacts', :controller => 'contacts', :action => "import_contacts", :as => :import_contacts
 
 	resources :user_sessions
 	resources :users do
     resources :profiles
   end
+  resources :contacts
 	 
   # The priority is based upon order of creation:
   # first created -> highest priority.

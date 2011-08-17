@@ -4,20 +4,14 @@ class ApplicationController < ActionController::Base
 
   private
     def current_user_session
-      logger.debug "ApplicationController::current_user_session"
-  #    return @current_user_session if defined?(@current_user_session)
-  #    @current_user_session = UserSession.find
 			@current_user_session ||= UserSession.find
     end
 
     def current_user
-      logger.debug "ApplicationController::current_user"
-#      return @current_user if defined?(@current_user)
       @current_user ||= current_user_session && current_user_session.user
     end
 
     def require_user
-      logger.debug "ApplicationController::require_user"
       unless current_user
         store_location
         flash[:notice] = "You must be logged in to access this page"
@@ -27,10 +21,8 @@ class ApplicationController < ActionController::Base
     end
 
     def require_no_user
-      logger.debug "ApplicationController::require_no_user"
       if current_user
         store_location
-				puts current_user.inspect + "((((((((((((((((("
         flash[:notice] = "You must be logged out to access this page"
         redirect_to user_home_path
         return false
@@ -38,7 +30,8 @@ class ApplicationController < ActionController::Base
     end
 
     def store_location
-      session[:return_to] = request.request_uri
+      session[:return_to] = request.fullpath
+      session[:params] = request.params
     end
 
     def redirect_back_or_default(default)

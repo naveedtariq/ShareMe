@@ -12,13 +12,15 @@ class UserSessionsController < ApplicationController
 		@user_session.save do |result|
 			if result 
 				if request.xhr?
-					render :json => {:result=>"success",:message =>"Login successful!"}	
+					render :json => {:result=>"success",:message =>"Login successful!",:path => get_recent_path}	
 				else
 					flash[:notice] = "Login successful!"
           if current_user && current_user.is_local == false
             redirect_to register_url(current_user.perishable_token)
           else
-					  redirect_to current_user ? user_home_path : login_url
+            redirect_to get_recent_path
+#            redirect_to search_path if session[:return_to] == "/search"
+#					  redirect_to current_user ? user_home_path : login_url
           end
 				end
 			else
@@ -35,6 +37,18 @@ class UserSessionsController < ApplicationController
     current_user_session.destroy
     flash[:notice] = "Logout successful!"
     redirect_back_or_default "/" 
+  end
+
+  def get_recent_path
+    if current_user
+      if session[:return_to]
+        r_path = session[:return_to]
+      else
+        r_path = user_home_path
+      end
+    else
+      r_path = root_url
+    end
   end
 
 end

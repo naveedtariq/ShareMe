@@ -767,6 +767,29 @@ ul.left_navigation li a.activeLeft {
   background-color: #FFBA00;
   display: block;
   padding: 5px 21px;
+  font-weight: bold;
+}
+ul.left_navigation_sub {
+  float: left;
+  margin: 5px 0;
+  width: 225px;
+}
+ul.left_navigation_sub li {
+	display: block;
+	line-height: none;
+	
+}
+ul.left_navigation_sub li a {
+  display: block;
+  padding: 5px 30px;
+  font-size: smaller;
+}
+ul.left_navigation_sub li a.activeLeft {
+  background-color: #FFBA00;
+  display: block;
+  padding: 5px 30px;
+  font-size: smaller;
+  font-weight: bold;
 }
 table#userInfoTbl {
 	width: 700px;

@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
 
 
+  has_many :contacts, :dependent => :destroy
+  has_many :associated_contacts, :class_name => "Contact", :foreign_key => :associated_user_id
   has_one :profile, :dependent => :destroy
   accepts_nested_attributes_for :profile, :allow_destroy => true
 
@@ -92,5 +94,16 @@ class User < ActiveRecord::Base
     self.name = self.social_profile[:name] unless self.social_profile[:name].blank?
     self.update_name
     self.phone = self.social_profile[:phone] unless self.social_profile[:phone].blank?
+  end
+
+#Add a single contact
+  def add_contact(contact, and_add_self_to_contact = false)
+    if @exists_contact = contacts.email_or_associated_user_id(contact.email, contact.id).first
+      @exists_contact.update_attribute(:associated_user, contact)
+    else
+      @exists_contact = contacts.create({:associated_user => contact })
+    end
+    contact.add_contact(self) if and_add_self_to_contact
+    @exists_contact
   end
 end

@@ -11,6 +11,7 @@ gem 'rails3-generators'
 gem "oauth"
 gem "oauth2"
 gem "authlogic-connect"
+gem "recaptcha", :require => "recaptcha/rails"
 #gem "ruby-debug"
 
 # Use unicorn as the web server

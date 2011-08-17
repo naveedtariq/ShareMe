@@ -1,0 +1,26 @@
+<% content_for :top_js do %>
+  <%= csrf_meta_tag %>
+<% end %>
+<% unless flash.blank?  %>
+  <div class="profile_featured_section">
+    <%= flash[:notice] || flash[:error] %>
+  </div>
+  <br /> 
+<% end %>
+<div class="profile_featured_section">
+	<h2><span>YOUR </span>CONTACTS</h2>
+  <% if @contacts.size > 0 %>
+	<table width="600" border="0" id="userInfoTbl">
+    <% @contacts.each do |contact| %>
+      <tr>
+        <td width="200"><%= contact.name %></td>
+        <td width="200"><%= contact.email %></td>
+        <td width="200"><%= contact.associated_user.code %></td>
+        <td><%= button_to "Delete", contact_path(contact) , :confirm => "Are you sure?", :method=>:delete,:class=>"yellowInputBtn" %></td>
+      </tr>
+    <% end %>
+  </table>
+  <% else %>
+    <div>You have no contacts Yet</div>
+  <% end %>
+</div>

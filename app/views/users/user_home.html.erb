@@ -8,7 +8,11 @@
 		}
   </script>
 <% end %>
-
+<% unless flash.blank? %>
+  <div class="profile_featured_section">
+    <p><%= flash[:error] || flash[:notice] %></p>
+  </div>
+<% end %>
 <div class="profile_featured_section">
 	<h2><span>YOUR </span>CONTACT INFORMATION</h2>
 	<table width="600" border="0" id="userInfoTbl">

@@ -95,7 +95,7 @@ module SocialProfile
           {
             :id     => "unknown",
             :name   => "User",
-            :photo  => "/images/icons/google.png",
+            :photo  => "/images/generic_profile.jpg",
             :link   => "/images/icons/google.png",
             :title  => "Google"
           }

@@ -23,7 +23,7 @@ jQuery(document).ready(function(){
 
 
  $(document).ready(function () {
-             $(".digits").forceNumeric();
+             $(".digits").alphanumeric();
          });
 
 

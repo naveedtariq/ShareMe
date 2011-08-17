@@ -62,7 +62,7 @@
 				success: function(data){
 						var response = data;
 						if(response.result == "success") {
-							window.location.href = "/user_home";
+							window.location.href = response.path;
 						}
 						else {
 							$("#error-explanation").html("");

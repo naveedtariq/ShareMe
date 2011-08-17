@@ -1,17 +1,31 @@
 <div class="profile_section"> 
-<img src="<%= current_user.social_profile[:photo] %>" alt="Profile User Thumbnail" style="margin-bottom: 10px;" />
+<img src="<%= current_user.social_profile[:photo].blank? ? "images/generic_profile.jpg" : current_user.social_profile[:photo]  %>" alt="Profile User Thumbnail" style="margin-bottom: 10px;" />
   <br />
 	<h2><%= current_user.f_name %>&nbsp;<%= current_user.l_name %></h2>
 	<small><%= current_user.social_profile[:location] %></small> 
 
 	<%= link_to "Edit Profile", edit_user_path(current_user),{:title=>"Edit Profile",:class=>"editProfile"} %>
+	<%= link_to "Sign Out","/logout",{:class=>"editProfile"} %>
+
 	<ul class="left_navigation">
 		<li>
-			<%= link_to "Home", user_home_path,{:title=>"Home",:class=>"activeLeft"} %>
+			<%= link_to "Home", user_home_path,{:title=>"Home",:class=>request.fullpath.include?("home") ? "activeLeft" : "normal"} %>
 		</li>
-		<li><a href="#">Contacts</a></li>
+		<li>
+			<%= link_to "Contacts", contacts_path,{:title=>"Contacts",:class=>request.fullpath.eql?("/contacts") ? "activeLeft" : "normal"} %>
+      <% if request.fullpath.include?("contacts") %>
+        <ul class="left_navigation_sub">
+          <li>
+			      <%= link_to "Add Contact", new_contact_path,{:title=>"Add Contact",:class=>request.fullpath.eql?("/contacts/new") ? "activeLeft" : "normal"} %>
+          </li>
+          <li><a href="#">Import Contacts</a></li>
+          <li><a href="#">Upload Contacts</a></li>
+        </ul>
+      <% end %>
+    </li>
 		<li><a href="#">Groups</a></li>
 		<li><a href="#">Settings</a></li>
 		<li><a href="#">Socialify</a></li>
 	</ul>
+
 </div>

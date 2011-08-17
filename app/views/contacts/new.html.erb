@@ -1,0 +1,30 @@
+<% content_for :top_js do %>
+  <script type="text/javascript">
+    $(function() {
+        $('#shareme_code').alphanumeric();
+     });
+  </script>
+<% end %>
+<% unless flash.blank?  %>
+  <div class="profile_featured_section">
+    <%= flash[:notice] || flash[:error] || flash[:recaptcha_error] %>
+  </div>
+  <br /> 
+<% end %>
+<div class="profile_featured_section">
+	<h2><span>ADD A NEW </span>CONTACT</h2>
+  <% form_for :contacts, :url => contacts_path, :html => {:method => :post} do |u|  %>
+    <table width="600" border="0" id="userInfoTbl" class="profile-table">
+      <tr>
+        <td width="200"><strong>ShareMe code</strong></td>
+        <td><%= text_field_tag :shareme_code,nil,:class=>"textField",:maxlength => 4 %></td>
+      </tr>
+      <tr>
+        <td width="200">&nbsp;</td>
+        <td><%= recaptcha_tags %></td>
+    </table>
+    <div id="recaptcha-div">
+    </div>
+    <p><%= u.submit "Add",:class=>"blackInputBtn" %></p>
+  <% end %>
+</div>

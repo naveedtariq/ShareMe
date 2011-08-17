@@ -1,0 +1,22 @@
+
+<script type="text/javascript">
+  function search_code() {
+    var code = "";
+    for(var i=1;i<5;i=i+1) {
+      code = code + $('#form_field_'+i).val();
+    }
+    $('#code').val(code);
+    $('#shareCode').submit();
+  } 
+</script>
+<%= form_tag search_path,:id=>"shareCode" do %>
+
+  <h2>ENTER <span>SHARE ME</span> CODE</h2>
+  <input id="form_field_1"  name="form_field_1" type="text" maxlength="1" class="digits"/>
+  <input id="form_field_2" name="form_field_2" type="text" maxlength="1"  class="digits"/>
+  <input id="form_field_3" name="form_field_3" type="text" maxlength="1"  class="digits"/>
+  <input id="form_field_4" name="form_field_4" type="text" maxlength="1"  class="digits"/>
+  <%= hidden_field_tag "code" %>
+  <input name="" type="button"  class="yellowInputBtn" value="search" onclick="javascript:search_code();return false;"/>
+
+<% end %>
