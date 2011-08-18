@@ -1,26 +1,49 @@
 <% content_for :top_js do %>
-  <%= csrf_meta_tag %>
+  <script type="text/javascript">
+    $(function () {
+        $('.c_links').click(function () {
+            var c_id = this.id;
+            $.ajax({
+              type: "GET",
+              url: "/show_basic_profile",
+              data: {id: this.id},
+              success: function(data){
+                $('#basic_profile_info').html(data);
+                $('.selected_link').removeClass("selected_link");
+                $('#'+c_id).addClass("selected_link");
+                }
+              });
+            return false;
+          });
+    });
+  </script>
 <% end %>
+
 <% unless flash.blank?  %>
   <div class="profile_featured_section">
-    <%= flash[:notice] || flash[:error] %>
-  </div>
-  <br /> 
+      <%= flash[:notice] || flash[:error] %>
+   </div>
+  <br />
 <% end %>
-<div class="profile_featured_section">
-	<h2><span>YOUR </span>CONTACTS</h2>
+<div class="profile_featured_section_full darkBg">
+  <h2>All Contacts</h2>
   <% if @contacts.size > 0 %>
-	<table width="600" border="0" id="userInfoTbl">
-    <% @contacts.each do |contact| %>
-      <tr>
-        <td width="200"><%= contact.name %></td>
-        <td width="200"><%= contact.email %></td>
-        <td width="200"><%= contact.associated_user.code %></td>
-        <td><%= button_to "Delete", contact_path(contact) , :confirm => "Are you sure?", :method=>:delete,:class=>"yellowInputBtn" %></td>
-      </tr>
+  <div class="scolling">
+    <% @contacts.each do |ct| %>
+      <% if ct.id == @contact.id %>
+        <% cl = "c_links selected_link" %>
+      <% else %>
+        <% cl = "c_links" %>
+      <% end %>
+      <%= link_to image_tag("/images/all_contacts_thumb.jpg")+ct.name,contact_path(ct),:class=>cl,:id=>ct.id %>
     <% end %>
-  </table>
+  </div>
   <% else %>
-    <div>You have no contacts Yet</div>
+    <div>You have no contacts</div>
+  <% end %>
+</div>
+<div id="basic_profile_info">
+  <% unless @contact.blank? %>
+    <%= render :partial => "profile_view_index", :locals=>{:contact=>@contact} %>
   <% end %>
 </div>

@@ -253,6 +253,16 @@ a.moreBtnWhite {
   top: 2px;
   width: 103px;
 }
+a.moreBtnYellowFloating {
+  background: url("../images/plus_ico_yellow.gif") no-repeat scroll right 1px transparent;
+  color: #000000;
+  display: block;
+  float: right;
+  margin: 0px 0 10px;
+  padding-right: 13px;
+  text-decoration: none;
+  width: 110px;
+}
 a.moreBtnPlain {
   color: #000;
   display: block;
@@ -260,6 +270,15 @@ a.moreBtnPlain {
   position: absolute;
   right: 10px;
   text-decoration: none;
+  top: 2px;
+}
+a.moreBtnPlainLeft {
+  color: #000;
+  display: block;
+  padding-right: 8px;
+  position: absolute;
+  left: 5px;
+/*  text-decoration: none;*/
   top: 2px;
 }
 a.moreBtnYellow {
@@ -798,6 +817,22 @@ table#userInfoTbl {
 	color: #000;
 	
 }
+table#userInfoTblEdit {
+	width: 700px;
+	border-collapse: collapse;
+	margin:15px;
+	color: #000;
+	
+}
+table#userInfoTblEdit td{
+	padding:0;
+	
+}
+table#userInfoTblEdit label {
+  float: left;
+  font-weight: bold;
+  margin: 5px 0;
+}
 table#userInfoTbl td {
 	padding: 2px;
   vertical-align: middle;
@@ -932,4 +967,115 @@ a.connect_with_linkedin_btn {
 }
 .fb_status {
 	text-align: left;
+}
+/*======================Profile Page Styles - Aug-3-2011=================================*/
+
+a.moreBtnPlainRed {
+  background-color: #FF0000;
+  color: #FFFFFF;
+  display: block;
+  font-size: 12px;
+  padding: 0 10px;
+  position: absolute;
+  right: 5px;
+  text-decoration: none;
+  text-transform: uppercase;
+  top: 2px;
+}
+a.blackBtnYellow {
+  background: url("../images/yellow_btn_bg.jpg") repeat-x scroll 0 0 transparent;
+  border: medium none;
+  color: #FFFFFF;
+  cursor: pointer;
+  float: left;
+  font-family: arial;
+  font-size: 1.1em;
+  font-weight: normal;
+  height: 26px;
+  line-height: 27px;
+  margin: 1px 8px 0 5px;
+  padding: 0 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.profile_featured_section_full {
+  background-color: #FFFFFF;
+  border: 1px solid #FFE400;
+  float: left;
+  margin: 0 0 10px;
+  position: relative;
+  width: 735px;
+}
+.profile_featured_section_full img {
+	float: left;
+	 margin: 20px 20px 20px 30px;
+	
+}
+.profile_featured_section_full h3 {
+	margin: 20px 0 0 0;
+	
+}
+.profile_featured_section_full h2 {
+  background-color: #FFBA00;
+  padding: 5px 10px;
+  text-align: center;
+  width: 715px;
+}
+.darkBg h2 {
+	background:#333333;
+	
+}
+.darkBg img {
+	margin: 0 5px 0 0;
+	float: left;
+	
+}
+.scolling {
+	height: 155px;
+	overflow-x: hidden;
+	
+}
+.darkBg a {
+  background-color: #F1F1F1;
+  color: #555555;
+  display: block;
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  margin: 0 0 1px 2px;
+  text-decoration: none;
+  width: 177px;
+}
+.darkBg a:hover {
+  background-color: #FFBA00;
+}
+h2.inner_black {
+	color: #000;
+	
+}
+.profile_featured_section_full select {
+  background: none repeat scroll 0 0 #F1F1F1;
+  border: none;
+  float: left;
+  margin: 3px 0 0;
+  width: 68%;
+}
+a.floated {
+  float: left;
+  margin: 0 0 20px 215px;
+}
+.selected_link {
+  background-color: #FFBA00 !important;
+}
+#userInfoTblEdit input.textField {
+  background: none repeat scroll 0 0 #DDDDDD;
+  border: medium none;
+  float: left;
+  width: 66%;
+}
+#userInfoTblEdit input.textField:focus {
+  background: none repeat scroll 0 0 #CCCCCC;
+  border: medium none;
+  float: left;
+  width: 66%;
 }

@@ -1,31 +1,30 @@
-
-<div class="profile_featured_section">
+<div class="profile_featured_section_full">
 <%= form_for @user do |u| %>
 	<h2><span>YOUR </span>CONTACT INFORMATION</h2>
-	<table width="600" border="0" id="userInfoTbl" class="profile-table">
+	<table width="600" border="0" id="userInfoTblEdit" class="profile-table">
 		<tr>
 			<td width="200"><strong>ShareMe Code</strong></td>
 			<td><%= @user.code %></td>
 		</tr>
 		<tr>
-			<td width="200"><strong>First Name</strong></td>
+			<td width="200"><label>First Name</label></td>
       <td><%= u.text_field :f_name,:class=>"textField" %></td>
       </tr>
 		<tr>
-			<td width="200"><strong>Last Name</strong></td>
+			<td width="200"><label>Last Name</label></td>
 			<td><%= u.text_field :l_name,:class=>"textField" %></td>
 		</tr>
 		<tr>
-			<td width="200"><strong>Email </strong></td>
+			<td width="200"><label>Email </label></td>
 			<td><%= u.text_field :email,:class=>"textField" %></td>
 		</tr>
     <%= u.fields_for :profile do |p| %>
       <tr>
-        <td width="200"><strong>Company Name</strong></td>
+        <td width="200"><label>Company Name</label></td>
         <td><%= p.text_field :company_name,:class=>"textField" %></td>
       </tr>
       <tr>
-        <td width="200"><strong>Company Address</strong></td>
+        <td width="200"><label>Company Address</label></td>
         <td><%= p.text_field :company_address,:class=>"textField" %></td>
       </tr>
       <tr>
@@ -33,11 +32,11 @@
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <td width="200"><strong>Phone Number </strong></td>
+        <td width="200"><label>Phone Number </label></td>
         <td><%= p.text_field :phone,:class=>"textField" %></td>
       </tr>
       <tr>
-        <td width="200"> <strong>Fax</strong></td>
+        <td width="200"> <label>Fax</label></td>
         <td><%= p.text_field :fax,:class=>"textField" %></td>
       </tr>
     <% end %>

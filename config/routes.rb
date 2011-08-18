@@ -14,6 +14,7 @@ ShareMe::Application.routes.draw do
 	match '/user_home', :controller => 'users', :action => 'user_home', :as => :user_home
   match 'search/(:code)', :controller => 'contacts', :action => "search", :as => :search
   match 'import_contacts', :controller => 'contacts', :action => "import_contacts", :as => :import_contacts
+  match 'show_basic_profile(:id)', :controller => 'contacts', :action => "show_basic_profile", :as => :show_basic_profile
 
 	resources :user_sessions
 	resources :users do

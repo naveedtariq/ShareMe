@@ -1,0 +1,12 @@
+<div class="profile_featured_section_full">
+  <h2><span><%= contact.name.capitalize %>'s </span>Share me Profile</h2>
+  <img src="/images/profile_thumb.jpg" alt="Profile User Thumbnail" />
+  <h3><%= contact.name.capitalize %></h3>
+  <small><%= contact.email %></small>
+  <p>Contact Group <strong>N/A</strong></p>
+  <a href="#" class="blackBtnYellow">Change</a>
+  <%= button_to "Delete", contact_path(contact) , :confirm => "Are you sure?", :method=>:delete,:class=>"yellowInputBtn" %>
+  <% if back_link %>
+    <%= link_to "Back to Contacts","/contacts?selected="+contact.id.to_s,{:class=>"moreBtnPlainLeft"} %>
+  <% end %>
+</div>

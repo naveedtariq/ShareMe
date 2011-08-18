@@ -51,7 +51,8 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     @user.update_attributes(params[:user])
     @user.profile.update_attributes(params[:profile_attributes])
-    redirect_to "/" and return
+    flash[:notice] = "Profile Successfully Updated!"
+    redirect_to "/user_home" and return
 #    render :action => :user_home
   end
 end
