@@ -9,3 +9,8 @@ tmp/
 *.swp
 *.rb~
 config/database.yml
+tmp/*
+public/stylesheets/compiled/*.css
+log/*.*
+public/.htaccess
+share-me_production

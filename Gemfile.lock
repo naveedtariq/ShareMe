@@ -111,6 +111,3 @@ DEPENDENCIES
   rails (= 3.0.9)
   rails3-generators
   recaptcha
-
-METADATA
-  version: 1.0.6

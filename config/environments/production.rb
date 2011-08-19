@@ -46,4 +46,22 @@ ShareMe::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+config.action_mailer.default_content_type = "text/html"
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.delivery_method = :smtp
+config.action_mailer.default_url_options = { :host => "demo.shareme.me" }
+
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => "shareme.me",
+    :authentication => :plain,
+    :user_name => "aabaassit@gmail.com",
+    :password => "New_1234",
+    :enable_starttls_auto => true
+  }
+
+
 end
