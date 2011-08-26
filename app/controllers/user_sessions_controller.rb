@@ -19,8 +19,6 @@ class UserSessionsController < ApplicationController
             redirect_to register_url(current_user.perishable_token)
           else
             redirect_to get_recent_path
-#            redirect_to search_path if session[:return_to] == "/search"
-#					  redirect_to current_user ? user_home_path : login_url
           end
 				end
 			else

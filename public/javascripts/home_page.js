@@ -1,4 +1,6 @@
 		$(document).ready(function() {
+        var title = "Success!";
+        var icon = "success";
 				$('#register-btn').click(function () {
 					$.ajax({
 						type: "POST",
@@ -7,7 +9,20 @@
 						success: function(data){
 								var response = data;
 								if(response.result == "success") {
-									window.location.href = "/";
+                  $("#user_e").val("");
+                  $("#user_n").val("");
+
+                  var text = response.message;
+                  $("#notif_container").notify("create", {
+                      title: title,
+                      text: text,
+                      icon: icon
+                     },
+                     {
+                      click: function(e,instance){
+                      instance.close();
+                     }
+                   });
 								}
 								else {
 									$("#signup-btn").trigger('click');
@@ -38,7 +53,21 @@
 						success: function(data){
 								var response = data;
 								if(response.result == "success") {
-									window.location.href = "/";
+                  tb_remove();
+                  $("#user_e").val("");
+                  $("#user_n").val("");
+                  var text = response.message;
+                  $("#notif_container").notify("create", {
+                      title: title,
+                      text: text,
+                      icon: icon
+                     },
+                     {
+                      click: function(e,instance){
+                      instance.close();
+                     }
+                   });
+									//window.location.href = "/";
 								}
 								else {
 									$("#error-signup").html("");

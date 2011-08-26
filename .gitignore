@@ -9,3 +9,7 @@ tmp/
 *.swp
 *.rb~
 config/database.yml
+db/schema.rb
+public/system/*
+Gemfile.lock
+vendor/

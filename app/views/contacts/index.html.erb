@@ -15,16 +15,44 @@
               });
             return false;
           });
+      <% unless flash.blank? %>
+        var title = "";
+        var text = "";
+        var icon = "";
+        <% if !flash[:notice] .blank? %>
+          title = "Warning!";
+          text = "<%= flash[:notice].to_s %>";
+          icon = "warning";
+        <% elsif !flash[:success].blank? %>
+          title = "Success!";
+          text = "<%= flash[:success].to_s %>";
+          icon = "success";
+        <% elsif !flash[:error].blank? %>
+          title = "Error!";
+          text = "<%= flash[:error].to_s %>";
+          icon = "error";
+        <% end %>
+        $("#notif_container").notify("create", {
+            title: title,
+            text: text,
+            icon: icon
+           },
+           {
+            click: function(e,instance){
+            instance.close();
+           }
+         });
+      <% end %>
     });
   </script>
 <% end %>
 
-<% unless flash.blank?  %>
-  <div class="profile_featured_section">
-      <%= flash[:notice] || flash[:error] %>
-   </div>
-  <br />
-<% end %>
+<%# unless flash.blank?  %>
+  <!--<div class="profile_featured_section">-->
+      <%#= flash[:notice] || flash[:error] %>
+<!--   </div>-->
+<!--  <br />-->
+<%# end %>
 <div class="profile_featured_section_full darkBg">
   <h2>All Contacts</h2>
   <% if @contacts.size > 0 %>
@@ -35,11 +63,11 @@
       <% else %>
         <% cl = "c_links" %>
       <% end %>
-      <%= link_to image_tag("/images/all_contacts_thumb.jpg")+ct.name,contact_path(ct),:class=>cl,:id=>ct.id %>
+      <%= link_to image_tag(ct.associated_user.profile.picture_file_name.nil? ? "/images/all_contacts_thumb.jpg" : ct.associated_user.profile.picture.url(:contact_list_thumb)) +ct.name,contact_path(ct),:class=>cl,:id=>ct.id %>
     <% end %>
   </div>
   <% else %>
-    <div>You have no contacts</div>
+    <div style="height: 25px; font-size: 20px; text-align: center; line-height: 25px;">Currently You Have No Contacts!!!</div>
   <% end %>
 </div>
 <div id="basic_profile_info">
