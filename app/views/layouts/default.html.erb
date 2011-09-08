@@ -26,6 +26,11 @@
           speed: 500,
           expires: false
         });
+
+        $('.digits').keyup(function (event) {
+          event.preventDefault();
+          $(this).next('.digits').focus();
+        });
      });
   </script>
 <%= yield :top_js %>

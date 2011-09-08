@@ -5,6 +5,10 @@
   <script type="text/javascript">
     $(document).ready(function() {
         // or with options (there are only 2)
+        $('.digits').keyup(function (event) {
+          event.preventDefault();
+          $(this).next('.digits').focus();
+        });
         $("#notif_container").notify({
           speed: 500,
           expires: false
@@ -18,6 +22,9 @@
             title = "Warning!";
             text = "<%= flash[:notice].to_s %>";
             icon = "warning";
+            <% if flash[:notice].include?("logged in") || flash[:notice].include?("Sign In") %>
+              $('#sign-in-btn').trigger('click');
+            <% end %>
           <% elsif !flash[:success].blank? %>
             title = "Success!";
             text = "<%= flash[:success].to_s %>";
@@ -73,23 +80,45 @@
 
 <h2>About <span>Share Me</span></h2>
 
-<p>Share Me allows you to accumalate all your basic, personal, professional and social information into a convenient, easily accessible, unique 4-digit code. That however does not mean you are letting the world access all your important information through a single code. This is where our intuitive security settings come to your help; letting you choose exactly who sees what, and when.</p>
+<p>
+Save, Share & Store your personal, professional and social information with a single
+unique 4-digit code. Are you tired of incorrect email addresses and wrong phone
+numbers? Just get their 4 digit ShareMe # ~ it is so much easier!
+With ShareMe, only those you trust get access to your basic information. You choose
+exactly who sees what, and when.
+</p>
 
 <a href="#" class="moreBtnYellow">Full details</a> </div>
 
 <div class="col_2">
 
-<h2>HOW <span>Share Me</span> WORKS</h2>
+<h2><span>Picture</span> THIS</h2>
 
-<p>Share Me allows you to accumalate all your basic, personal, professional and social information into a convenient, easily accessible, unique 4-digit code. That however does not mean you are letting the world access all your important information through a single code. This is where our intuitive security settings come to your help; letting you choose exactly who sees what, and when.</p>
+<p>
+Say goodbye to Business Cards, email addresses and phone numbers…well almost!
+Now you can share your basic information (like your email address) with a single 4 digit
+number! Get & Give correct contact details all the time, every time!
+Consolidate & update all your FaceBook, LinkedIn & Twitter feeds.
+<br />
+Language barriers? Trying to understand a foreign dialect? Their email address is
+Gibberish? Simplify! Just get their 4 digit ShareMe & get instant access to their correct
+contact details!
+</p>
 
 <a href="#" class="moreBtnYellow">Full details</a> </div>
 
 <div class="col_3">
 
-<h2>How <span>Share Me</span> Works</h2>
+<h2>The <span>Business/Social</span> Scene</h2>
 
-<p>Share Me allows you to accumalate all your basic, personal, professional and social information into a convenient, easily accessible, unique 4-digit code. That however does not mean you are letting the world access all your important information through a single code. This is where our intuitive security settings come to your help; letting you choose exactly who sees what, and when.</p>
+<p>
+You are on the road, just about to close a sale when your cell phone call is dropped! You
+lose the sale & the contact forever! Next time... Get their 4 digit ShareMe and never lose
+a contact again!
+<br />
+Flirting in a bar ~ why waste precious time prying their email and phone #? Be cool &
+get their ShareMe!
+</p>
 
 <a href="#" class="moreBtnYellow">Full details</a> </div>
 
@@ -150,7 +179,7 @@
 
 <% end %>
 </div>
-<input id="signup-btn" alt="#TB_inline?height=179&width=252&inlineId=signup-form" class="thickbox" type="button" value="show" style="visibility:hidden" />
+<input id="signup-btn" alt="#TB_inline?height=179&width=293&inlineId=signup-form" class="thickbox" type="button" value="show" style="visibility:hidden" />
 
 <!--Get Share me code section ends here--> 
 
@@ -184,9 +213,6 @@
 <input type="radio" value="linked_in" name="oauth_provider" id="oauth_provider_linked_in" style="display: none;">
 </li>
 
-<li><a class="social-myspace tipsy" href="#" title="Myspace" onclick="social_connect('myspace');return false;"></a>
-<input type="radio" value="myspace" name="oauth_provider" id="oauth_provider_myspace" style="display: none;">
-</li>
 
 </ul>
 <% end %>
@@ -201,7 +227,7 @@
 
 <p>Already a Member ?</p>
 
-<a href="/user_sessions/new?height=142&width=299&modal=true" class="blackInputBtn thickbox">Sign In</a>  
+<a id="sign-in-btn" href="/user_sessions/new?height=142&width=299&modal=true" class="blackInputBtn thickbox">Sign In</a>  
 
 
 
@@ -234,6 +260,35 @@
 
 <input id="register-btn1" type="button" class="blackInputBtn register" value="Register">
 
+<% end %>
+</div>
+<div style="padding-left:35px;">
+<ul class="connect_with_socials">
+
+<p>Or connect with</p>
+
+<%= form_tag authenticate_path, {:id=> "oauth_form", :method => :post } do |uf| %>
+<%= hidden_field_tag "authentication_type","session" %>
+
+<li>
+<a class="social-fb tipsy" href="#" title="Facebook" onclick="social_connect('facebook');return false;"></a>
+
+<%#= hidden_field_tag "oauth_provider", "facebook" %>
+<input type="radio" value="facebook" name="oauth_provider" id="oauth_provider_facebook" style="display: none;">
+</li>
+
+<li><a class="social-twitt tipsy" href="#" title="Twitter" onclick="social_connect('twitter');return false;"></a>
+
+<input type="radio" value="twitter" name="oauth_provider" id="oauth_provider_twitter" style="display: none;">
+</li>
+
+<li>
+<a class="social-linkedin tipsy" href="#" title="LinkedIn" onclick="social_connect('linked_in');return false;"></a>
+<input type="radio" value="linked_in" name="oauth_provider" id="oauth_provider_linked_in" style="display: none;">
+</li>
+
+
+</ul>
 <% end %>
 </div>
 </div>
