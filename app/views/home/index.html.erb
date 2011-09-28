@@ -4,6 +4,12 @@
   <%= javascript_include_tag "jquery.carousel.min" %>
   <script type="text/javascript">
     $(document).ready(function() {
+        var temp = $("#confirmation_token");
+        if (temp.val())
+        {
+          $("#confirmation_popup").trigger("click");
+          $('#TB_title').hide();
+        }
         // or with options (there are only 2)
         $('.digits').keyup(function (event) {
           event.preventDefault();
@@ -44,6 +50,11 @@
               instance.close();
              }
            });
+          if(text == "You need to Sign In to perform this action.")
+          {
+            $('#sign-in-btn').trigger('click');
+          }
+
         <% end %>
      });
   </script>
@@ -51,7 +62,9 @@
 <div id="layout_wrapper">
 
 <div class="left_contents"> 
-
+<% unless @confirmation_token.blank? %>
+<%= hidden_field_tag "confirmation_token",@confirmation_token %>
+<% end %>
 <!--Featured Section starts here-->
 
 
@@ -60,11 +73,11 @@
 
 <h2>HOW <span>Share Me</span> WILL MAKE YOUR LIFE SIMPLER</h2>
 
-<img src="images/abuot_share_me_thumb.jpg" alt="ABOUT SHARE ME" />
+<img src="/images/abuot_share_me_thumb.jpg" alt="ABOUT SHARE ME" />
 
-<img src="images/how_share_me_works_thumb.jpg" alt="HOW SHARE ME WORKS" />
+<img src="/images/how_share_me_works_thumb.jpg" alt="HOW SHARE ME WORKS" />
 
-<img src="images/how_share_me_helps_thumb.jpg" alt="HOW SHARE ME HELPS?" />
+<img src="/images/how_share_me_helps_thumb.jpg" alt="HOW SHARE ME HELPS?" />
 
 <a href="#" class="moreBtnWhite">more scenarios</a> </div>
 
@@ -165,15 +178,17 @@ get their ShareMe!
 <div class="get_share_code">
 
 <h2> get your <span>SHARE ME</span> CODE</h2>
-<%= form_tag authenticate_path, {:id=> "sign_up_form", :method => :post } do |uf| %>
-
+<%= form_tag registration_path(resource), {:id=> "signup_form", :method => :post } do |uf| %>
+<%#= form_for(resource, :as => resource_name, :url => registration_path(resource)) do |f| %>
 <label>E-mail:</label>
 
 <input id="user_e" name="user[email]" type="text" class="textField"/>
+<%#= f.email_field :email, :class=>"textField" %>
 
 <label>Name:</label>
 
 <input id="user_n" name="user[name]" type="text"  class="textField"/>
+<%#= f.text_field :name, :class=>"textField" %>
 
 <input id="register-btn" type="button" class="blackInputBtn register" value="Register">
 
@@ -183,7 +198,7 @@ get their ShareMe!
 
 <!--Get Share me code section ends here--> 
 
-
+<input id="confirmation_popup" alt="#TB_inline?height=200&width=472&inlineId=confirmation_div" class="thickbox" type="button" value="confirm" style="visibility:hidden;" />
 
 <!--Connect with section starts here-->
 
@@ -193,7 +208,7 @@ get their ShareMe!
 
 <p>Or connect with</p>
 
-<%= form_tag authenticate_path, {:id=> "oauth_form", :method => :post } do |uf| %>
+<%#= form_tag authenticate_path, {:id=> "oauth_form", :method => :post } do |uf| %>
 <%= hidden_field_tag "authentication_type","session" %>
 
 <li>
@@ -215,7 +230,7 @@ get their ShareMe!
 
 
 </ul>
-<% end %>
+<%# end %>
 <!--Connect with section ends here--> 
 
 
@@ -227,7 +242,7 @@ get their ShareMe!
 
 <p>Already a Member ?</p>
 
-<a id="sign-in-btn" href="/user_sessions/new?height=142&width=299&modal=true" class="blackInputBtn thickbox">Sign In</a>  
+<a id="sign-in-btn" href="/users/sign_in?height=142&width=299&modal=true" class="blackInputBtn thickbox">Sign In</a>  
 
 
 
@@ -244,51 +259,47 @@ get their ShareMe!
 
 
 </div>
+
 <div id="signup-form" style="display:none;">
-<div class="get_share_code" id="get-share-code">
+  <div class="get_share_code" id="get-share-code">
 
-<h2> get your <span>SHARE ME</span> CODE</h2>
-<div id="error-signup"></div>
-<br />
-<%= form_for @user do |uf| %>
-
-<label>E-mail:</label>
-<%= uf.text_field :email, {:class=>"textField"}%>
-
-<label>Name:</label>
-<%= uf.text_field :name, {:class=>"textField"}%>
-
-<input id="register-btn1" type="button" class="blackInputBtn register" value="Register">
-
+    <h2> get your <span>SHARE ME</span> CODE</h2>
+    <div id="error-signup"></div>
+    <br />
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource)) do |f| %>
+    <label>E-mail:</label>
+    <!--<input id="user_e" name="user[email]" type="text" class="textField"/>-->
+    <%= f.email_field :email, :class=>"textField" %>
+    <label>Name:</label>
+    <!--input id="user_n" name="user[name]" type="text"  class="textField"/>-->
+    <%= f.text_field :name, :class=>"textField" %>
+    <input id="register-btn1" type="button" class="blackInputBtn register" value="Register">
+    <% end %>
+  </div>
+  <div style="padding-left:35px;">
+    <ul class="connect_with_socials">
+      <p>Or connect with</p>
+      <%#= form_tag authenticate_path, {:id=> "oauth_form", :method => :post } do |uf| %>
+      <%= hidden_field_tag "authentication_type","session" %>
+      <li>
+        <a class="social-fb tipsy" href="#" title="Facebook" onclick="social_connect('facebook');return false;"></a>
+        <%#= hidden_field_tag "oauth_provider", "facebook" %>
+        <input type="radio" value="facebook" name="oauth_provider" id="oauth_provider_facebook" style="display: none;">
+      </li>
+      <li>
+        <a class="social-twitt tipsy" href="#" title="Twitter" onclick="social_connect('twitter');return false;"></a>
+        <input type="radio" value="twitter" name="oauth_provider" id="oauth_provider_twitter" style="display: none;">
+      </li>
+      <li>
+        <a class="social-linkedin tipsy" href="#" title="LinkedIn" onclick="social_connect('linked_in');return false;"></a>
+        <input type="radio" value="linked_in" name="oauth_provider" id="oauth_provider_linked_in" style="display: none;">
+      </li>
+    </ul>
+    <%# end %>
+  </div>
+</div>
+<% unless @confirmation_token.blank? %>
+  <div id="confirmation_div" class="get_share_code" style="display:none;">
+    <%= render :partial=>"confirmations/main" %>
+  </div>
 <% end %>
-</div>
-<div style="padding-left:35px;">
-<ul class="connect_with_socials">
-
-<p>Or connect with</p>
-
-<%= form_tag authenticate_path, {:id=> "oauth_form", :method => :post } do |uf| %>
-<%= hidden_field_tag "authentication_type","session" %>
-
-<li>
-<a class="social-fb tipsy" href="#" title="Facebook" onclick="social_connect('facebook');return false;"></a>
-
-<%#= hidden_field_tag "oauth_provider", "facebook" %>
-<input type="radio" value="facebook" name="oauth_provider" id="oauth_provider_facebook" style="display: none;">
-</li>
-
-<li><a class="social-twitt tipsy" href="#" title="Twitter" onclick="social_connect('twitter');return false;"></a>
-
-<input type="radio" value="twitter" name="oauth_provider" id="oauth_provider_twitter" style="display: none;">
-</li>
-
-<li>
-<a class="social-linkedin tipsy" href="#" title="LinkedIn" onclick="social_connect('linked_in');return false;"></a>
-<input type="radio" value="linked_in" name="oauth_provider" id="oauth_provider_linked_in" style="display: none;">
-</li>
-
-
-</ul>
-<% end %>
-</div>
-</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110823060638) do
+ActiveRecord::Schema.define(:version => 20110928123259) do
 
   create_table "access_tokens", :force => true do |t|
     t.integer  "user_id"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20110823060638) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
+    t.string   "address",              :null => false
   end
 
   create_table "sessions", :force => true do |t|
@@ -63,33 +64,26 @@ ActiveRecord::Schema.define(:version => 20110823060638) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
-    t.string   "login"
-    t.string   "email"
-    t.string   "crypted_password"
-    t.string   "password_salt"
-    t.string   "persistence_token",                     :null => false
-    t.integer  "login_count",        :default => 0,     :null => false
-    t.integer  "failed_login_count", :default => 0,     :null => false
-    t.datetime "last_request_at"
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string   "current_login_ip"
-    t.string   "last_login_ip"
+    t.string   "email",                                 :default => "", :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.integer  "sign_in_count",                         :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "perishable_token",                      :null => false
-    t.boolean  "active",             :default => false, :null => false
     t.string   "name"
-    t.string   "phone"
-    t.string   "code"
-    t.integer  "active_token_id"
     t.string   "f_name"
     t.string   "l_name"
-    t.boolean  "is_local",           :default => false
+    t.string   "code"
+    t.string   "phone"
   end
-
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["login"], :name => "index_users_on_login", :unique => true
-  add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token", :unique => true
 
 end

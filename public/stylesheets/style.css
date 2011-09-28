@@ -922,6 +922,7 @@ a.connect_with_linkedin_btn {
 	border: 1px solid #FFE400;
 	position: relative;
 	margin: 8px auto;
+  width: 500px;
 }
 #account_verification h2 {
 	background-color: #FFBA00;
@@ -933,7 +934,7 @@ a.connect_with_linkedin_btn {
 	color: #000000;
 	float: left;
 	clear: both;
-	margin: 5px 7px 0 310px;
+	margin: 5px 7px 0 5px;
 	text-align: left;
 	width: 175px;
 }
@@ -966,6 +967,7 @@ a.connect_with_linkedin_btn {
 #confirm_submit {
 	margin-bottom: 5px;
 	margin-right: 5px;
+  margin-top: 30px;
 }
 .fb_status {
 	text-align: left;

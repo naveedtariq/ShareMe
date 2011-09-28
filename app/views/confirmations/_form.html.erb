@@ -1,0 +1,15 @@
+<% unless email_present  %>
+  <%= form.label :email, "Email" %>
+  <%= form.text_field :email,:class=>"input_fields" %><br />
+<% end %>
+<%= form.label :phone, "Phone No." %>
+<%= form.text_field :phone,:class=>"input_fields" %><br />
+<%= form.label :password, "Set your password" %>
+<%= form.password_field :password ,:class=>"input_fields"%><br />
+<br />
+<%= form.label :password_confirmation %>
+<%= form.password_field :password_confirmation ,:class=> "input_fields"%><br /><br /><br />
+
+<input id="confirm_submit" type="button" class="blackInputBtn" value="Activate">
+<%#= form."Activate",:class=>"blackInputBtn", :id=>"confirm_submit" %>
+<div class="clear"></div>

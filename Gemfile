@@ -6,14 +6,16 @@ gem 'rails', '3.0.9'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql'
-gem 'authlogic'
+#gem 'authlogic'
 gem 'rails3-generators'
-gem "oauth"
-gem "oauth2","0.4.1"
-gem "authlogic-connect"
+#gem "oauth"
+#gem "oauth2","0.4.1"
+#gem "authlogic-connect"
 gem "recaptcha", :require => "recaptcha/rails"
 gem "paperclip", "~> 2.3"
 #gem "ruby-debug"
+gem "devise"
+gem 'omniauth'
 
 # Use unicorn as the web server
 # gem 'unicorn'

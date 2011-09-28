@@ -1,26 +1,31 @@
 ShareMe::Application.routes.draw do
-  get "activations/new"
+  devise_for :users, :controllers => {:confirmations => "confirmations", :registrations => "registrations"} do
+    put "confirm_user", :to => "confirmations#confirm_user"
+    get "logout", :to => "devise/sessions#destroy"
+  end
+  resources :users
+  resources :profiles
+  resources :contacts
 
-  get "activations/create"
+#  get "activations/new"
+
+#  get "activations/create"
 
 #  get "user_sessions/new"
 
-  match 'authenticate' => 'user_sessions#create', :as => :authenticate, :via => :post
-	match 'login' => "user_sessions#new",      :as => :login
-	match 'logout' => "user_sessions#destroy", :as => :logout
+#  match 'authenticate' => 'user_sessions#create', :as => :authenticate, :via => :post
+#	match 'login' => "user_sessions#new",      :as => :login
+#	match 'logout' => "user_sessions#destroy", :as => :logout
 	root :to  => 'home#index'
-	match '/register/:activation_code', :controller => 'activations', :action => 'new', :as => :register
-	match '/activate/:id', :controller => 'activations', :action => 'create', :as => :activate
 	match '/user_home', :controller => 'users', :action => 'user_home', :as => :user_home
   match 'search/(:code)', :controller => 'contacts', :action => "search", :as => :search
   match 'import_contacts', :controller => 'contacts', :action => "import_contacts", :as => :import_contacts
   match 'show_basic_profile(:id)', :controller => 'contacts', :action => "show_basic_profile", :as => :show_basic_profile
+  match '/(:confirmation_token)', :controller => 'home', :action => 'index', :as => '/'
 
-	resources :user_sessions
-	resources :users do
-    resources :profiles
-  end
-  resources :contacts
+#	resources :user_sessions
+#	resources :users do
+# end
 	 
   # The priority is based upon order of creation:
   # first created -> highest priority.

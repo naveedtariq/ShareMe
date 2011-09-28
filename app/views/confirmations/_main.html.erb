@@ -1,0 +1,17 @@
+<div id="account_verification">
+  <h2>Activate your <span>SHARE ME</span> account</h2>
+
+    <div id="error-confirm"></div>
+  <div id="confirm_form">
+    <% form_for(resource,:as => resource_name, :url => confirm_user_path, :html=>{:id=>"aaa"}) do |form| %>
+    <%= form.hidden_field :confirmation_token %>
+    <br />
+    <% if @user.email.blank? %>
+    <% is_email_present = false %>
+    <% else %>
+    <% is_email_present = true %>
+    <% end %>
+    <%= render :partial => "confirmations/form", :locals => { :form => form,:email_present => is_email_present }%>
+    <% end %>
+  </div>
+</div>

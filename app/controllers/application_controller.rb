@@ -1,46 +1,23 @@
 class ApplicationController < ActionController::Base
 #  protect_from_forgery
-	helper_method :current_user_session, :current_user
-
+  helper_method :shareme_code
   private
-    def current_user_session
-			@current_user_session ||= UserSession.find
-    end
 
-    def current_user
-      @current_user ||= current_user_session && current_user_session.user
+# Redirect to user profile after sign in
+#
+  def after_sign_in_path_for(resource_or_scope)
+    puts "i was hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    puts shareme_code.inspect + "11111111111111111111111111111111111111111111111111111111111!"
+    if shareme_code.present?
+      puts "inside ifffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      "/search?code="+shareme_code
+    else
+      puts "inside elseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      contacts_path
     end
+  end
 
-    def require_user
-      unless current_user
-        store_location
-        if session[:return_to].to_s.include?("search")
-          flash[:notice] = "If you want to connect with '" + session[:params][:code].upcase + "', Please Sign In to continue."
-        else
-          flash[:notice] = "You must be logged in to access this page"
-        end
-        redirect_to :root
-        return false
-      end
-    end
-
-    def require_no_user
-      if current_user
-        store_location
-        flash[:notice] = "You must be logged out to access this page"
-        redirect_to user_home_path
-        return false
-      end
-    end
-
-    def store_location
-      session[:return_to] = request.fullpath
-      session[:params] = request.params
-    end
-
-    def redirect_back_or_default(default)
-      redirect_to(session[:return_to] || default)
-      session[:return_to] = nil
-    end
-
+  def shareme_code
+    session[:code]
+  end
 end

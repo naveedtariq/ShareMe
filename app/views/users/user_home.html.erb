@@ -53,15 +53,15 @@
 		</tr>
 		<tr>
 			<td width="200"><strong>First Name</strong></td>
-			<td><%= current_user.f_name.blank? ? current_user.social_profile[:first_name] : current_user.f_name %></td>
+			<td><%= current_user.f_name.blank? ? "" : current_user.f_name %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Last Name</strong></td>
-			<td><%= current_user.l_name.blank? ? current_user.social_profile[:last_name] : current_user.l_name   %></td>
+			<td><%= current_user.l_name.blank? ? "" : current_user.l_name   %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Company Name</strong></td>
-			<td><%= (current_user.profile.blank? || current_user.profile.company_name.blank?)? current_user.social_profile[:company_name] : current_user.profile.company_name %></td>
+			<td><%= (current_user.profile.blank? || current_user.profile.company_name.blank?)? "" : current_user.profile.company_name %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Company Address</strong></td>
@@ -77,7 +77,7 @@
 		</tr>
 		<tr>
 			<td width="200"><strong>Phone Number </strong></td>
-			<td><%= (current_user.profile.blank? || current_user.profile.phone.blank?)? ""  : current_user.profile.phone %></td>
+			<td><%= (current_user.profile.blank? || current_user.profile.phone.blank?)? current_user.phone  : current_user.profile.phone %></td>
 		</tr>
 		<tr>
 			<td width="200"> <strong>Fax</strong></td>
@@ -97,64 +97,6 @@
 
 
 
-<div class="social_APIs_widgets">
-
-<h2>YOUR <span>Facebook Feed</span></h2>
-
-<div class="APIs_contents">
-<% unless current_user.facebook %>
-<p>You are currently not connected to Facebook.</p>
-<% else %>
-<% current_user.fb_status_feed.each do |fb_status| %>
-	<p class="fb_status"><%= fb_status["message"] %> --- <%= (fb_status["likes"].blank? ? 0 : fb_status["likes"]["data"].length )%> people like this.</p>
-<% end %>
-<% end %>
-</div>
-
-<% unless current_user.facebook %>
-  <a href="#" class="connect_with_facebook_btn"></a></td>
-<% end %>
-
-
-
-</div>
-
-<!--Facebook APIs Widget Section ends here--> 
-
-
-
-<!--Twitter APIs Widget Section starts here--> 
-
-
-
-<div class="social_APIs_widgets">
-
-<h2>YOUR <span>Twitter Tweets</span></h2>
-
-<div class="APIs_contents">
-
-<% unless current_user.twitter %>
-  <p>You are currently not connected to twitter.</p>
-<% else %>
-  <% current_user.tweets.each do |tweet| %>
-    <p class="fb_status"><%= tweet["text"] %> </p>
-  <% end %>
-<% end %>
-
-</div>
-<% unless current_user.twitter %>
-  <%= form_tag authenticate_path, {:id=> "oauth_form", :method => :post } do |uf| %>
-    <%= hidden_field_tag "authentication_type","user" %>
-    <input type="radio" value="twitter" name="oauth_provider" id="oauth_provider_twitter" style="display: none;">
-    <input type="text" value="<%= current_user.email %>" name="user[email]" style="display: none;">
-  <% end %>
-  <a href="#" class="connect_with_twitter_btn" onclick="javascript:social_connect('twitter');return false;"></a></td>
-<% end %>
-
-
-</div>
-
-<!--Twitter APIs Widget Section ends here--> 
 
 
 

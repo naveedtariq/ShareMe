@@ -20,6 +20,10 @@
 		</tr>
     <%= u.fields_for :profile do |p| %>
       <tr>
+        <td width="200"><label>Address</label></td>
+        <td><%= p.text_field :address,:class=>"textField" %></td>
+      </tr>
+      <tr>
         <td width="200"><label>Company Name</label></td>
         <td><%= p.text_field :company_name,:class=>"textField" %></td>
       </tr>

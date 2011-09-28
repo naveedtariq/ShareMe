@@ -1,17 +1,13 @@
 class User < ActiveRecord::Base
-#acts_as_authentic
 
 	before_validation :generate_code,     :if => lambda{ |t| t.code.blank? }
-  before_save :test
+  before_create :update_name
+  before_create :link_profile
 
-	acts_as_authentic do |c|
-		c.login_field = "email"
-	  c.validates_length_of_password_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
-		c.validates_length_of_password_confirmation_field_options = {:on => :update, :minimum => 4, :if => :has_no_credentials?}
-		c.validate_login_field = false  #don't validate email field with additional validations
-	end
+  devise :database_authenticatable, :registerable,
+          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-
+  validates :name, :presence => true
 
   has_many :contacts, :dependent => :destroy
   has_many :associated_contacts, :class_name => "Contact", :foreign_key => :associated_user_id
@@ -19,53 +15,12 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :profile, :allow_destroy => true
 
 
-	include SocialProfile
+  def password_match?
+    self.errors[:password] << 'password not match' if password != password_confirmation
+    self.errors[:password] << 'you must provide a password' if password.blank?
+    password == password_confirmation and !password.blank?
+  end
 
-
-	def test
-		if (self.new_record?) && (!self.access_tokens.empty?)
-			self.active = true
-			self.name = self.social_profile[:name]
-		end
-	end
-
-	def active?
-		active 
-	end
-
-	def activate!(params)
-		self.active = true
-    self.password = params[:user][:password]
-    self.password_confirmation = params[:user][:password_confirmation]
-    self.phone = params[:user][:phone]
-    self.email = params[:user][:email] if params[:user][:email]
-    self.update_info_from_social_profile if !self.is_local
-    self.is_local = true
-    self.build_profile
-    self.profile.update_profile(self)
-    self.profile.save
-		save
-	end
-
-	def deliver_activation_instructions!
-		reset_perishable_token!
-		Notifier.activation_instructions(self).deliver!
-	end
-	 
-	def deliver_activation_confirmation!
-		reset_perishable_token!
-		Notifier.activation_confirmation(self).deliver!
-	end
-
-
-	def has_no_credentials?
-	  self.crypted_password.blank? 
-	end
-
-	def signup!(params)
-		self.update_attributes params[:user]
-		save_without_session_maintenance
-	end
 
 	# Generate random code
 	#
@@ -80,23 +35,18 @@ class User < ActiveRecord::Base
 
 # update users' first name and last name
   def update_name
-    names = self.name.split(' ')
-    if names.length > 1
-      fname = names[0]
-      lname = self.name.gsub(names[0]+" ","")
+    if self.f_name.blank? && self.l_name.blank?
+      names = self.name.split(' ')
+      if names.length > 1
+        fname = names[0]
+        lname = self.name.gsub(names[0]+" ","")
+      end
+      self.f_name = fname
+      self.l_name = lname
     end
-    self.f_name = fname
-    self.l_name = lname
   end
 
-  def update_info_from_social_profile
-    self.email = self.social_profile[:email] unless self.social_profile[:email].blank?
-    self.name = self.social_profile[:name] unless self.social_profile[:name].blank?
-    self.update_name
-    self.phone = self.social_profile[:phone] unless self.social_profile[:phone].blank?
-  end
-
-#Add a single contact
+  #Add a single contact
   def add_contact(contact, and_add_self_to_contact = false)
     if @exists_contact = contacts.email_or_associated_user_id(contact.email, contact.id).first
       @exists_contact.update_attribute(:associated_user, contact)
@@ -106,4 +56,14 @@ class User < ActiveRecord::Base
     contact.add_contact(self) if and_add_self_to_contact
     @exists_contact
   end
+
+  def link_profile
+    if self.new_record?
+      self.build_profile
+      self.profile.phone = self.phone
+      self.profile.save!
+    end
+  end
+
+
 end

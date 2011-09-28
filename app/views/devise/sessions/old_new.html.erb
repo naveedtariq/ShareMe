@@ -1,0 +1,52 @@
+<div class="get_share_code_signin_popup">
+
+<h2> Sign in to <span>SHARE ME</span></h2>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+<div id="error-explanation"></div>
+<br />
+<label>Email:</label>
+
+<%= f.email_field :email ,:class=>"textField"%>
+
+<label>Password:</label>
+
+<%= f.password_field :password, :class=>"textField" %></div>
+
+<input type="button" onclick="tb_remove()" value="Cancel" class="blackInputBtnCancel"/>
+
+
+
+<input id="sign-in" type="submit" value="Sign in"  class="blackInputBtn" onclick="javascript:signIn();return false;"/>
+
+<% end %>
+
+<div style="padding-left:35px;">
+<ul class="connect_with_socials">
+
+<p>Or connect with</p>
+
+<%= form_tag authenticate_path, {:id=> "oauth_form", :method => :post } do |uf| %>
+<%= hidden_field_tag "authentication_type","session" %>
+
+<li>
+<a class="social-fb tipsy" href="#" title="Facebook" onclick="social_connect('facebook');return false;"></a>
+
+<%#= hidden_field_tag "oauth_provider", "facebook" %>
+<input type="radio" value="facebook" name="oauth_provider" id="oauth_provider_facebook" style="display: none;">
+</li>
+
+<li><a class="social-twitt tipsy" href="#" title="Twitter" onclick="social_connect('twitter');return false;"></a>
+
+<input type="radio" value="twitter" name="oauth_provider" id="oauth_provider_twitter" style="display: none;">
+</li>
+
+<li>
+<a class="social-linkedin tipsy" href="#" title="LinkedIn" onclick="social_connect('linked_in');return false;"></a>
+<input type="radio" value="linked_in" name="oauth_provider" id="oauth_provider_linked_in" style="display: none;">
+</li>
+
+
+</ul>
+<% end %>
+</div>
+</div>

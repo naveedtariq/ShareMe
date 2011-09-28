@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
 	layout "default"
-  before_filter :require_user
-  before_filter :verify_contacts, :only =>[:show]
+#  before_filter :require_user
+#  before_filter :verify_contacts, :only =>[:show]
 
   def index
     @contacts = current_user.contacts
@@ -29,13 +29,13 @@ class ContactsController < ApplicationController
         redirect_to contacts_path
       else
         flash[:error] = "There is no User with \'" + params[:shareme_code] + "\' ShareMe Code."
-#render :new
+        #render :new
         redirect_to new_contact_path
       end
     else
       flash[:error] = "Captcha Doesn't Match! Please Try again!" 
       redirect_to new_contact_path
-#render :new
+      #render :new
     end
   end
 
@@ -49,16 +49,26 @@ class ContactsController < ApplicationController
   end
 
   def search
-    if params[:code] || session[:params][:code]
+    session[:code] = session[:connect_user_id] = nil
+    if params[:code]
       if @user = User.find_by_code(params[:code]||session[:params][:code])
-        current_user.add_contact(@user, true) 
+        session[:code] = params[:code]
+        session[:connect_user_id] = @user.id
+        unless current_user
+          flash[:error] = "You need to Sign In to perform this action."
+          redirect_to "/" and return
+        end
+        current_user.add_contact(@user, true)
+        session[:code] = session[:connect_user_id] = nil
         flash[:success] = "User With ShareMe Code \'#{@user.code}\' Found And Is Successfully Added To Your Contact List!" 
         redirect_to contacts_path and return
       else
-        flash[:error] = "There is no User with \'" +( params[:code] || session[:params][:code]) + "\' ShareMe Code."
-        redirect_to user_home_path
+        flash[:error] = "There is no User with \'" +( params[:code] || session[:code]) + "\' ShareMe Code."
+        session[:code] = session[:connect_user_id] = nil
+        redirect_to current_user.blank? ? root_path : user_home_path
       end
     else
+      session[:code] = session[:connect_user_id] = nil
       redirect_to root_path
     end
   end
