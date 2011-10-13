@@ -4,8 +4,8 @@ connect:
     secret: "bJmZLu71qtzZUDFsqvcb1ID08QT4yt08kYISVbFvY"
     label: "Twitter"
   facebook:
-    key: "251625571516094"
-    secret: "b034c76e328858690d954e5c404c6e64"
+    key: "246967045336612"
+    secret: "80cbdb0f5a64c5ae299d3ab6a4dcc539"
     label: "Facebook"
     scope: "email, offline_access, user_work_history, user_location, user_hometown, read_stream"
   google:

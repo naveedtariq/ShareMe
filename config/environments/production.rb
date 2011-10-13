@@ -64,4 +64,5 @@ config.action_mailer.default_url_options = { :host => "demo.shareme.me" }
   }
 
 
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 end

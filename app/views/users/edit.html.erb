@@ -1,5 +1,5 @@
 <div class="profile_featured_section_full">
-<%= form_for @user do |u| %>
+<%= form_for @user,:html=> {:multipart => true} do |u| %>
 	<h2><span>YOUR </span>CONTACT INFORMATION</h2>
 	<table width="600" border="0" id="userInfoTblEdit" class="profile-table">
 		<tr>
@@ -38,6 +38,10 @@
       <tr>
         <td width="200"> <label>Fax</label></td>
         <td><%= p.text_field :fax,:class=>"textField" %></td>
+      </tr>
+      <tr>
+        <td width="200"> <label>Profile Picture</label></td>
+        <td><%= p.file_field :picture,:class=>"textField" %></td>
       </tr>
     <% end %>
 	</table>

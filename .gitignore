@@ -14,3 +14,7 @@ public/stylesheets/compiled/*.css
 log/*.*
 public/.htaccess
 share-me_production
+db/schema.rb
+public/system/*
+Gemfile.lock
+vendor/

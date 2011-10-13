@@ -14,8 +14,8 @@ class ActivationsController < ApplicationController
       @user.update_name
       @user.save
 
-			flash[:notice] = "You now have your very own 4 digit ShareMe. No more business cards and email addresses just ShareMe."
-			redirect_to :controller=>"home", :action => "index" 
+			flash[:success] = "You now have your very own 4 digit ShareMe. No more business cards and email addresses just ShareMe."
+			redirect_to user_home_path
 		else
 			render :action => :new
 		end

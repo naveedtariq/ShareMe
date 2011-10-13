@@ -1,7 +1,7 @@
 class AddPreishableTokenAndActiveToUsers < ActiveRecord::Migration
   def self.up
-		add_column :users, :perishable_token,:string,	:null => false
-		add_column :users, :active, :boolean, :default => false, :null => false
+		add_column :users, :perishable_token,:string
+		add_column :users, :active, :boolean, :default => false
   end
 
   def self.down

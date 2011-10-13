@@ -9,9 +9,10 @@ gem 'mysql'
 gem 'authlogic'
 gem 'rails3-generators'
 gem "oauth"
-gem "oauth2"
+gem "oauth2","0.4.1"
 gem "authlogic-connect"
 gem "recaptcha", :require => "recaptcha/rails"
+gem "paperclip", "~> 2.3"
 #gem "ruby-debug"
 
 # Use unicorn as the web server
@@ -27,7 +28,7 @@ gem "recaptcha", :require => "recaptcha/rails"
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'sqlite3-ruby'
 # gem 'aws-s3', :require => 'aws/s3'
 
 # Bundle gems for the local environment. Make sure to

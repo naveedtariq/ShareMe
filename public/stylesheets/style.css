@@ -251,7 +251,7 @@ a.moreBtnWhite {
   right: 10px;
   text-decoration: none;
   top: 2px;
-  width: 103px;
+  width: 110px;
 }
 a.moreBtnYellowFloating {
   background: url("../images/plus_ico_yellow.gif") no-repeat scroll right 1px transparent;
@@ -291,7 +291,7 @@ a.moreBtnYellow {
   right: 0;
   text-decoration: none;
   text-transform: lowercase;
-  width: 71px;
+  width: 80px;
 }
 input.yellowInputBtn {
   background: url("../images/yellow_btn_bg.jpg") repeat-x scroll 0 0 transparent;
@@ -380,6 +380,7 @@ h1#shareMeLogo {
   margin: 12px;
   text-indent: -999em;
   width: 432px;
+  margin-right: 40px;
 }
 h1#shareMeLogo a {
   background: url("../images/logo.jpg") no-repeat scroll 0 0 transparent;
@@ -656,7 +657,7 @@ ul.connect_with_socials {
 ul.connect_with_socials p {
   float: left;
   font-weight: bold;
-  margin: 4px 13px 0;
+  margin: 4px 8px 0;
 }
 a.social-fb {
   background: url("../images/connect_with_socials.gif") no-repeat scroll 0 0 transparent;
@@ -1078,4 +1079,7 @@ a.floated {
   border: medium none;
   float: left;
   width: 66%;
+}
+.profile-edit-picture {
+  margin: -25px 20px 20px 270px !important;
 }

@@ -1,9 +1,45 @@
 <!--home main contents wrapper starts here-->
 <% content_for :top_js do %>
   <%= javascript_include_tag "home_page" %>
-<% end %>
-<% unless current_user.blank? %>
-<%= current_user.email.to_s %>
+  <%= javascript_include_tag "jquery.carousel.min" %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        // or with options (there are only 2)
+        $("#notif_container").notify({
+          speed: 500,
+          expires: false
+        });
+        var icon = "";
+        <% unless flash.blank? %>
+          var title = "";
+          var text = "";
+          var icon = "";
+          <% if !flash[:notice] .blank? %>
+            title = "Warning!";
+            text = "<%= flash[:notice].to_s %>";
+            icon = "warning";
+          <% elsif !flash[:success].blank? %>
+            title = "Success!";
+            text = "<%= flash[:success].to_s %>";
+            icon = "success";
+          <% elsif !flash[:error].blank? %>
+            title = "Error!";
+            text = "<%= flash[:error].to_s %>";
+            icon = "error";
+          <% end %>
+          $("#notif_container").notify("create", {
+              title: title,
+              text: text,
+              icon: icon
+             },
+             {
+              click: function(e,instance){
+              instance.close();
+             }
+           });
+        <% end %>
+     });
+  </script>
 <% end %>
 <div id="layout_wrapper">
 
@@ -75,12 +111,12 @@
 
 <div class="rightBar"> 
 
-<% unless flash.blank? %>
-<div id="home-page-notification" >
-	<%= flash[:notice] %>
-</div>
+<%# unless flash.blank? %>
+<!--<div id="home-page-notification" >-->
+	<%#= flash[:notice] %>
+<!--</div>-->
 
-<% end %>
+<%# end %>
 <!--Enter share me code section starts here-->
 
 

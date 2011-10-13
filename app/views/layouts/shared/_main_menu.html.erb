@@ -1,5 +1,12 @@
 <div class="profile_section"> 
-<img src="<%= current_user.social_profile[:photo].blank? ? "images/generic_profile.jpg" : current_user.social_profile[:photo]  %>" alt="Profile User Thumbnail" style="margin-bottom: 10px;" />
+<% if !current_user.profile.picture_file_name.nil? %>
+  <% user_picturepath = current_user.profile.picture.url(:thumb) %>
+<% elsif !current_user.social_profile[:photo].blank? %>
+  <% user_picturepath = current_user.social_profile[:photo] %>
+<% else %>
+  <% user_picturepath = "/images/generic_profile.jpg" %>
+<% end %>
+<img src="<%= user_picturepath %>" alt="Profile User Thumbnail" style="margin-bottom: 10px;" />
   <br />
 	<h2><%= current_user.f_name %>&nbsp;<%= current_user.l_name %></h2>
 	<small><%= current_user.social_profile[:location] %></small> 
