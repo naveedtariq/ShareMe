@@ -1,0 +1,10 @@
+<% current_user.fb_status_feed.each do |fb_status| %>
+  <div class="api_contents"> <img src="<%= current_user.social_profile[:photo] %>" width="52" height="52" />
+    <h3><%= fb_status["from"]["name"] %></h3>
+    <p><%= fb_status["message"]  %></p>
+    <div class="api_links"> 
+      <a href="#" class="likeIco">Like <span>(<%= (fb_status["likes"].blank? ? 0 : fb_status["likes"]["data"].length )%>)</span></a> 
+      <a href="#" class="commentIco">Comments<span>(<%= (fb_status["comments"].blank? ? 0 : fb_status["comments"]["data"].length )%>)</span></a> 
+    </div>
+  </div>
+<% end %>

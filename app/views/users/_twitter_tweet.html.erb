@@ -1,0 +1,6 @@
+<% current_user.tweets.each do |tweet| %>
+  <div class="api_contents"> <img src="<%= tweet["user"]["profile_image_url_https"]%>" width="52" height="52" />
+    <h3><%= tweet["user"]["name"] %></h3>
+    <p><%= tweet["text"]  %></p>
+  </div>
+<% end %>

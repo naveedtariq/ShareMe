@@ -1,0 +1,19 @@
+<script type="text/javascript">
+  if(<%=@already%>)
+  {
+    self.opener.location.href = 'http://localhost.com/user_home';
+    self.close();
+  }
+  else if(!<%=@activation%>){
+    window.opener.show_notification('Error','<%=flash[:error]%>','error');
+    self.close();
+  }
+  else{
+    if(<%= @dd%>)
+    {
+      window.opener.form_type("update_user");
+    }
+    window.opener.oauth_data("facebook");
+    self.close();
+  }
+</script>

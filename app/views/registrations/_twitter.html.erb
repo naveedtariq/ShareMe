@@ -1,0 +1,26 @@
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("twitter_reg_popup").trigger("click");
+  $('#TB_title').hide();
+  alert("wajo");
+});
+</script>
+
+<input id="twitter_reg_popup" alt="#TB_inline?height=200&width=472&inlineId=twitter_div" class="thickbox" type="button" value="confirm" style="visibility:hidden;" />
+
+<div class="get_share_code" id="get-share-code">
+  Welcome <%= @name %> Please provide the following information to complete sign up
+  <h2> get your <span>SHARE ME</span> CODE</h2>
+  <div id="error-signup"></div>
+  <br />
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource)) do |f| %>
+  <label>E-mail:</label>
+  <!--<input id="user_e" name="user[email]" type="text" class="textField"/>-->
+  <%= f.email_field :email, :class=>"textField" %>
+  <label>Name:</label>
+  <!--input id="user_n" name="user[name]" type="text"  class="textField"/>-->
+  <%= f.text_field :name, :class=>"textField" %>
+  <input id="register-btn1" type="button" class="blackInputBtn register" value="Register">
+  <% end %>
+</div>

@@ -1,0 +1,41 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('#connect_with_facebook').click(function() {
+        var left = (screen.width/2)-(600/2);
+        var top = (screen.height/2)-(300/2);
+        var w = window.open(this.href, 'Link Your Facebook Account', config='top='+top+', left='+left+',height=500, width=600, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, directories=no, status=no');
+        return false;
+       });
+      $('#connect_with_twitter').click(function() {
+        var left = (screen.width/2)-(600/2);
+        var top = (screen.height/2)-(300/2);
+        var w = window.open(this.href, 'Link Your Twitter Account', config='top='+top+', left='+left+',height=500, width=600, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, directories=no, status=no');
+        return false;
+       });
+    });
+</script>
+<div class="profile_featured_section">
+	<h2><span>Socialify </span>Youself</h2>
+  <p class="parag">Connect Your Social Profiles with Share Me</p>
+
+  <ul class="socialify-div">
+    <li>
+      <% if current_user.authenticated_with("facebook") %>
+        <%= link_to "","",:id=>"connect_with_facebook",:class=>"social-fb-already tipsy",:title=>"facebook" %>
+      <% else %>
+        <%= link_to "",user_omniauth_authorize_path(:facebook),:id=>"connect_with_facebook",:class=>"social-fb tipsy",:title=>"facebook" %>
+      <% end %>
+    </li>
+    <li>
+      <% if current_user.authenticated_with("twitter") %>
+        <%= link_to "","",:id=>"connect_with_twitter",:class=>"social-twitt-already tipsy",:title=>"twitter" %>
+      <% else %>
+        <%= link_to "",user_omniauth_authorize_path(:twitter),:id=>"connect_with_twitter",:class=>"social-twitt tipsy",:title=>"twitter" %>
+      <% end %>
+    </li>
+    <li>
+    <a class="social-linkedin tipsy" href="#" title="LinkedIn" onclick="social_connect('linked_in');return false;"></a>
+    <input type="radio" value="linked_in" name="oauth_provider" id="oauth_provider_linked_in" style="display: none;">
+    </li>
+  </ul>
+</div>
