@@ -14,7 +14,11 @@ class ApplicationController < ActionController::Base
     def require_user
       unless current_user
         store_location
-        flash[:notice] = "You must be logged in to access this page"
+        if session[:return_to].to_s.include?("search")
+          flash[:notice] = "If you want to connect with '" + session[:params][:code].upcase + "', Please Sign In to continue."
+        else
+          flash[:notice] = "You must be logged in to access this page"
+        end
         redirect_to :root
         return false
       end
