@@ -6,10 +6,27 @@ $.fn.serializeObject = function() {
   
   return values;
 }  
+var form_type = function(param) {
+  $('#dd').val(param);
+}
+var oauth_data = function(type) {
+  $.ajax({
+    type: "GET",
+    url: "omniauth_callbacks/oauth_data",
+    data: 'type='+type,
+    success: function(data){
+      populate_form(data);
+      }
+    });
+}
+var populate_form = function(data){
+  $('#user_e').val(data['email']);
+  $('#user_n').val(data['name']);
+}
+var title = "Success!";
+var icon = "success";
 
 $(document).ready(function() {
-  var title = "Success!";
-  var icon = "success";
 
   $('#confirm_submit').click(function () {
     $('#user_confirmation_token').val($('#confirmation_token').val());
@@ -47,104 +64,16 @@ $(document).ready(function() {
       });
     });
 
+  
   $('#register-btn').click(function () {
-    $.ajax({
-      type: "POST",
-      url: "/users",
-      data: $("#signup_form").serialize(),
-      dataType: "json",
-      error:function (xhr, ajaxOptions, thrownError){
-          $("#signup-btn").trigger('click');
-          $("#get-share-code").width("320px");
-          $("#get-share-code label").width("80px");
-          $("#error-signup").html("");
-          var errors = $("#error-signup");
-          errors.append("<h2>There were errors while submitting the form:</h2><ul>");
-          var er = JSON.parse(xhr.responseText);
-          if(er.email)
-          {
-            errors.append("<li>Email: " + er.email  + "</li>");
-          }
-          if(er.name)
-          {
-            errors.append("<li>Name: " + er.name  + "</li>");
-          }
-          errors.append("</ul>");
-          $("#TB_title").hide();
-          if($("#user_email").val().length==0)
-              $("#user_email").val($("#user_e").val());
-          if($("#user_name").val().length==0)
-              $("#user_name").val($("#user_n").val());
-        },
-      failure: function(data){
-        },
-      success: function(data){
-        var response = data;
-        if(response.user) {
-          $("#user_e").val("");
-          $("#user_n").val("");
-          var text = "Congratulations! The way you communicate just got upgraded.<br /> A simple 4 digit ShareMe is all you will ever need, check your email now.";
-          $("#notif_container").notify("create",
-              {
-                title: title,
-                text: text,
-                icon: icon
-              },
-              {  
-                click: function(e,instance){
-                instance.close();
-                }
-              }
-            );
-          }
-        }
-      });
-    });
+      registration(this);
+  });
 
   $('#register-btn1').click(function () {
-    $.ajax({
-      type: "POST",
-      url: "/users",
-      dataType: "json",
-      data: $("#user_new").serialize(), 
-      error: function(xhr,ajaxOptions,thrownError){
-          $("#error-signup").html("");
-          var errors = $("#error-signup");
-          errors.append("<h2>There were errors while submitting the form:</h2><ul>");
-          var er = JSON.parse(xhr.responseText);
-          if(er.email)
-          {
-            errors.append("<li>Email: " + er.email  + "</li>");
-          }
-          if(er.name)
-          {
-            errors.append("<li>Name: " + er.name  + "</li>");
-          }
-          errors.append("</ul>");
-          $("#TB_title").hide();
-      },
-      success: function(data){
-          var response = data;
-          if(response.user) {
-            tb_remove();
-            $("#user_e").val("");
-            $("#user_n").val("");
-            var text = "Congratulations! The way you communicate just got upgraded.<br /> A simple 4 digit ShareMe is all you will ever need, check your email now.";
-            $("#notif_container").notify("create", {
-                title: title,
-                text: text,
-                icon: icon
-               },
-               {
-                click: function(e,instance){
-                instance.close();
-               }
-             });
-          }
-        }
-      });
-    });
+      registration(this);
+  });
 });
+
 function signIn(){
   var email = $('#signin-e').val();
   var password = $('#signin-n').val();
@@ -184,6 +113,89 @@ function signIn(){
     });
 }
 function social_connect(id) {
-$('#oauth_provider_'+id).attr('checked','checked');
-$('#oauth_form').submit();
+  $('#oauth_provider_'+id).attr('checked','checked');
+  $('#oauth_form').submit();
 }
+var registration = function(ele){
+  if($('#dd').val() == "update_user")
+  {
+    var ty = "/users/update_user_for_password";
+  }
+  else
+  {
+    var ty = "/users";
+  }
+  $.ajax({
+    type: "POST",
+    url: ty,
+    data: $(ele).parent().serialize(),
+    dataType: "json",
+    error:signup_error,
+    failure: function(data){
+      },
+    success: signup_success
+    });
+
+}
+  var signup_error = function(response){
+    var er = JSON.parse(response.responseText);
+    title = "Error";
+    text = "There are errors with the following fields:\n\n<ul>";
+    if(er.email)
+      text = text + "<li>Email: "  + er.email + "</li>";
+    if(er.name)
+      text = text + "<li>Name: "  + er.name + "</li>";
+    if(er.password)
+      text = text + "<li>Password: "  + er.password + "</li></ul>";
+    icon = "error";
+      $("#notif_container").notify("create", {
+          title: title,
+          text: text,
+          icon: icon
+         },
+         {
+          click: function(e,instance){
+          instance.close();
+         }
+       });
+//    $("#signup-btn").trigger('click');
+//    $("#get-share-code").width("320px");
+//    $("#get-share-code label").width("80px");
+//    $("#error-signup").html("");
+//    var errors = $("#error-signup");
+//    errors.append("<h2>There were errors while submitting the form:</h2><ul>");
+//    var er = JSON.parse(response.responseText);
+//  if(er.email)
+//  {
+//    errors.append("<li>Email: " + er.email  + "</li>");
+//  }
+//  if(er.name)
+//  {
+//    errors.append("<li>Name: " + er.name  + "</li>");
+//  }
+//  errors.append("</ul>");
+//  $("#TB_title").hide();
+//  if($("#user_email").val().length==0)
+//      $("#user_email").val($("#user_e").val());
+//  if($("#user_name").val().length==0)
+//      $("#user_name").val($("#user_n").val());
+  }
+  var signup_success = function(response){
+    if(response.user) {
+      tb_remove();
+      $("#user_e").val("");
+      $("#user_n").val("");
+      $("#user_p").val("");
+      var text = "Congratulations! The way you communicate just got upgraded.<br /> A simple 4 digit ShareMe is all you will ever need, check your email now.";
+      $("#notif_container").notify("create", {
+          title: title,
+          text: text,
+          icon: icon
+         },
+         {
+          click: function(e,instance){
+          instance.close();
+         }
+       });
+    }
+  }

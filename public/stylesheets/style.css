@@ -1086,3 +1086,300 @@ a.floated {
 .profile-edit-picture {
   margin: -25px 20px 20px 270px !important;
 }
+.social_APIs_widgets {
+
+    background-color: #FFFFFF;
+
+      border: 1px solid #DDDDDD;
+
+                float: left;
+
+                         margin: 10px 0;
+
+                                   padding-bottom: 20px;
+
+                                     position: relative;
+
+                                                 width: 735px;
+
+}
+
+.social_APIs_widgets h2 {
+
+    background: url("../images/white_dotted_pattrn.jpg") repeat scroll 0 0 transparent;
+
+                  float: left;
+
+                           height: 27px;
+
+                                     margin: 0;
+
+                                               padding: 0;
+
+                                                          text-align: center;
+
+                                                            width: 733px; color: #FFBA00;
+
+}
+
+
+
+.social_APIs_widgets h2 {
+
+    background: url("../images/white_dotted_pattrn.jpg") repeat scroll 0 0 transparent;
+
+                  border-bottom: 1px solid #DDDDDD;
+
+                    color: #FFBA00;
+
+                             float: left;
+
+                                      height: 17px;
+
+                                                margin: 0;
+
+                                                          padding: 5px 0;
+
+                                                                     text-align: center;
+
+                                                                       width: 735px;
+
+}
+
+a.connect_with_facebook_btn {
+
+    background: url("../images/connect_with_facebook.gif") no-repeat scroll 0 0 transparent;
+
+                  display: block;
+
+                             height: 21px;
+
+                                       position: absolute;
+
+                                                   right: 3px;
+
+                                                            top: 3px;
+
+                                                                   width: 169px;
+
+}
+
+a.connect_with_twitter_btn {
+
+    background: url("../images/signin_with_twitter.gif") no-repeat scroll 0 0 transparent;
+
+                  display: block;
+
+                             height: 21px;
+
+                                       position: absolute;
+
+                                                   right: 3px;
+
+                                                            top: 3px;
+
+                                                                   width: 131px;
+
+}
+
+a.connect_with_linkedin_btn {
+
+    background: url("../images/connect_with_linkedin.gif") no-repeat scroll 0 0 transparent;
+
+                  display: block;
+
+                             height: 21px;
+
+                                       position: absolute;
+
+                                                   right: 3px;
+
+                                                            top: 3px;
+
+                                                                   width: 140px;
+
+}
+
+.api_contents {
+
+    border-bottom: 1px dotted #DDDDDD;
+
+      float: left;
+
+               margin: 18px 20px 0;
+
+                         padding: 0;
+
+                                    width: 700px;
+
+}
+
+.api_contents img {
+
+    border: 1px solid #DDDDDD;
+
+              float: left;
+
+                       margin: 0 10px 0 0;
+
+                                 padding: 3px;
+
+}
+
+.api_contents h3 {
+
+    color: #DB9F06;
+
+             float: left;
+
+                      font-size: 17px;
+
+                        margin: 0 10px 0 0;
+
+}
+
+.api_contents p {
+
+    float: left;
+
+             font-size: 11px;
+
+               margin: 0 0 6px;
+
+                         width: 600px;
+
+}
+
+.api_links {
+
+    float: left;
+
+             font-size: 11px;
+
+               margin: 0 0 5px 63px;
+
+}
+
+
+
+.api_contents a.commentIco {
+
+    background: url("../images/commentIco.png") no-repeat scroll 0 5px transparent;
+
+                  float: left;
+
+                           height: 20px;
+
+                                     padding-left: 18px;
+
+
+
+}
+
+.api_contents a.likeIco {
+
+    background: url("../images/likeIco.png") no-repeat scroll 0 2px transparent;
+
+                  float: left;
+
+                           height: 20px;
+
+                                     margin: 0 15px 0 0;
+
+                                               padding-left: 18px;
+
+                                                
+
+}
+
+.api_contents a {
+
+    text-decoration: none;
+
+      
+
+}
+
+.api_contents a:hover {
+
+    text-decoration: underline;
+
+      
+
+}
+
+.api_contents span {
+
+    color: #DB9F06;
+
+}
+
+
+
+.api_contents small {
+
+    color: #ccc;
+
+            margin: 0 5px;
+
+                      
+
+}
+
+.api_contents a.twittAnchor {
+
+    color: #000;
+
+
+
+            
+
+}
+
+
+
+/*===================End facebook / twiter / linked in styling================*/
+
+.socialify-div {
+  background: url("../images/white_dotted_pattrn.jpg") repeat scroll 0 0 transparent;
+  border: 1px solid #DDDDDD;
+  float: left;
+  height: 50px;
+  margin: 10px 10px;
+  padding: 16px 0;
+  width: 715px;
+}
+.socialify-div li {
+  margin: 10px;
+}
+.parag {
+  margin: 5px;
+}
+a.social-fb-already {
+  background: url("../images/connect_with_socials_gray.gif") no-repeat scroll 0 0 transparent;
+  display: block;
+  float: left;
+  height: 20px;
+  width: 29px;
+}
+a.social-twitt-already {
+  background: url("../images/connect_with_socials_gray.gif") no-repeat scroll -29px 0 transparent;
+  display: block;
+  float: left;
+  height: 20px;
+  width: 29px;
+}
+a.social-linkedin-already {
+  background: url("../images/connect_with_socials_gray.gif") no-repeat scroll -58px 0 transparent;
+  display: block;
+  float: left;
+  height: 20px;
+  width: 29px;
+}
+a.social-myspace-already {
+  background: url("../images/connect_with_socials_gray.gif") no-repeat scroll -87px 0 transparent;
+  display: block;
+  float: left;
+  height: 20px;
+  width: 29px;
+}

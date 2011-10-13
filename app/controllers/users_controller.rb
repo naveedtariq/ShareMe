@@ -1,40 +1,8 @@
 class UsersController < ApplicationController
 #########	layout "application", :only => [:new, :create]
 	layout "default", :except=> [:new, :create]
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:update_user_for_password]
   before_filter :correct_redirect
-#	before_filter :require_no_user, :only => [:new, :create]
-#	before_filter :require_user, :only => [:user_home,:edit,:update]
-
-
-#	def new
-#		@user = User.new
-#	end
-
-#	def create
-#  	@user = User.new params[:user]
-#		@user.is_local = true
-#
-#		@user.save do |result|
-#			if result 
-#				@user.deliver_activation_instructions!
-#
-#				if request.xhr?
-#					flash[:notice] = "Congratulations! The way you communicate just got upgraded. A simple 4 digit ShareMe is all you will ever need, check your email now."
-#					render :json => {:result=>"success",:message =>"Congratulations! The way you communicate just got upgraded. A simple 4 digit ShareMe is all you will ever need, check your email now."}	
-#				else
-#					flash[:notice] = "Congratulations! The way you communicate just got upgraded. A simple 4 digit ShareMe is all you will ever need, check your email now."
-#					redirect_to :controller => "home", :action => "index"
-#				end
-#			else
-#			if request.xhr?
-#					render :json => {:result=>"failure",:message=>"There are errors with the following fields",:error=>@user.errors.full_messages}
-#				else
-#					render :action => :new
-#				end
-#			end
-#		end
-#	end
 
 	def user_home
 	end
@@ -53,9 +21,37 @@ class UsersController < ApplicationController
     render :action => :user_home
   end
 
+  def update_user_for_password
+#    user = User.find_by_email(params[0:user][:email]) if params[:user][:email]
+    token = UserToken.find_by_uid(session[:omniauth]["uid"]) if session[:omniauth] && session[:omniauth]["uid"]
+    if token
+      user = token.user if token.user
+      if user
+        user.update_attributes(params[:user])
+        user.profile.company_name = user.social_profile[:company_name] if user.social_profile
+        user.profile.save!
+        user.send_confirmation_instructions
+        return render :json=>{:user => user}
+      end
+    end
+  end
+
   def correct_redirect
     if session[:code].present?
       redirect_to search_path(session[:code]) and return
     end
   end
+
+  def socialify
+  end
+
+    def get_facebook_feed
+      fb_status_feed ||= JSON.parse(current_user.facebook_access_token.get("/me/statuses"))["data"]
+      return render  :json=>fb_status_feed
+    end
+    def get_tweets
+        tweets ||= JSON.parse(current_user.twitter_access_token.get("/1/statuses/user_timeline.json").body)
+      return render  :json=>tweets
+    end
+
 end

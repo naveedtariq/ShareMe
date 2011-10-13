@@ -1,11 +1,15 @@
 class ConfirmationsController < Devise::ConfirmationsController
 
   def show
-    @user = User.find_by_confirmation_token(params[:confirmation_token])
-    if !@user.present?
-      flash[:error] = "There is no user with this Confirmation Code or The user is already confirmed."
-      redirect_to :root and return
+    if params[:confirmation_token]
+      @user = User.find_by_confirmation_token(params[:confirmation_token])
+      if @user.present?
+        @confirmation_token = @user.confirmation_token
+      else
+        flash[:error] = "There is no user with this Confirmation Code or The user is already confirmed."
+      end
     end
+    render 'home/index'
   end
 
   def confirm_user

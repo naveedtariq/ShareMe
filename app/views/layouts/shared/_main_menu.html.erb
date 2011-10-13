@@ -1,6 +1,8 @@
 <div class="profile_section"> 
 <% if !current_user.profile.picture_file_name.nil? %>
   <% user_picturepath = current_user.profile.picture.url(:thumb) %>
+<% elsif !current_user.social_profile[:photo].blank? %>
+  <% user_picturepath = current_user.social_profile[:photo] %>
 <% else %>
   <% user_picturepath = "/images/generic_profile.jpg" %>
 <% end %>
@@ -30,7 +32,9 @@
     </li>
 		<li><a href="#">Groups</a></li>
 		<li><a href="#">Settings</a></li>
-		<li><a href="#">Socialify</a></li>
+		<li>
+      <%= link_to "Socialify", socialify_path ,{:title=>"Socialify",:class=>request.fullpath.eql?("/socialify") ? "activeLeft" : "normal"} %>
+    </li>
 	</ul>
 
 </div>

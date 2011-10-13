@@ -2,6 +2,18 @@
   <script type="text/javascript">
     
     $(document).ready(function() {
+        $('#connect_with_facebook').click(function() {
+          var left = (screen.width/2)-(600/2);
+          var top = (screen.height/2)-(300/2);
+          var w = window.open(this.href, 'Link Your Facebook Account', config='top='+top+', left='+left+',height=500, width=600, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, directories=no, status=no');
+          return false;
+         });
+        $('#connect_with_twitter').click(function() {
+          var left = (screen.width/2)-(600/2);
+          var top = (screen.height/2)-(300/2);
+          var w = window.open(this.href, 'Link Your Twitter Account', config='top='+top+', left='+left+',height=500, width=600, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, directories=no, status=no');
+          return false;
+         });
         <% unless flash.blank? %>
           var title = "";
           var text = "";
@@ -37,13 +49,6 @@
 		}
   </script>
 <% end %>
-<%# unless flash.blank? %>
-<!--  <div class="profile_featured_section">-->
-   <!-- <p> -->
-    <%#= flash[:error] || flash[:notice] %>
-    <!--</p>-->
-  <!--</div>-->
-<%# end %>
 <div class="profile_featured_section">
 	<h2><span>YOUR </span>CONTACT INFORMATION</h2>
 	<table width="600" border="0" id="userInfoTbl">
@@ -53,15 +58,15 @@
 		</tr>
 		<tr>
 			<td width="200"><strong>First Name</strong></td>
-			<td><%= current_user.f_name.blank? ? "" : current_user.f_name %></td>
+			<td><%= current_user.f_name.blank? ? current_user.social_profile[:first_name] : current_user.f_name %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Last Name</strong></td>
-			<td><%= current_user.l_name.blank? ? "" : current_user.l_name   %></td>
+			<td><%= current_user.l_name.blank? ? current_user.social_profile[:last_name] : current_user.l_name   %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Company Name</strong></td>
-			<td><%= (current_user.profile.blank? || current_user.profile.company_name.blank?)? "" : current_user.profile.company_name %></td>
+			<td><%= (current_user.profile.blank? || current_user.profile.company_name.blank?)? current_user.social_profile[:company_name] : current_user.profile.company_name %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Company Address</strong></td>
@@ -94,18 +99,42 @@
 
 
 <!--Facebook APIs Widget Section starts here--> 
+<div class="social_APIs_widgets">
+  <h2>YOUR <span>Facebook Feed</span></h2>
+
+    <% unless current_user.facebook %>
+      <div class="APIs_contents">
+        <p>You are currently not connected to Facebook.</p>
+      </div>
+    <% else %>
+      <%= render :partial => "facebook_feed" %>
+    <% end %>
+
+  <% unless current_user.facebook %>
+    <%= link_to "",user_omniauth_authorize_path(:facebook),:id=>"connect_with_facebook",:class=>"connect_with_facebook_btn",:title=>"facebook" %>
+  <% end %>
+</div>
+<!--Facebook APIs Widget Section ends here--> 
 
 
+<!--Twitter APIs Widget Section starts here--> 
+<div class="social_APIs_widgets">
+  <h2>YOUR <span>Twitter Tweets</span></h2>
+    <% unless current_user.twitter %>
+      <div class="APIs_contents">
+        <p>You are currently not connected to Twitter.</p>
+      </div>
+    <% else %>
+      <%= render :partial => "twitter_tweet" %>
+    <% end %>
 
-
-
-
-
+  <% unless current_user.twitter %>
+    <%= link_to "",user_omniauth_authorize_path(:twitter),:id=>"connect_with_twitter",:class=>"connect_with_twitter_btn",:title=>"twitter" %>
+  <% end %>
+</div>
+<!--Facebook APIs Widget Section ends here--> 
 
 <!--Linkedin APIs Widget Section starts here--> 
-
-
-
 <div class="social_APIs_widgets">
 
 <h2>YOUR <span>LinkedIN Feedback</span></h2>

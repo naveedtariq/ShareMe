@@ -1,7 +1,9 @@
 ShareMe::Application.routes.draw do
-  devise_for :users, :controllers => {:confirmations => "confirmations", :registrations => "registrations"} do
-    put "confirm_user", :to => "confirmations#confirm_user"
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks"} do
     get "logout", :to => "devise/sessions#destroy"
+    get 'omniauth_callbacks/oauth_data' => 'omniauth_callbacks#oauth_data'
+    get '/users/auth/:provider' => 'omniauth_callbacks#passthru'
+    get '/users/auth/:provider/callback' => 'omniauth_callbacks#aho'
   end
   resources :users
   resources :profiles
@@ -21,8 +23,10 @@ ShareMe::Application.routes.draw do
   match 'search/(:code)', :controller => 'contacts', :action => "search", :as => :search
   match 'import_contacts', :controller => 'contacts', :action => "import_contacts", :as => :import_contacts
   match 'show_basic_profile(:id)', :controller => 'contacts', :action => "show_basic_profile", :as => :show_basic_profile
-  match '/(:confirmation_token)', :controller => 'home', :action => 'index', :as => '/'
-
+  match '/get_facebook_feed', :controller => 'users', :action => 'get_facebook_feed', :as => :get_facebook_feed
+  match '/get_tweets', :controller => 'users', :action => 'get_tweets', :as => :get_tweets
+  match '/socialify', :controller => 'users', :action => 'socialify', :as => :socialify
+#  match '/users/update_user_for_password', :controller => 'users', :action => 'update_user_for_password'
 #	resources :user_sessions
 #	resources :users do
 # end
@@ -82,5 +86,5 @@ ShareMe::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+   match ':controller(/:action(/:id(.:format)))'
 end

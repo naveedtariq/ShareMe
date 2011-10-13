@@ -6,14 +6,10 @@ class ApplicationController < ActionController::Base
 # Redirect to user profile after sign in
 #
   def after_sign_in_path_for(resource_or_scope)
-    puts "i was hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-    puts shareme_code.inspect + "11111111111111111111111111111111111111111111111111111111111!"
     if shareme_code.present?
-      puts "inside ifffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
       "/search?code="+shareme_code
     else
-      puts "inside elseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-      contacts_path
+      user_home_path
     end
   end
 

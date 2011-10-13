@@ -1,10 +1,10 @@
 module Devise
   module Models
-    module Validatable
+    module Confirmable
 
-      def password_required?
-        false
-      end
+#      def send_confirmation_instructions
+#        ::Notifier.deliver_confirmation_instructions(self)
+#      end
 
     end
   end

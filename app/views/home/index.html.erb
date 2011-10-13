@@ -3,13 +3,21 @@
   <%= javascript_include_tag "home_page" %>
   <%= javascript_include_tag "jquery.carousel.min" %>
   <script type="text/javascript">
+
+    
     $(document).ready(function() {
-        var temp = $("#confirmation_token");
-        if (temp.val())
-        {
-          $("#confirmation_popup").trigger("click");
-          $('#TB_title').hide();
-        }
+      $('#connect_with_facebook').click(function() {
+        var left = (screen.width/2)-(600/2);
+        var top = (screen.height/2)-(300/2);
+        var w = window.open(this.href, 'Link Your Facebook Account', config='top='+top+', left='+left+',height=500, width=600, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, directories=no, status=no');
+        return false;
+       });
+      $('#connect_with_twitter').click(function() {
+        var left = (screen.width/2)-(600/2);
+        var top = (screen.height/2)-(300/2);
+        var w = window.open(this.href, 'Link Your Twitter Account', config='top='+top+', left='+left+',height=500, width=600, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, directories=no, status=no');
+        return false;
+       });
         // or with options (there are only 2)
         $('.digits').keyup(function (event) {
           event.preventDefault();
@@ -40,16 +48,7 @@
             text = "<%= flash[:error].to_s %>";
             icon = "error";
           <% end %>
-          $("#notif_container").notify("create", {
-              title: title,
-              text: text,
-              icon: icon
-             },
-             {
-              click: function(e,instance){
-              instance.close();
-             }
-           });
+            show_notification(title,text,icon);
           if(text == "You need to Sign In to perform this action.")
           {
             $('#sign-in-btn').trigger('click');
@@ -57,6 +56,18 @@
 
         <% end %>
      });
+var show_notification = function(title, text, icon){
+  $("#notif_container").notify("create", {
+      title: title,
+      text: text,
+      icon: icon
+     },
+     {
+      click: function(e,instance){
+      instance.close();
+     }
+   });
+}
   </script>
 <% end %>
 <div id="layout_wrapper">
@@ -65,6 +76,11 @@
 <% unless @confirmation_token.blank? %>
 <%= hidden_field_tag "confirmation_token",@confirmation_token %>
 <% end %>
+<% unless @twitter_registration.blank? %>
+<%= hidden_field_tag "twitter_registration",@confirmation_token %>
+<% end %>
+<%= @dd %>
+<%= hidden_field_tag "dd" %>
 <!--Featured Section starts here-->
 
 
@@ -188,6 +204,10 @@ get their ShareMe!
 <label>Name:</label>
 
 <input id="user_n" name="user[name]" type="text"  class="textField"/>
+
+<label>Password:</label>
+
+<input id="user_p" name="user[password]" type="password"  class="textField"/>
 <%#= f.text_field :name, :class=>"textField" %>
 
 <input id="register-btn" type="button" class="blackInputBtn register" value="Register">
@@ -198,7 +218,6 @@ get their ShareMe!
 
 <!--Get Share me code section ends here--> 
 
-<input id="confirmation_popup" alt="#TB_inline?height=200&width=472&inlineId=confirmation_div" class="thickbox" type="button" value="confirm" style="visibility:hidden;" />
 
 <!--Connect with section starts here-->
 
@@ -207,22 +226,12 @@ get their ShareMe!
 <ul class="connect_with_socials">
 
 <p>Or connect with</p>
-
-<%#= form_tag authenticate_path, {:id=> "oauth_form", :method => :post } do |uf| %>
-<%= hidden_field_tag "authentication_type","session" %>
-
 <li>
-<a class="social-fb tipsy" href="#" title="Facebook" onclick="social_connect('facebook');return false;"></a>
-
-<%#= hidden_field_tag "oauth_provider", "facebook" %>
-<input type="radio" value="facebook" name="oauth_provider" id="oauth_provider_facebook" style="display: none;">
+<%= link_to "",user_omniauth_authorize_path(:facebook),:id=>"connect_with_facebook",:class=>"social-fb tipsy",:title=>"facebook" %>
 </li>
-
-<li><a class="social-twitt tipsy" href="#" title="Twitter" onclick="social_connect('twitter');return false;"></a>
-
-<input type="radio" value="twitter" name="oauth_provider" id="oauth_provider_twitter" style="display: none;">
+<li>
+<%= link_to "",user_omniauth_authorize_path(:twitter),:id=>"connect_with_twitter",:class=>"social-twitt tipsy",:title=>"twitter" %>
 </li>
-
 <li>
 <a class="social-linkedin tipsy" href="#" title="LinkedIn" onclick="social_connect('linked_in');return false;"></a>
 <input type="radio" value="linked_in" name="oauth_provider" id="oauth_provider_linked_in" style="display: none;">
@@ -279,20 +288,14 @@ get their ShareMe!
   <div style="padding-left:35px;">
     <ul class="connect_with_socials">
       <p>Or connect with</p>
-      <%#= form_tag authenticate_path, {:id=> "oauth_form", :method => :post } do |uf| %>
-      <%= hidden_field_tag "authentication_type","session" %>
       <li>
         <a class="social-fb tipsy" href="#" title="Facebook" onclick="social_connect('facebook');return false;"></a>
-        <%#= hidden_field_tag "oauth_provider", "facebook" %>
-        <input type="radio" value="facebook" name="oauth_provider" id="oauth_provider_facebook" style="display: none;">
       </li>
       <li>
         <a class="social-twitt tipsy" href="#" title="Twitter" onclick="social_connect('twitter');return false;"></a>
-        <input type="radio" value="twitter" name="oauth_provider" id="oauth_provider_twitter" style="display: none;">
       </li>
       <li>
         <a class="social-linkedin tipsy" href="#" title="LinkedIn" onclick="social_connect('linked_in');return false;"></a>
-        <input type="radio" value="linked_in" name="oauth_provider" id="oauth_provider_linked_in" style="display: none;">
       </li>
     </ul>
     <%# end %>
@@ -301,5 +304,10 @@ get their ShareMe!
 <% unless @confirmation_token.blank? %>
   <div id="confirmation_div" class="get_share_code" style="display:none;">
     <%= render :partial=>"confirmations/main" %>
+  </div>
+<% end %>
+<% unless @twitter_registration.blank? %>
+  <div id="twitter_div" class="get_share_code" style="display:none;">
+    <%= render :partial=>"registrations/twitter" %>
   </div>
 <% end %>

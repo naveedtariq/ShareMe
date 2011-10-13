@@ -9,12 +9,12 @@ gem 'mysql'
 #gem 'authlogic'
 gem 'rails3-generators'
 #gem "oauth"
-#gem "oauth2","0.4.1"
+gem "oauth2","0.4.1"
 #gem "authlogic-connect"
 gem "recaptcha", :require => "recaptcha/rails"
 gem "paperclip", "~> 2.3"
 #gem "ruby-debug"
-gem "devise"
+gem "devise", "~>1.4.6"
 gem 'omniauth'
 
 # Use unicorn as the web server

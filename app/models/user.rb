@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   before_create :update_name
   before_create :link_profile
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :omniauthable,
           :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   validates :name, :presence => true
@@ -12,14 +12,22 @@ class User < ActiveRecord::Base
   has_many :contacts, :dependent => :destroy
   has_many :associated_contacts, :class_name => "Contact", :foreign_key => :associated_user_id
   has_one :profile, :dependent => :destroy
+  has_many :user_tokens
+
   accepts_nested_attributes_for :profile, :allow_destroy => true
 
+  include SocialProfile
 
   def password_match?
     self.errors[:password] << 'password not match' if password != password_confirmation
     self.errors[:password] << 'you must provide a password' if password.blank?
     password == password_confirmation and !password.blank?
   end
+
+  def confirmation_required?
+    (!self.encrypted_password.blank?) && super
+  end
+
 
 
 	# Generate random code
@@ -61,9 +69,48 @@ class User < ActiveRecord::Base
     if self.new_record?
       self.build_profile
       self.profile.phone = self.phone
+      self.profile.company_name = self.social_profile[:company_name] if self.social_profile
       self.profile.save!
     end
   end
 
+  def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
+    data = access_token['extra']['user_hash']
+    User.find_by_email(data["email"])
+  end
+
+  def self.find_for_twitter_oauth(access_token, signed_in_resource=nil)
+    data = access_token['extra']['user_hash']
+    User.create(:name => data['name'])
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session[:omniauth]
+        user.user_tokens.build(:provider => data['provider'], :uid => data['uid'])
+      end
+    end
+  end
+                                
+  def apply_omniauth(omniauth)
+    #add some info about the user
+    self.name = omniauth['user_info']['name'] if name.blank?
+    #self.nickname = omniauth['user_info']['nickname'] if nickname.blank?
+    
+    unless omniauth['credentials'].blank?
+#      user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+      user_tokens.build(:provider => omniauth['provider'], 
+                        :uid => omniauth['uid'],
+                        :token => omniauth['credentials']['token'], 
+                        :secret => omniauth['credentials']['secret'])
+      else
+        user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+      end
+      #self.confirm!# unless user.email.blank?
+  end
+                            
+  def password_required?
+    (user_tokens.empty? || !password.blank?) && super  
+  end
 
 end
