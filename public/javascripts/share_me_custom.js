@@ -23,7 +23,7 @@ jQuery(document).ready(function(){
 
 
  $(document).ready(function () {
-             $(".digits").alphanumeric();
+//             $(".digits").alphanumeric();
          });
 
 
@@ -34,7 +34,7 @@ jQuery(document).ready(function(){
                  $(this).keydown(function (e) {
                      var key = e.which || e.keyCode;
 
-                     if (!e.shiftKey && !e.altKey && !e.ctrlKey &&
+                     if (!e.shiftKey && !e.altKey && 
                      // numbers   
                          key >= 48 && key <= 57 ||
                      // Numeric keypad

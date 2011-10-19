@@ -23,11 +23,11 @@
     </tr>
     <tr>
     <td width="200"><strong>Email </strong></td>
-    <td><%= contact.email %></td>
+    <td><%= mail_to contact.email %></td>
     </tr>
     <tr>
     <td width="200"><strong>Phone Number </strong></td>
-    <td><%= contact.associated_user.profile.phone %></td>
+    <td><a href="callto:<%= contact.associated_user.profile.phone %>"><%= contact.associated_user.profile.phone%></a></td>
     </tr>
     <tr>
     <td width="200"> <strong>Fax</strong></td>

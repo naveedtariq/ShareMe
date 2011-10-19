@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-#########	layout "application", :only => [:new, :create]
 	layout "default", :except=> [:new, :create]
   before_filter :authenticate_user!, :except => [:update_user_for_password]
   before_filter :correct_redirect
@@ -22,16 +21,16 @@ class UsersController < ApplicationController
   end
 
   def update_user_for_password
-#    user = User.find_by_email(params[0:user][:email]) if params[:user][:email]
     token = UserToken.find_by_uid(session[:omniauth]["uid"]) if session[:omniauth] && session[:omniauth]["uid"]
     if token
       user = token.user if token.user
       if user
         user.update_attributes(params[:user])
-        user.profile.company_name = user.social_profile[:company_name] if user.social_profile
-        user.profile.save!
-        user.send_confirmation_instructions
-        return render :json=>{:user => user}
+        if user.valid?
+          user.send_confirmation_instructions
+          return render :json=>{:user => user}
+        end
+          return render :json=>{:user => user, :errors => user.errors}
       end
     end
   end
@@ -46,12 +45,20 @@ class UsersController < ApplicationController
   end
 
     def get_facebook_feed
-      fb_status_feed ||= JSON.parse(current_user.facebook_access_token.get("/me/statuses"))["data"]
-      return render  :json=>fb_status_feed
+#      fb_status_feed ||= JSON.parse(current_user.facebook_access_token.get("/me/home"))["data"]
+#      fb_status_feed ||= JSON.parse(current_user.facebook_access_token.get("/me/friends"))["data"]
+#      id = 668328382
+#      hay = current_user.facebook_access_token.post("/"+id.to_s+"/feed",:link=>"http://google.com",:message=>"hi")     
+#      return render :text=>hay
+#      return render  :json=>fb_status_feed
     end
     def get_tweets
-        tweets ||= JSON.parse(current_user.twitter_access_token.get("/1/statuses/user_timeline.json").body)
+        tweets ||= JSON.parse(current_user.twitter_access_token.get("/1/statuses/home_timeline.json").body)
       return render  :json=>tweets
+    end
+    def get_linkedin
+      linkedin ||= JSON.parse(current_user.linked_in_access_token.get("/v1/people/~/network/updates?type=SHAR", 'x-li-format' => 'json').body)
+      return render  :json=>linkedin.values
     end
 
 end

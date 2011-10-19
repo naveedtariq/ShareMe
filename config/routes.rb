@@ -2,6 +2,7 @@ ShareMe::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks"} do
     get "logout", :to => "devise/sessions#destroy"
     get 'omniauth_callbacks/oauth_data' => 'omniauth_callbacks#oauth_data'
+    post 'omniauth_callbacks/clear_omniauth' => 'omniauth_callbacks#clear_omniauth'
     get '/users/auth/:provider' => 'omniauth_callbacks#passthru'
     get '/users/auth/:provider/callback' => 'omniauth_callbacks#aho'
   end
@@ -22,9 +23,12 @@ ShareMe::Application.routes.draw do
 	match '/user_home', :controller => 'users', :action => 'user_home', :as => :user_home
   match 'search/(:code)', :controller => 'contacts', :action => "search", :as => :search
   match 'import_contacts', :controller => 'contacts', :action => "import_contacts", :as => :import_contacts
+  match 'get_facebook_friends', :controller => 'contacts', :action => "get_facebook_friends", :as => :get_facebook_friends
+  match 'post_on_wall', :controller => 'contacts', :action => "post_on_wall", :as => :post_on_wall
   match 'show_basic_profile(:id)', :controller => 'contacts', :action => "show_basic_profile", :as => :show_basic_profile
   match '/get_facebook_feed', :controller => 'users', :action => 'get_facebook_feed', :as => :get_facebook_feed
   match '/get_tweets', :controller => 'users', :action => 'get_tweets', :as => :get_tweets
+  match '/get_linkedin', :controller => 'users', :action => 'get_linkedin', :as => :get_linkedin
   match '/socialify', :controller => 'users', :action => 'socialify', :as => :socialify
 #  match '/users/update_user_for_password', :controller => 'users', :action => 'update_user_for_password'
 #	resources :user_sessions

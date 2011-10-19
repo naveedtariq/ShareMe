@@ -1,0 +1,51 @@
+<% content_for :top_js do %>
+<%= javascript_include_tag "jquery.reveal" %>
+<%= stylesheet_link_tag "reveal" %>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#import_from_facebook').click(function() {
+    $('.loader').show();
+    $.ajax({
+      type: "GET",
+      url: "/get_facebook_friends",
+      success: function (data){
+        $('.loader').hide();
+        $("#friends-div").html(data);
+        $("#friends-div").reveal();
+      }
+      });
+    return false;
+   });
+});
+</script>
+<% end %>
+<div class="profile_featured_section">
+	<h2><span>Import Your Contacts From Your </span>Social Profiles</h2>
+  <p class="parag">Get the contacts from the social networks that you have already connected with ShareMe.</p>
+
+  <ul class="socialify-div">
+    <li>
+      <% if current_user.authenticated_with("facebook") %>
+        <%= link_to "","",:id=>"import_from_facebook",:class=>"social-fb tipsy",:title=>"facebook" %>
+      <% else %>
+        <%= link_to "","#",:id=>"connect_with_facebook",:class=>"social-fb-already tipsy",:title=>"facebook" %>
+      <% end %>
+    </li>
+    <li>
+      <% if current_user.authenticated_with("twitter") %>
+        <%= link_to "","#",:id=>"connect_with_twitter",:class=>"social-twitt-already tipsy",:title=>"twitter" %>
+      <% else %>
+        <%= link_to "","#",:id=>"connect_with_twitter",:class=>"social-twitt-already tipsy",:title=>"twitter" %>
+        <%#= link_to "",user_omniauth_authorize_path(:twitter),:id=>"connect_with_twitter",:class=>"social-twitt tipsy",:title=>"twitter" %>
+      <% end %>
+    </li>
+    <li>
+        <%= link_to "","#",:id=>"connect_with_linkedin",:class=>"social-linkedin-already tipsy",:title=>"linkedin" %>
+    </li>
+    <%= link_to "Sign Out","/logout",{:class=>"moreBtnPlain"} %>
+    <br />
+    <div class="loader" style="display:none; margin: 14px 12px;"> <%= image_tag 'ajax-loader.gif' %></div>
+  </ul>
+</div>
+<div id="friends-div" class="reveal-modal">
+</div>

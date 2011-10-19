@@ -3,8 +3,6 @@
   <%= javascript_include_tag "home_page" %>
   <%= javascript_include_tag "jquery.carousel.min" %>
   <script type="text/javascript">
-
-    
     $(document).ready(function() {
       $('#connect_with_facebook').click(function() {
         var left = (screen.width/2)-(600/2);
@@ -16,6 +14,12 @@
         var left = (screen.width/2)-(600/2);
         var top = (screen.height/2)-(300/2);
         var w = window.open(this.href, 'Link Your Twitter Account', config='top='+top+', left='+left+',height=500, width=600, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, directories=no, status=no');
+        return false;
+       });
+      $('#connect_with_linked_in').click(function() {
+        var left = (screen.width/2)-(600/2);
+        var top = (screen.height/2)-(300/2);
+        var w = window.open(this.href, 'Link Your Linked In Account', config='top='+top+', left='+left+',height=500, width=600, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, directories=no, status=no');
         return false;
        });
         // or with options (there are only 2)
@@ -48,11 +52,11 @@
             text = "<%= flash[:error].to_s %>";
             icon = "error";
           <% end %>
-            show_notification(title,text,icon);
-          if(text == "You need to Sign In to perform this action.")
+//            show_notification(title,text,icon);
+/*          if(text == "You need to Sign In to perform this action.")
           {
             $('#sign-in-btn').trigger('click');
-          }
+          }*/
 
         <% end %>
      });
@@ -67,6 +71,12 @@ var show_notification = function(title, text, icon){
       instance.close();
      }
    });
+}
+var show_no_confirmation = function() {
+  hide_errors();
+  $('#simple-signup').hide();
+  $('#social-signup').hide();
+  $('#no-activation-signup').show();
 }
   </script>
 <% end %>
@@ -180,7 +190,6 @@ get their ShareMe!
 
 
 <div class="enter_share_code">
-
 <%= render :partial => "layouts/shared/search_form_index" %>
 
 </div>
@@ -191,70 +200,67 @@ get their ShareMe!
 
 <!--Get Share me code section starts here-->
 
-<div class="get_share_code">
+<div class="get_share_code" style="postion:relative;">
 
 <h2> get your <span>SHARE ME</span> CODE</h2>
-<%= form_tag registration_path(resource), {:id=> "signup_form", :method => :post } do |uf| %>
-<%#= form_for(resource, :as => resource_name, :url => registration_path(resource)) do |f| %>
-<label>E-mail:</label>
-
-<input id="user_e" name="user[email]" type="text" class="textField"/>
-<%#= f.email_field :email, :class=>"textField" %>
-
-<label>Name:</label>
-
-<input id="user_n" name="user[name]" type="text"  class="textField"/>
-
-<label>Password:</label>
-
-<input id="user_p" name="user[password]" type="password"  class="textField"/>
-<%#= f.text_field :name, :class=>"textField" %>
-
-<input id="register-btn" type="button" class="blackInputBtn register" value="Register">
-
-<% end %>
+  <div id="simple-signup">
+    <%= form_tag registration_path(resource), {:class => "theform", :id=> "signup_form", :method => :post } do |uf| %>
+    <div style="padding:5px 10px;">
+      <input placeholder ="Name" id="user_n" name="user[name]" type="text"  class="textField"/>
+      <input placeholder="E-mail" id="user_e" name="user[email]" type="text" class="textField"/>
+      <input placeholder="Password" id="user_p" name="user[password]" type="password"  class="textField"/>
+      <input id="register-btn" type="button" class="blackInputBtn register" value="Register">
+      <div class="loader" style="display:none; float: left; margin: 14px 0pt;"> <%= image_tag 'ajax-loader.gif' %></div>
+    </div>
+    <% end %>
+    <ul class="connect_with_socials">
+      <p>Or connect with</p>
+      <li>
+        <%= link_to "",user_omniauth_authorize_path(:facebook),:id=>"connect_with_facebook",:class=>"social-fb tipsy",:title=>"facebook" %>
+      </li>
+      <li>
+        <%= link_to "",user_omniauth_authorize_path(:twitter),:id=>"connect_with_twitter",:class=>"social-twitt tipsy",:title=>"twitter" %>
+      </li>
+      <li>
+        <%= link_to "",user_omniauth_authorize_path(:linked_in),:id=>"connect_with_linked_in",:class=>"social-linkedin tipsy",:title=>"linkedin" %>
+      </li>
+    </ul>
+  </div>
+  <div id="social-signup" style="display:none;">
+    <%= form_tag '/users/update_user_for_password', :class => "theform" do %>
+    <div style="padding:5px 10px;">
+      <div id="socialdiv" style="border: 1px solid rgb(204, 204, 204); float: left; width: 233px; margin: 0pt 0pt 5px; background: url(&quot;../images/input_pattern_yellow.jpg&quot;) repeat scroll 0pt 0pt transparent;">
+        <img class="social_image" src="" style="float: left; margin: 0pt 5px 0pt 0pt; padding: 3px;">
+        <h3 class="social_name" style="font-size: 15px; display: block; line-height: 45px;"></h3>
+      </div>
+      <input placeholder="E-mail" id="s_user_e" name="user[email]" type="text" class="textField"/>
+      <input placeholder="Password" id="user_p" name="user[password]" type="password"  class="textField"/>
+      <input onclick="show_simple_form();" id="cancel-btn" type="button" class="blackInputBtn register" value="Cancel">
+      <input id="social-register-btn" type="button" class="blackInputBtn register" value="Register">
+      <div class="loader" style="display:none; float: left; margin: 14px 0pt;"> <%= image_tag 'ajax-loader.gif' %></div>
+    </div>
+    <% end %>
+  </div>
+  <div id="success-signup" style="display:none;">
+    <p style="margin:10px;font-weight:bold;">
+      Congratulations! The way you communicate just got upgraded.<br /> A simple 4 digit ShareMe is all you will ever need, check your email now.
+    </p>
+    <input onclick="goto_simple_form();" id="cancel-btn" type="button" class="blackInputBtn register" value="Back">
+  </div>
+  <div id="no-activation-signup" style="display:none;">
+    <p style="margin:10px;font-weight:bold;">
+      You have already registered, You need to confirm your account before proceeding.
+    </p>
+    <input onclick="goto_simple_form();" id="cancel-btn" type="button" class="blackInputBtn register" value="Back">
+  </div>
 </div>
-<input id="signup-btn" alt="#TB_inline?height=179&width=293&inlineId=signup-form" class="thickbox" type="button" value="show" style="visibility:hidden" />
-
-<!--Get Share me code section ends here--> 
-
-
-<!--Connect with section starts here-->
-
-
-
-<ul class="connect_with_socials">
-
-<p>Or connect with</p>
-<li>
-<%= link_to "",user_omniauth_authorize_path(:facebook),:id=>"connect_with_facebook",:class=>"social-fb tipsy",:title=>"facebook" %>
-</li>
-<li>
-<%= link_to "",user_omniauth_authorize_path(:twitter),:id=>"connect_with_twitter",:class=>"social-twitt tipsy",:title=>"twitter" %>
-</li>
-<li>
-<a class="social-linkedin tipsy" href="#" title="LinkedIn" onclick="social_connect('linked_in');return false;"></a>
-<input type="radio" value="linked_in" name="oauth_provider" id="oauth_provider_linked_in" style="display: none;">
-</li>
-
-
-</ul>
-<%# end %>
-<!--Connect with section ends here--> 
+<!--<input id="signup-btn" alt="#TB_inline?height=179&width=293&inlineId=signup-form" class="thickbox" type="button" value="show" style="visibility:hidden" />-->
 
 
 <!--Already Member section starts here-->
-
-
-
 <div class="already_a_member">
-
-<p>Already a Member ?</p>
-
-<a id="sign-in-btn" href="/users/sign_in?height=142&width=299&modal=true" class="blackInputBtn thickbox">Sign In</a>  
-
-
-
+  <p>Already a Member ?</p>
+  <a id="sign-in-btn" href="/users/sign_in?height=142&width=299&modal=true" class="blackInputBtn thickbox">Sign In</a>  
 </div>
 
 <!--Already Member section ends here--> 
@@ -269,38 +275,6 @@ get their ShareMe!
 
 </div>
 
-<div id="signup-form" style="display:none;">
-  <div class="get_share_code" id="get-share-code">
-
-    <h2> get your <span>SHARE ME</span> CODE</h2>
-    <div id="error-signup"></div>
-    <br />
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource)) do |f| %>
-    <label>E-mail:</label>
-    <!--<input id="user_e" name="user[email]" type="text" class="textField"/>-->
-    <%= f.email_field :email, :class=>"textField" %>
-    <label>Name:</label>
-    <!--input id="user_n" name="user[name]" type="text"  class="textField"/>-->
-    <%= f.text_field :name, :class=>"textField" %>
-    <input id="register-btn1" type="button" class="blackInputBtn register" value="Register">
-    <% end %>
-  </div>
-  <div style="padding-left:35px;">
-    <ul class="connect_with_socials">
-      <p>Or connect with</p>
-      <li>
-        <a class="social-fb tipsy" href="#" title="Facebook" onclick="social_connect('facebook');return false;"></a>
-      </li>
-      <li>
-        <a class="social-twitt tipsy" href="#" title="Twitter" onclick="social_connect('twitter');return false;"></a>
-      </li>
-      <li>
-        <a class="social-linkedin tipsy" href="#" title="LinkedIn" onclick="social_connect('linked_in');return false;"></a>
-      </li>
-    </ul>
-    <%# end %>
-  </div>
-</div>
 <% unless @confirmation_token.blank? %>
   <div id="confirmation_div" class="get_share_code" style="display:none;">
     <%= render :partial=>"confirmations/main" %>

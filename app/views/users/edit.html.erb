@@ -1,3 +1,35 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        <% unless flash.blank? %>
+          var title = "";
+          var text = "";
+          var icon = "";
+          <% if !flash[:success] .blank? %>
+            title = "Success!";
+            text = "<%= flash[:success].to_s %>";
+            icon = "success";
+          <% elsif !flash[:notice].blank? %>
+            title = "Warning!";
+            text = "<%= flash[:notice].to_s %>";
+            icon = "warning";
+          <% elsif !flash[:error].blank? %>
+            title = "Error!";
+            text = "<%= flash[:error].to_s %>";
+            icon = "error";
+          <% end %>
+          $("#notif_container").notify("create", {
+              title: title,
+              text: text,
+              icon: icon
+             },
+             {
+              click: function(e,instance){
+              instance.close();
+             }
+           });
+        <% end %>
+     });
+</script>
 <div class="profile_featured_section_full">
 <%= form_for @user,:html=> {:multipart => true} do |u| %>
 	<h2><span>YOUR </span>CONTACT INFORMATION</h2>

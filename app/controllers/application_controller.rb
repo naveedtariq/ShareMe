@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource_or_scope)
     if shareme_code.present?
       "/search?code="+shareme_code
+    elsif current_user.sign_in_count == 1
+      flash[:success] = "Successfully Signed in. Complete Your Profile to Proceed."
+      edit_user_path(current_user)
     else
       user_home_path
     end

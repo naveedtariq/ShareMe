@@ -27,20 +27,31 @@ module SocialProfile
         access_token = OAuth::AccessToken.from_hash(consumer,{:oauth_token=>token,:oauth_token_secret=>secret})
       end
     end
-#    def get_facebook_feed
-#      fb_status_feed ||= JSON.parse(current_user.facebook_access_token.get("/me/statuses"))["data"]
-#      return render  :json=>fb_status_feed
-#    end
+
+    def linked_in_access_token
+      if self.user_tokens.find_by_provider("linked_in")
+        token = self.user_tokens.find_by_provider("linked_in").token
+        secret = self.user_tokens.find_by_provider("linked_in").secret
+        consumer = OAuth::Consumer.new(Devise.omniauth_configs[:linked_in].args[0],Devise.omniauth_configs[:linked_in].args[1],:site => 'http://api.linkedin.com')
+        access_token = OAuth::AccessToken.from_hash(consumer,{:oauth_token=>token,:oauth_token_secret=>secret})
+      end
+    end
 
 		def fb_status_feed
       if token = facebook_access_token
-        @fb_status_feed ||= JSON.parse(token.get("/me/statuses"))["data"]
+        @fb_status_feed ||= JSON.parse(token.get("/me/home?limit=10"))["data"]
       end
 		end
 
 		def tweets
       if token = twitter_access_token
-        @tweets ||= JSON.parse(token.get("/1/statuses/user_timeline.json").body)
+        @tweets ||= JSON.parse(token.get("/1/statuses/home_timeline.json?count=10").body)
+      end
+		end
+
+		def linkedin_social_stream
+      if token = linked_in_access_token
+        @li_Stream||= JSON.parse(token.get("/v1/people/~/network/updates?type=SHAR", 'x-li-format' => 'json').body)["values"]
       end
 		end
 
@@ -57,9 +68,10 @@ module SocialProfile
     end
 
 		def linked_in
-#			if token = authenticated_with?(:linked_in)
-#				@linked_in ||= JSON.parse(token.get('http://api.linkedin.com/v1/people/~:(first-name,last-name,headline,picture-url)?format=json'))
-#			end
+      if token = linked_in_access_token
+        fields = ['id','first-name', 'last-name', 'picture-url', 'headline', 'public-profile-url','location:(name)'].join(',')
+        @linked_in ||= JSON.parse(token.get("/v1/people/~:(#{fields})", 'x-li-format' => 'json').body)
+      end
 		end
 
 		def myspace 
@@ -72,6 +84,20 @@ module SocialProfile
 #      @google ||= "" # todo
     end
 
+    def get_facebook_friends_list
+      if authenticated_with("facebook")
+        fb_friends ||= JSON.parse(self.facebook_access_token.get("/me/friends"))["data"]
+        return fb_friends
+      end
+    end
+
+    def post_on_fb(id)
+      begin
+        hay = self.facebook_access_token.post("/"+id.to_s+"/feed",:link=>"http://localhost.com",:message=>"I am using this awesome website!")     
+      rescue => msg
+        puts "Exception occurred! " + msg.inspect
+      end
+    end
 
 
     
@@ -106,10 +132,16 @@ module SocialProfile
           }
 				elsif linked_in
 					{
-						:id 		=> linked_in["id"],
-						:name		=> linked_in["name"],
-            :photo  => "/images/icons/google.png",
-						:title	=> "linked_in"
+            :id     => linked_in["id"],
+            :name   => linked_in["firstName"] + " " + linked_in["lastName"],
+						:first_name => linked_in["firstName"],
+            :last_name   => linked_in["lastName"],
+            :photo  => linked_in["pictureUrl"],
+            :link   => linked_in["publicProfileUrl"],
+						:company_name => linked_in["headline"],
+            :title  => "LinkedIn",
+						:location => linked_in["location"]["name"],
+						:all => linked_in
 					}
 				elsif myspace 
 					{

@@ -5,13 +5,14 @@
     self.close();
   }
   else if(!<%=@activation%>){
-    window.opener.show_notification('Error','<%=flash[:error]%>','error');
+  //  window.opener.show_notification('Error','<%=flash[:error]%>','error');
+    window.opener.show_no_confirmation();
     self.close();
   }
   else{
     if(<%= @dd%>)
     {
-      window.opener.form_type("update_user");
+      window.opener.show_social_form();
     }
     window.opener.oauth_data("facebook");
     self.close();

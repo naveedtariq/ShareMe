@@ -55,7 +55,7 @@ class ContactsController < ApplicationController
         session[:code] = params[:code]
         session[:connect_user_id] = @user.id
         unless current_user
-          flash[:error] = "You need to Sign In to perform this action."
+          flash[:error] = "'#{( params[:code] || session[:code]).upcase}' is a registered user. Please Register or Sign In to view the details of the User."
           redirect_to "/" and return
         end
         current_user.add_contact(@user, true)
@@ -63,7 +63,7 @@ class ContactsController < ApplicationController
         flash[:success] = "User With ShareMe Code \'#{@user.code}\' Found And Is Successfully Added To Your Contact List!" 
         redirect_to contacts_path and return
       else
-        flash[:error] = "There is no User with \'" +( params[:code] || session[:code]) + "\' ShareMe Code."
+        flash[:error] = "'" + ( params[:code] || session[:code]).upcase + "' is not registered. Please try again."
         session[:code] = session[:connect_user_id] = nil
         redirect_to current_user.blank? ? root_path : user_home_path
       end
@@ -74,7 +74,19 @@ class ContactsController < ApplicationController
   end
 
   def import_contacts
-    
+  end
+
+  def post_on_wall
+    ids = params["id"].split(",")
+    ids.each do |id|
+     current_user.post_on_fb(id) 
+    end
+    return render :json=>{:success=>true}
+  end
+
+  def get_facebook_friends
+    @friends = current_user.get_facebook_friends_list
+    render :partial => "friend_box" and return
   end
 
   def show_basic_profile

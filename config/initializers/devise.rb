@@ -213,8 +213,9 @@ Devise.setup do |config|
 #  config.encryptor = :authlogic_sha512
   config.http_authenticatable_on_xhr = false
   config.navigational_formats = [:html, :js]
-  config.omniauth :facebook, "153591991400582", "c4c201af4e9eef97a896c9f0668b128e", :scope => 'email, offline_access, user_work_history, user_location, user_hometown, read_stream'
+  config.omniauth :facebook, "153591991400582", "c4c201af4e9eef97a896c9f0668b128e", :scope => 'publish_stream,email, offline_access, user_work_history, user_location, user_hometown, read_stream'
   config.omniauth :twitter, "SuKEZVzJo2ZJQspy9HdbHQ", "wBCcsXflIVw5WpobMO80463PdF1YSuayuhd54UO7zQs"
+  config.omniauth :linked_in, "k8w8r3mnkh4h", "2olAjWaINpaVDZnP"
 
   class Hash
     def recursive_find_by_key(key)

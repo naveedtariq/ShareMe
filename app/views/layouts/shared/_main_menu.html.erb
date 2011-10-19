@@ -25,7 +25,9 @@
           <li>
 			      <%= link_to "Add Contact", new_contact_path,{:title=>"Add Contact",:class=>request.fullpath.eql?("/contacts/new") ? "activeLeft" : "normal"} %>
           </li>
-          <li><a href="#">Import Contacts</a></li>
+          <li>
+			      <%= link_to "Import Contacts", import_contacts_path,{:title=>"Imprt Contacts",:class=>request.fullpath.eql?("/import_contacts") ? "activeLeft" : "normal"} %>
+          </li>
           <li><a href="#">Upload Contacts</a></li>
         </ul>
       <% end %>

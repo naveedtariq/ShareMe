@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
   has_many :contacts, :dependent => :destroy
   has_many :associated_contacts, :class_name => "Contact", :foreign_key => :associated_user_id
   has_one :profile, :dependent => :destroy
-  has_many :user_tokens
+  has_many :user_tokens, :dependent => :destroy
+
 
   accepts_nested_attributes_for :profile, :allow_destroy => true
 
@@ -27,7 +28,6 @@ class User < ActiveRecord::Base
   def confirmation_required?
     (!self.encrypted_password.blank?) && super
   end
-
 
 
 	# Generate random code
@@ -98,19 +98,19 @@ class User < ActiveRecord::Base
     #self.nickname = omniauth['user_info']['nickname'] if nickname.blank?
     
     unless omniauth['credentials'].blank?
-#      user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+        puts "4444444444444444444444444444444444444444444444444444"
       user_tokens.build(:provider => omniauth['provider'], 
                         :uid => omniauth['uid'],
                         :token => omniauth['credentials']['token'], 
                         :secret => omniauth['credentials']['secret'])
       else
+        puts "5555555555555555555555555555555555555555555555555555"
         user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
       end
-      #self.confirm!# unless user.email.blank?
   end
                             
   def password_required?
-    (user_tokens.empty? || !password.blank?) && super  
+    (new_record?) ? (user_tokens.empty?) : password.blank?
   end
 
 end

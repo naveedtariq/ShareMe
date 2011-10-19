@@ -1,0 +1,11 @@
+<% current_user.linkedin_social_stream.each do |li_stream| %>
+  <div class="api_contents"> 
+  <img src="<%= li_stream['updateContent']['person']['pictureUrl'] %>" width="52" height="52" />
+    <h3><%= li_stream["updateContent"]["person"]["firstName"] %>&nbsp;<%= li_stream["updateContent"]["person"]["lastName"] %></h3>
+    <p><%= li_stream["updateContent"]["person"]["currentShare"]["comment"] || li_stream["updateContent"]["person"]["currentShare"]["content"]["description"]  %></p>
+    <div class="api_links"> 
+      <a class="likeIco">Like <span>(<%= (li_stream["isLiked"]?li_stream["likes"]["_total"]:0 )%>)</span></a> 
+      <a class="commentIco">Comments<span>(<%= (li_stream["updateComments"]["_total"])%>)</span></a> 
+    </div>
+  </div>
+<% end %>

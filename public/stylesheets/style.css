@@ -305,6 +305,7 @@ input.yellowInputBtn {
   padding: 0 10px;
   text-transform: uppercase;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 a.blackInputBtn {
   background: url("../images/black_btn_bg.jpg") repeat-x scroll 0 0 transparent;
@@ -509,7 +510,7 @@ span{
 .enter_share_code {
   background-color: #000000;
   float: left;
-  height: 78px;
+/*  height: 78px;*/
   margin: 0 0 10px;
   width: 253px;
 }
@@ -562,12 +563,12 @@ span{
   background: url("../images/input_pattern_yellow.jpg") repeat scroll 0 0 transparent;
   border: medium none;
   float: left;
-  font-size: 1em;
-  height: 25px;
+  font-size: 1.25em;
+  height: 40px;
   line-height: 25px;
   margin: 2px 0;
   padding: 0 5px;
-  width: 173px;
+  width: 225px;
 }
 form#shareCode {
 	float: left;
@@ -597,9 +598,9 @@ input.digits {
 
 }
 .already_a_member {
-	  float: left;
+	float: left;
   width: 253px;
-
+  margin-top: 5px;
 }
 .already_a_member p {
   float: left;
@@ -651,9 +652,9 @@ ul.connect_with_socials {
   border: 1px solid #DDDDDD;
   float: left;
   height: 27px;
-  margin: 10px 0;
+  margin: 10px 5px;
   padding: 16px 0;
-  width: 252px;
+  width: 240px;
 }
 ul.connect_with_socials p {
   float: left;
@@ -1383,3 +1384,68 @@ a.social-myspace-already {
   height: 20px;
   width: 29px;
 }
+#contact-signout {
+  color: white;
+  background: none;
+  float: right;
+  height: 20px;
+  line-height: 23px;
+  margin: 0;
+  padding: 0;
+  width: 55px;
+}
+#import-contacts h6 {
+  font-weight: bold;
+  text-shadow: 1px 1px 1px #ffffff;
+  font-size: 16px;
+}
+#import-contacts label#select-all-contacts {
+  font-size: 14px;
+  margin: 10px 0;
+}
+#import-contacts #scroll-list {
+  overflow-y: scroll;
+  height: 300px;
+  background: #ffffff;
+  margin: 15px 0;
+  border: 1px solid #cccccc;
+}
+#import-contacts ul { padding: 10px; }
+#import-contacts ul:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+#import-contacts li {
+  padding: 5px 5px 5px 65px;
+  width: 90px;
+  float: left;
+  display: block;
+  position: relative;
+  height: 54px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: #ffffff;
+}
+#import-contacts li img {
+  width: 50px;
+  padding: 1px;
+  border: 1px solid #dddddd;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: #ffffff;
+}
+#import-contacts li label { margin-top: 20px; }
+#import-contacts li:hover { background: #f4f4f4; }
+#import-contacts .submit {
+  background: url(/images/buttons/import-contacts.png) no-repeat top left;
+  width: 130px;
+  height: 30px;
+  position: relative;
+  left: -2px;
+}
+#import-contacts .submit:hover { background-position: bottom left; }

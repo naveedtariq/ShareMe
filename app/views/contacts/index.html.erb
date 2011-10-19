@@ -69,6 +69,7 @@
   <% else %>
     <div style="height: 25px; font-size: 20px; text-align: center; line-height: 25px;">Currently You Have No Contacts!!!</div>
   <% end %>
+	<%= link_to "Sign Out","/logout",{:id=>"contact-signout",:class=>"moreBtnPlain"} %>
 </div>
 <div id="basic_profile_info">
   <% unless @contact.blank? %>

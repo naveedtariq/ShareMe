@@ -1,9 +1,15 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
+  def clear_omniauth
+    token = UserToken.find_by_provider_and_uid(session[:omniauth]['provider'], session[:omniauth]['uid'])
+    token.user.destroy();
+    session[:omniauth] = nil
+    render :json => "success"
+  end
+
  def method_missing(provider) 
     provider = params[:provider]
     omniauth = env["omniauth.auth"]
-#    return render :json => omniauth
 
     if current_user #or User.find_by_email(auth.recursive_find_by_key("email"))
       user_token = current_user.user_tokens.find_or_create_by_provider_and_uid_and_token(omniauth['provider'], omniauth['uid'],omniauth['credentials']['token'])
@@ -14,7 +20,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @activation = true
       @dd = false
       render :action => "facebook" and return
-#      redirect_to user_home_path
     else
       authentication = UserToken.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
       if authentication
@@ -24,6 +29,13 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
           @activation = true
           @dd = false
           sign_in(:user,authentication.user)
+          render :action => "facebook" and return
+        elsif authentication.user.encrypted_password.blank?
+          @already = false
+          @activation = true
+          @dd = true
+          session[:omniauth] = omniauth.except('extra')
+          flash[:error] = "Please Provide Password to complete the registration!"
           render :action => "facebook" and return
         else
           @already = false
@@ -35,15 +47,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       else
         #create a new user
         unless omniauth.recursive_find_by_key("email").blank?
-          user = User.find_or_initialize_by_email(:email => omniauth.recursive_find_by_key("email"))
+          user = User.find_or_initialize_by_email(omniauth.recursive_find_by_key("email"))
         else
           user = User.new
         end
         user.apply_omniauth(omniauth)
-        #user.confirm! #unless user.email.blank?
-        puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
         if user.save(:validate => false)
-          puts "########################################################"
           session[:omniauth] = omniauth.except('extra')
           @already = false
           @activation = true

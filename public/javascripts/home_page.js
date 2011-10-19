@@ -6,9 +6,49 @@ $.fn.serializeObject = function() {
   
   return values;
 }  
-var form_type = function(param) {
-  $('#dd').val(param);
+
+var goto_simple_form = function() {
+  hide_errors();
+  $('#social-signup').hide();
+  $('#simple-signup').show();
+  $('#success-signup').hide();
+  $('#no-activation-signup').hide();
 }
+var show_simple_form = function(){
+  goto_simple_form();
+  $.ajax({
+    type: "POST",
+    url: "omniauth_callbacks/clear_omniauth",
+    success: function(){
+      alert("kar ditta pai jan");
+      }
+    });
+
+}
+var show_social_form= function() {
+  hide_errors();
+  $('#simple-signup').hide();
+  $('#social-signup').show();
+}
+
+var show_confirm_div= function() {
+  hide_errors();
+  $('#simple-signup').hide();
+  $('#social-signup').hide();
+  $('#no-activation-signup').show();
+}
+
+var show_success_div = function() {
+  hide_errors();
+  $('#simple-signup').hide();
+  $('#social-signup').hide();
+  $('#success-signup').show();
+}
+
+var hide_errors = function() {
+    $('.er_span').remove();
+}
+
 var oauth_data = function(type) {
   $.ajax({
     type: "GET",
@@ -20,14 +60,14 @@ var oauth_data = function(type) {
     });
 }
 var populate_form = function(data){
-  $('#user_e').val(data['email']);
-  $('#user_n').val(data['name']);
+  $('#s_user_e').val(data['email']);
+  $('.social_name').html(data['name']);
+  $('.social_image').attr("src",data["image"]);
 }
 var title = "Success!";
 var icon = "success";
 
 $(document).ready(function() {
-
   $('#confirm_submit').click(function () {
     $('#user_confirmation_token').val($('#confirmation_token').val());
     $.ajax({
@@ -66,10 +106,12 @@ $(document).ready(function() {
 
   
   $('#register-btn').click(function () {
+      $('.loader').show();
       registration(this);
   });
 
-  $('#register-btn1').click(function () {
+  $('#social-register-btn').click(function () {
+      $('#social-signup .loader').show();
       registration(this);
   });
 });
@@ -112,90 +154,51 @@ function signIn(){
       }
     });
 }
-function social_connect(id) {
-  $('#oauth_provider_'+id).attr('checked','checked');
-  $('#oauth_form').submit();
-}
+
 var registration = function(ele){
-  if($('#dd').val() == "update_user")
-  {
-    var ty = "/users/update_user_for_password";
-  }
-  else
-  {
-    var ty = "/users";
-  }
+  form = $(ele).parents(".theform");
+  url = form.attr("action");
   $.ajax({
     type: "POST",
-    url: ty,
-    data: $(ele).parent().serialize(),
+    url: url,
+    data: form.serialize(),
     dataType: "json",
     error:signup_error,
+    complete: function(){
+      $(".loader").hide();
+    },
     failure: function(data){
       },
     success: signup_success
     });
 
 }
+  var show_form_errors = function(er, type){
+    var a = 10;
+    var b = 20;
+    var c = $(this).reg
+    
+    $('.er_span').remove();
+    $.each(er, function(k, v){
+        el_name = "user["+k+"]";
+        console.log(el_name);
+        $('#'+type+' input[name*="'+el_name+'"]').after('<span class="er_span" style=\'display:block;color:red;\'>'+k+' '+v+'</span>');
+       }); 
+  }
   var signup_error = function(response){
     var er = JSON.parse(response.responseText);
-    title = "Error";
-    text = "There are errors with the following fields:\n\n<ul>";
-    if(er.email)
-      text = text + "<li>Email: "  + er.email + "</li>";
-    if(er.name)
-      text = text + "<li>Name: "  + er.name + "</li>";
-    if(er.password)
-      text = text + "<li>Password: "  + er.password + "</li></ul>";
-    icon = "error";
-      $("#notif_container").notify("create", {
-          title: title,
-          text: text,
-          icon: icon
-         },
-         {
-          click: function(e,instance){
-          instance.close();
-         }
-       });
-//    $("#signup-btn").trigger('click');
-//    $("#get-share-code").width("320px");
-//    $("#get-share-code label").width("80px");
-//    $("#error-signup").html("");
-//    var errors = $("#error-signup");
-//    errors.append("<h2>There were errors while submitting the form:</h2><ul>");
-//    var er = JSON.parse(response.responseText);
-//  if(er.email)
-//  {
-//    errors.append("<li>Email: " + er.email  + "</li>");
-//  }
-//  if(er.name)
-//  {
-//    errors.append("<li>Name: " + er.name  + "</li>");
-//  }
-//  errors.append("</ul>");
-//  $("#TB_title").hide();
-//  if($("#user_email").val().length==0)
-//      $("#user_email").val($("#user_e").val());
-//  if($("#user_name").val().length==0)
-//      $("#user_name").val($("#user_n").val());
+    show_form_errors(er, 'simple-signup');
   }
   var signup_success = function(response){
+    if(response.errors){
+      show_form_errors(response.errors, 'social-signup'); 
+      return false;
+    }
     if(response.user) {
       tb_remove();
       $("#user_e").val("");
       $("#user_n").val("");
       $("#user_p").val("");
-      var text = "Congratulations! The way you communicate just got upgraded.<br /> A simple 4 digit ShareMe is all you will ever need, check your email now.";
-      $("#notif_container").notify("create", {
-          title: title,
-          text: text,
-          icon: icon
-         },
-         {
-          click: function(e,instance){
-          instance.close();
-         }
-       });
+      show_success_div();
     }
   }

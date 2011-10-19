@@ -14,6 +14,12 @@
           var w = window.open(this.href, 'Link Your Twitter Account', config='top='+top+', left='+left+',height=500, width=600, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, directories=no, status=no');
           return false;
          });
+        $('#connect_with_linked_in').click(function() {
+          var left = (screen.width/2)-(600/2);
+          var top = (screen.height/2)-(300/2);
+          var w = window.open(this.href, 'Link Your Linked In Account', config='top='+top+', left='+left+',height=500, width=600, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, directories=no, status=no');
+          return false;
+         });
         <% unless flash.blank? %>
           var title = "";
           var text = "";
@@ -43,10 +49,6 @@
            });
         <% end %>
      });
-		function social_connect(id) {
-			$('#oauth_provider_'+id).attr('checked','checked');
-			$('#oauth_form').submit();
-		}
   </script>
 <% end %>
 <div class="profile_featured_section">
@@ -54,7 +56,7 @@
 	<table width="600" border="0" id="userInfoTbl">
 		<tr>
 			<td width="200"><strong>ShareMe Code</strong></td>
-			<td><%= current_user.code %></td>
+			<td><strong style="font-size: 20px;line-height: 20px;"><%= current_user.code %></strong></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>First Name</strong></td>
@@ -136,17 +138,18 @@
 
 <!--Linkedin APIs Widget Section starts here--> 
 <div class="social_APIs_widgets">
+  <h2>YOUR <span>LinkedIn Social Stream</span></h2>
+    <% unless current_user.linked_in %>
+      <div class="APIs_contents">
+        <p>You are currently not connected to Twitter.</p>
+      </div>
+    <% else %>
+      <%= render :partial => "linked_in_social_stream" %>
+    <% end %>
 
-<h2>YOUR <span>LinkedIN Feedback</span></h2>
-
-<div class="APIs_contents">
-
-<p>You are currently not connected to Facebook.</p>
-
-</div>
-
-<a href="#" class="connect_with_linkedin_btn"></a></td>
-
+  <% unless current_user.linked_in %>
+    <%= link_to "",user_omniauth_authorize_path(:linked_in),:id=>"connect_with_linked_in",:class=>"connect_with_linkedin_btn",:title=>"linkedin" %>
+  <% end %>
 
 
 </div>
