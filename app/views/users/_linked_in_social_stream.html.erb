@@ -5,7 +5,9 @@
     <p><%= li_stream["updateContent"]["person"]["currentShare"]["comment"] || li_stream["updateContent"]["person"]["currentShare"]["content"]["description"]  %></p>
     <div class="api_links"> 
       <a class="likeIco">Like <span>(<%= (li_stream["isLiked"]?li_stream["likes"]["_total"]:0 )%>)</span></a> 
-      <a class="commentIco">Comments<span>(<%= (li_stream["updateComments"]["_total"])%>)</span></a> 
+      <% if li_stream["updateComments"] %>
+        <a class="commentIco">Comments<span>(<%= (li_stream["updateComments"]["_total"])%>)</span></a> 
+      <% end %>
     </div>
   </div>
 <% end %>
