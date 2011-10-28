@@ -3,19 +3,19 @@
   <table width="600" border="0" id="userInfoTbl">
     <tr>
       <td width="200"><strong>First Name</strong></td>
-      <td><%= contact.f_name %></td>
+      <td><%= contact.associated_user.f_name %></td>
     </tr>
     <tr>
       <td width="200"><strong>Last Name</strong></td>
-      <td><%= contact.l_name %></td>
+      <td><%= contact.associated_user.l_name %></td>
     </tr>
     <tr>
     <td width="200"><strong>Company Name</strong></td>
-    <td><%= contact.profile.company_name %></td>
+    <td><%= contact.associated_user.profile.company_name %></td>
     </tr>
     <tr>
     <td width="200"><strong>Company Address</strong></td>
-    <td><%= contact.profile.company_address %></td>
+    <td><%= contact.associated_user.profile.company_address %></td>
     </tr>
     <tr>
     <td width="200">&nbsp;</td>
@@ -27,11 +27,11 @@
     </tr>
     <tr>
     <td width="200"><strong>Phone Number </strong></td>
-    <td><a href="callto:<%= contact.profile.phone %>"><%= contact.profile.phone%></a></td>
+    <td><a href="callto:<%= contact.associated_user.profile.phone %>"><%= contact.associated_user.profile.phone%></a></td>
     </tr>
     <tr>
     <td width="200"> <strong>Fax</strong></td>
-    <td><%= contact.profile.fax %></td>
+    <td><%= contact.associated_user.profile.fax %></td>
     </tr>
   </table> 
 </div>

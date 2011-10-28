@@ -5,6 +5,7 @@ class ContactsController < ApplicationController
 
   def index
     @contacts = current_user.contacts
+    
     if params[:selected]
       @contact = current_user.contacts.find(params[:selected])
     else
@@ -17,13 +18,12 @@ class ContactsController < ApplicationController
   end
 
   def new
-
   end
 
   def create
     if verify_recaptcha
       if params[:shareme_code].present? && (@user = User.find_by_code(params[:shareme_code]))
-        @contact = current_user.add_or_update_contact(@user)
+        @contact = current_user.add_or_update_contact(@user.id)
         @contacts = current_user.contacts
         flash[:success] = "User \'#{@user.code}\' Is Successfully Added To Your Contact List!"
         redirect_to contacts_path
@@ -40,7 +40,7 @@ class ContactsController < ApplicationController
   end
 
   def destroy
-    if (@link = current_user.links.find(:first, :contact_id =>params[:id])) && @link.destroy
+    if (@link = current_user.links.where(:contact_id => params[:id]).first) && @link.destroy
       flash.notice = "User with ShareMe Code \'#{@link.contact.code}\' Has Been Deleted Successfully From You Contact List!"
     else
       flash[:error] = "There Was Some Error While Deleting Contact. Please Try Again Later!" 

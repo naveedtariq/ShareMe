@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
 #	before_filter :require_no_user
   def index
+  	
+  	
 		@user = User.new
     if params[:confirmation_token]
       @user = User.find_by_confirmation_token(params[:confirmation_token])

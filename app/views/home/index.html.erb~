@@ -33,10 +33,10 @@
 			{
 				if(this.id == 'form_field_1')
 				{
-					$('#form_field_4').val(this.value[3]);
-					$('#form_field_3').val(this.value[2]);
-					$('#form_field_2').val(this.value[1]);
-					$('#form_field_1').val(this.value[0]);
+					$('#form_field_4').val(this.val[3]);
+					$('#form_field_3').val(this.val[2]);
+					$('#form_field_2').val(this.val[1]);
+					$('#form_field_1').val(this.val[0]);
 				}
 				
 				$(this).next('.digits').focus();

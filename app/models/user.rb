@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
 
 #  has_many :contacts, :dependent => :destroy
 #  has_many :associated_contacts, :class_name => "Contact", :foreign_key => :associated_user_idgt
-  has_many :contacts, :through => :links
+  has_many :links
+  has_many :contacts, :through => :links, :source => :contact
   has_many :a_contacts, :through => :links, :conditions => {:group_id => 1}
   has_many :b_contacts, :through => :links, :conditions => {:group_id => 2}
   has_many :c_contacts, :through => :links, :conditions => {:group_id => 3}
@@ -66,8 +67,8 @@ class User < ActiveRecord::Base
       contact.group_id = group_id
       contact.save
     else
-      Link.create(:user_id=>id,:contact_id=>contact_id,:group_id => group_id)
-      unless Link.where(:user_id => contact_id, :contact_id => id)
+      Link.create(:user_id=>id, :contact_id=>contact_id, :group_id => group_id)
+      if Link.where(:user_id => contact_id, :contact_id => id).empty?
         Link.create(:user_id=>contact_id,:contact_id=>id,:group_id => 1)
       end
     end
