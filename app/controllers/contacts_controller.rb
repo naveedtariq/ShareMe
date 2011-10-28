@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
 	layout "default"
-#  before_filter :require_user
-#  before_filter :verify_contacts, :only =>[:show]
+  before_filter :authenticate_user!
+  before_filter :verify_contacts, :only =>[:show]
 
   def index
     @contacts = current_user.contacts
@@ -23,7 +23,7 @@ class ContactsController < ApplicationController
   def create
     if verify_recaptcha
       if params[:shareme_code].present? && (@user = User.find_by_code(params[:shareme_code]))
-        @contact = current_user.add_contact(@user)
+        @contact = current_user.add_or_update_contact(@user)
         @contacts = current_user.contacts
         flash[:success] = "User \'#{@user.code}\' Is Successfully Added To Your Contact List!"
         redirect_to contacts_path
@@ -40,8 +40,8 @@ class ContactsController < ApplicationController
   end
 
   def destroy
-    if (@contact = current_user.contacts.find(params[:id])) && @contact.destroy
-      flash.notice = "User with ShareMe Code \'#{@contact.associated_user.code}\' Has Been Deleted Successfully From You Contact List!"
+    if (@link = current_user.links.find(:first, :contact_id =>params[:id])) && @link.destroy
+      flash.notice = "User with ShareMe Code \'#{@link.contact.code}\' Has Been Deleted Successfully From You Contact List!"
     else
       flash[:error] = "There Was Some Error While Deleting Contact. Please Try Again Later!" 
     end
@@ -58,7 +58,7 @@ class ContactsController < ApplicationController
           flash[:error] = "'#{( params[:code] || session[:code]).upcase}' is a registered user. Please Register or Sign In to view the details of the User."
           redirect_to "/" and return
         end
-        current_user.add_contact(@user, true)
+        current_user.add_or_update_contact(@user.id)
         session[:code] = session[:connect_user_id] = nil
         flash[:success] = "User With ShareMe Code \'#{@user.code}\' Found And Is Successfully Added To Your Contact List!" 
         redirect_to contacts_path and return
@@ -96,6 +96,7 @@ class ContactsController < ApplicationController
     end
   end
 
+  protected
   def verify_contacts
     contact = current_user.contacts.find(params[:id])
     if contact.blank?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111012111319) do
+ActiveRecord::Schema.define(:version => 20111028145534) do
 
   create_table "access_tokens", :force => true do |t|
     t.integer  "user_id"
@@ -25,18 +25,13 @@ ActiveRecord::Schema.define(:version => 20111012111319) do
 
   add_index "access_tokens", ["key"], :name => "index_access_tokens_on_key", :unique => true
 
-  create_table "contacts", :force => true do |t|
-    t.integer  "user_id",            :null => false
-    t.string   "name",               :null => false
-    t.string   "email",              :null => false
-    t.integer  "associated_user_id"
+  create_table "links", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "contact_id"
+    t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "contacts", ["associated_user_id"], :name => "index_contacts_on_associated_user_id"
-  add_index "contacts", ["email"], :name => "index_contacts_on_email"
-  add_index "contacts", ["user_id"], :name => "index_contacts_on_user_id"
 
   create_table "profiles", :force => true do |t|
     t.string   "company_name"

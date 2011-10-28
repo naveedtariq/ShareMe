@@ -9,8 +9,14 @@ class User < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  has_many :contacts, :dependent => :destroy
-  has_many :associated_contacts, :class_name => "Contact", :foreign_key => :associated_user_id
+#  has_many :contacts, :dependent => :destroy
+#  has_many :associated_contacts, :class_name => "Contact", :foreign_key => :associated_user_idgt
+  has_many :contacts, :through => :links
+  has_many :a_contacts, :through => :links, :conditions => {:group_id => 1}
+  has_many :b_contacts, :through => :links, :conditions => {:group_id => 2}
+  has_many :c_contacts, :through => :links, :conditions => {:group_id => 3}
+  has_many :d_contacts, :through => :links, :conditions => {:group_id => 4}
+
   has_one :profile, :dependent => :destroy
   has_many :user_tokens, :dependent => :destroy
 
@@ -54,8 +60,20 @@ class User < ActiveRecord::Base
     end
   end
 
+  def add_or_update_contact(contact_id,group_id = 1) 
+    contact = self.links.find(:first,:conditions => {:contact_id => contact_id})
+    unless contact.blank?
+      contact.group_id = group_id
+      contact.save
+    else
+      Link.create(:user_id=>id,:contact_id=>contact_id,:group_id => group_id)
+      unless Link.where(:user_id => contact_id, :contact_id => id)
+        Link.create(:user_id=>contact_id,:contact_id=>id,:group_id => 1)
+      end
+    end
+  end
   #Add a single contact
-  def add_contact(contact, and_add_self_to_contact = false)
+  def add_contact(contact)
     if @exists_contact = contacts.email_or_associated_user_id(contact.email, contact.id).first
       @exists_contact.update_attribute(:associated_user, contact)
     else
