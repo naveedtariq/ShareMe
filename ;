@@ -26,26 +26,6 @@
           speed: 500,
           expires: false
         });
-
-        $('.digits').keyup(function (e) {
-        	var k;
-        	
-		  	if (!e.charCode) 	k = String.fromCharCode(e.which);
-		  	else 				k = String.fromCharCode(e.charCode);
-		  							
-			if( k == 'V' && e.ctrlKey)
-			{
-				if(this.id == 'form_field_1')
-				{
-					$('#form_field_4').val(this.value[3]);
-					$('#form_field_3').val(this.value[2]);
-					$('#form_field_2').val(this.value[1]);
-					$('#form_field_1').val(this.value[0]);
-				}
-				
-				$(this).next('.digits').focus();
-			}
-        });
      });
   </script>
 <%= yield :top_js %>

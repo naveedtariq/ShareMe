@@ -34,7 +34,6 @@
 									if( this.maxLength == 4 && this.id != 'form_field_1')
 									{
 										if (ch.indexOf(k) != -1) e.preventDefault();
-										return;
 									}
 										
 									if( k == 'v' && e.ctrlKey)

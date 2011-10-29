@@ -2,7 +2,6 @@ class HomeController < ApplicationController
 #	before_filter :require_no_user
   def index
 			if user_signed_in?
-				# ...................redirect path here
 				redirect_to user_home_path  
 			end
 		@user = User.new

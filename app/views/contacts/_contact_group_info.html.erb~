@@ -1,6 +1,6 @@
 <div class="profile_featured_section_full">
   <h2><span><%= contact.name.capitalize %>'s </span>Share me Profile</h2>
-  <%= image_tag(contact.profile.picture_file_name.nil? ? "/images/profile_thumb.jpg" : contact.profile.picture.url(:contact_thumb)) %>
+  <%= image_tag(contact.associated_user.profile.picture_file_name.nil? ? "/images/profile_thumb.jpg" : contact.associated_user.profile.picture.url(:contact_thumb)) %>
   <h3><%= contact.name.capitalize %></h3>
   <small><%= contact.email %></small>
   <p>Contact Group <strong>N/A</strong></p>
