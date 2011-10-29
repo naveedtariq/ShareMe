@@ -4,7 +4,8 @@
   <h3><%= contact.name.capitalize %></h3>
   <small><%= contact.email %></small>
   <p>Contact Group <strong>N/A</strong></p>
-  <a href="#" class="blackBtnYellow">Change</a>
+  
+  <%= button_to "Change", { :controller => :groups, :action=>:change, :id=>contact.id }, :class=>"yellowInputBtn" %>
   <%= button_to "Delete", contact_path(contact) , :confirm => "Are you sure?", :method=>:delete,:class=>"yellowInputBtn" %>
   <% if back_link %>
     <%= link_to "Back to Contacts","/contacts?selected="+contact.id.to_s,{:class=>"moreBtnPlainLeft"} %>

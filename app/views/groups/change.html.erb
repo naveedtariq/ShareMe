@@ -1,0 +1,66 @@
+<% content_for :top_js do %>
+  <script type="text/javascript">
+    $(function() {
+        $('#shareme_code').alphanumeric();
+        <% unless flash.blank? %>
+          var title = "";
+          var text = "";
+          var icon = "";
+          <% if !flash[:notice] .blank? %>
+            title = "Warning!";
+            text = "<%= flash[:notice].to_s %>";
+            icon = "warning";
+          <% elsif !flash[:success].blank? %>
+            title = "Success!";
+            text = "<%= flash[:success].to_s %>";
+            icon = "success";
+          <% elsif !flash[:error].blank? %>
+            title = "Error!";
+            text = "<%= flash[:error].to_s %>";
+            icon = "error";
+          <% end %>
+          $("#notif_container").notify("create", {
+              title: title,
+              text: text,
+              icon: icon
+             },
+             {
+              click: function(e,instance){
+              instance.close();
+             }
+           });
+        <% end %>
+     });
+  </script>
+<% end %>
+<%# unless flash.blank?  %>
+  <!--<div class="profile_featured_section">-->
+    <%#= flash[:notice] || flash[:error] || flash[:recaptcha_error] %>
+  <!--</div>-->
+  <!--<br /> -->
+<%# end %>
+<div class="profile_featured_section">
+	<h2><span>ADD A NEW </span>CONTACT</h2>
+  <% form_for :groups, :url => '/group/update', :html => {:method => :post} do |u|  %>
+    <table width="600" border="0" id="userInfoTbl" class="profile-table">
+      <tr>
+        <td width="200"><strong>Select new group</strong></td>
+        <td>
+        <input name="id" type="hidden" value=<%= @contact.id %> />
+        <%= radio_button_tag(:newgroup, "1") %>
+		<%= label_tag(:newgroup_A, "Group A") %>
+		<%= radio_button_tag(:newgroup, "2") %>
+		<%= label_tag(:newgroup_B, "Group B") %>
+		<%= radio_button_tag(:newgroup, "3") %>
+		<%= label_tag(:newgroup_C, "Group C") %>
+	    <%= radio_button_tag(:newgroup, "4") %>
+		<%= label_tag(:newgroup_D, "Group D") %>
+		<%= radio_button_tag(:newgroup, "5") %>
+		<%= label_tag(:newgroup_E, "Group E") %>
+		</td>
+      </tr>
+    </table>
+    <p><%= u.submit "Update",:class=>"blackInputBtn" %></p>
+  <% end %>
+	<%= link_to "Sign Out","/logout",{:class=>"moreBtnPlain"} %>
+</div>

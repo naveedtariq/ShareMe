@@ -9,6 +9,7 @@ ShareMe::Application.routes.draw do
   resources :users
   resources :profiles
   resources :contacts
+  resources :groups
 
 #  get "activations/new"
 
@@ -30,6 +31,8 @@ ShareMe::Application.routes.draw do
   match '/get_tweets', :controller => 'users', :action => 'get_tweets', :as => :get_tweets
   match '/get_linkedin', :controller => 'users', :action => 'get_linkedin', :as => :get_linkedin
   match '/socialify', :controller => 'users', :action => 'socialify', :as => :socialify
+  match '/group/change/(:id)', :controller => 'groups', :action => 'change'
+  match '/group/update', :controller => 'groups', :action => 'update'
 #  match '/users/update_user_for_password', :controller => 'users', :action => 'update_user_for_password'
 #	resources :user_sessions
 #	resources :users do
