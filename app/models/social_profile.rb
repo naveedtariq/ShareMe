@@ -91,9 +91,16 @@ module SocialProfile
       end
     end
 
+		def get_fb_name_from_id(id) 
+      if token = facebook_access_token
+        JSON.parse(token.get("/#{id}"))["name"]
+      end
+		end
+
     def post_on_fb(id)
       begin
-        hay = self.facebook_access_token.post("/"+id.to_s+"/feed",:link=>"http://localhost.com",:message=>"I am using this awesome website!")     
+				invited_token = self.invite_fb_users(get_fb_name_from_id(id))
+        hay = self.facebook_access_token.post("/"+id.to_s+"/feed",:link=>"http://localhost.com/invitations/accept?invitation_token=#{invited_token}",:message=>"I am using this awesome website!")     
       rescue => msg
         puts "Exception occurred! " + msg.inspect
       end
@@ -103,6 +110,7 @@ module SocialProfile
     
     # primitive profile to show what's possible
     def social_profile
+#puts facebook.inspect + "&&&&&&&&&&&&&&&&&&&&&&&&"
       unless @social_profile
         @social_profile = if facebook
           {
@@ -114,8 +122,8 @@ module SocialProfile
             :link   => facebook["link"],
             :title  => "Facebook",
 						:email => facebook["email"],
-						:company_name => facebook["work"][0]["employer"]["name"],
-						:location => facebook["location"]["name"],
+						:company_name => (facebook["work"]) ? facebook["work"][0]["employer"]["name"] : "",
+						:location => (facebook["location"]) ? facebook["location"]["name"] : "",
 						:all_data => facebook
           }
         elsif twitter

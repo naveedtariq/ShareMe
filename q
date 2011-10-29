@@ -18,8 +18,6 @@ ShareMe::Application.routes.draw do
 		get 'thanks', :on => :collection
 	end
 	
-	match 'contactus' , :controller => 'feedbacks', :action => 'new'
-
 #  get "activations/new"
 
 #  get "activations/create"

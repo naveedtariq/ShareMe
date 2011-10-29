@@ -5,6 +5,9 @@ class ConfirmationsController < Devise::ConfirmationsController
       @user = User.find_by_confirmation_token(params[:confirmation_token])
       if @user.present?
         @confirmation_token = @user.confirmation_token
+				if @user.searched_code.present?
+					redirect_to "/search?code=#{@user.searched_code}" and return
+				end
       else
         flash[:error] = "There is no user with this Confirmation Code or The user is already confirmed."
       end

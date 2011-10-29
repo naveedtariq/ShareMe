@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111012111319) do
+ActiveRecord::Schema.define(:version => 20111029022415) do
 
   create_table "access_tokens", :force => true do |t|
     t.integer  "user_id"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(:version => 20111012111319) do
   add_index "contacts", ["associated_user_id"], :name => "index_contacts_on_associated_user_id"
   add_index "contacts", ["email"], :name => "index_contacts_on_email"
   add_index "contacts", ["user_id"], :name => "index_contacts_on_user_id"
+
+  create_table "feedbacks", :force => true do |t|
+    t.string   "first_name", :null => false
+    t.string   "last_name"
+    t.string   "email",      :null => false
+    t.string   "comments",   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "profiles", :force => true do |t|
     t.string   "company_name"
@@ -75,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20111012111319) do
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => ""
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -94,6 +103,16 @@ ActiveRecord::Schema.define(:version => 20111012111319) do
     t.string   "l_name"
     t.string   "code"
     t.string   "phone"
+    t.string   "searched_code"
+    t.string   "invitation_token",       :limit => 60
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
   end
+
+  add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token"
+  add_index "users", ["invited_by_id"], :name => "index_users_on_invited_by_id"
 
 end

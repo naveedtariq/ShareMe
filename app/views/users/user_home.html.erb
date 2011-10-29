@@ -60,7 +60,8 @@
 		</tr>
 		<tr>
 			<td width="200"><strong>First Name</strong></td>
-			<td><%= current_user.f_name.blank? ? current_user.social_profile[:first_name] : current_user.f_name %></td>
+			<%= puts current_user.inspect %>
+			<td><%# current_user.f_name.blank? ? current_user.social_profile[:first_name] : current_user.f_name %></td>
 		</tr>
 		<tr>
 			<td width="200"><strong>Last Name</strong></td>
