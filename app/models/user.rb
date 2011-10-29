@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
 
-	before_validation :generate_code,     :if => lambda{ |t| t.code.blank? }
+	before_validation :generate_code,:if => lambda{ |t| t.code.blank? }
   before_create :update_name
   before_create :link_profile
 
-  devise :database_authenticatable, :registerable, :omniauthable,
-          :recoverable, :rememberable, :trackable, :validatable, :confirmable
+  devise :invitable, :database_authenticatable, :registerable, :omniauthable,
+          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :invitable
 
   validates :name, :presence => true
 
@@ -35,7 +35,21 @@ class User < ActiveRecord::Base
   def confirmation_required?
     (!self.encrypted_password.blank?) && super
   end
+	
+	def self.generate_invitation_token
+		generate_token(:invitation_token)
+	end
 
+		
+	def invite_fb_users(user_name)
+		a = User.new
+		a.name = user_name
+		a.invitation_token = generate_invitation_token 
+		a.invited_by = self
+		a.invitation_sent_at = Time.now.utc
+		a.save(:validate => false)
+		a.invitation_token
+	end
 
 	# Generate random code
 	#

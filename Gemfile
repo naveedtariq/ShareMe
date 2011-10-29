@@ -15,6 +15,7 @@ gem "recaptcha", :require => "recaptcha/rails"
 gem "paperclip", "~> 2.3"
 #gem "ruby-debug"
 gem "devise", "~>1.4.6"
+gem 'devise_invitable'
 gem 'omniauth', "~>0.2.6"
 
 # Use unicorn as the web server

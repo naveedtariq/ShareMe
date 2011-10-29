@@ -1,0 +1,18 @@
+
+<%= render :partial => 'shared/errors', :locals => {:target => @u} %>
+
+<%= form_tag('/invitations/update', :method => 'post') do %>
+
+<%= label_tag 'email' %>
+<%= text_field_tag 'user[email]', @u.email %> <br/> <br/>
+
+<%= label_tag 'name' %>
+<%= text_field_tag 'user[name]', @u.name %> <br/> <br/>
+
+<%= label_tag 'password' %>
+<%= password_field_tag 'user[password]' %><br/> <br/>
+
+<%= hidden_field_tag 'user[invitation_token]', @u.invitation_token %>
+<%= submit_tag 'Register' %>
+
+<% end %>

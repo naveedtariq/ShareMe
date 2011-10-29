@@ -1,0 +1,17 @@
+<h1>Contact Us</h1>
+<%= render :partial => 'shared/errors', :locals => {:target => @feedback } %>
+<%= form_for @feedback do |f| %>
+
+<%= f.label :first_name %>
+<%= f.text_field :first_name %> <br/>
+
+
+<%= f.label :last_name %>
+<%= f.text_field :last_name %><br/>
+<%= f.label :email%>
+<%= f.email_field :email%> <br/>
+<%= f.label :comments %>
+<%= f.text_area :comments %> <br/>
+
+<%= f.submit 'Send' %>
+<% end %>
