@@ -14,6 +14,7 @@ ShareMe::Application.routes.draw do
   resources :users
   resources :profiles
   resources :contacts
+  resources :groups
   resources :feedbacks do
   	get 'thanks', :on => :collection
   end

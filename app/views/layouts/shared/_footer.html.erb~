@@ -2,7 +2,7 @@
 	<li><a href="#">Home</a></li>
 	<li><a href="#">About Share Me </a></li>
 	<li><a href="#"> How Share Me Works</a></li>
-	<li><%= link_to "Contact Us", { :controller => :feedbacks, :action => 'new'} %></li>
+	<li><%= link_to "Contact Us", feedbacks_path, { :controller => :feedbacks, :action => 'new'} %></li>
 	<li><a href="#"> Your Profile </a></li>
 	<li><a href="#"> Privacy Policy </a></li>
 	<li><a href="#"> Terms & Conditions</a></li>

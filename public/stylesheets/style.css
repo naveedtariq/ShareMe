@@ -576,6 +576,14 @@ span{
   padding: 0 5px;
   width: 225px;
 }
+
+textarea.textField{
+  background: none repeat scroll 0 0 #DDDDDD;
+  border: medium none;
+  float: left;
+  width: 66%;
+}
+
 form#shareCode {
 	float: left;
 	width: 240px;

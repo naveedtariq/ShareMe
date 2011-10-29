@@ -125,9 +125,6 @@ a:hover {
 	color: #666;
 	text-decoration: underline;
 }
-a.c_links2:hover{
-	
-}
 
 /* 
    Forms 

@@ -1,4 +1,4 @@
-<div class="profile_featured_section" style="margin: 10px 127.5px;">
+<div class="profile_featured_section" style="margin: 10px auto; float:center">
 	<h2><span>Contact Us </span>CONTACT</h2>
 		<div style="width: 90%; padding: 2% 10%">
 		<%= form_for @feedback do |f| %>
