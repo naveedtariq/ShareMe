@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
 	layout "default"
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except =>[:search]
   before_filter :verify_contacts, :only =>[:show]
 
   def index

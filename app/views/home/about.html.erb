@@ -4,12 +4,6 @@
   <%= javascript_include_tag "jquery.carousel.min" %>
   <script type="text/javascript">
     $(document).ready(function() {
-      $("#reset-btn").click(function() {
-          $('#feedback_first_name').val("");
-          $('#feedback_last_name').val("");
-          $('#feedback_email').val("");
-          $('#feedback_comments').val("");
-        });
       $('#connect_with_facebook').click(function() {
         var left = (screen.width/2)-(900/2);
         var top = (screen.height/2)-(500/2);
@@ -111,49 +105,11 @@ var show_no_confirmation = function() {
   <%= hidden_field_tag "dd" %>
 <div class="left_contents">
   <div class="left_custom">
-    <h2><span>Contact </span>Us</h2>
-    <div class="contact-us-sec">
-      <%= form_for @feedback do |f| %>
-        <%= render :partial => 'shared/errors', :locals => {:target => @feedback } %>
-        <table width="600" border="0" id="userInfoTblCustom">
-          <tr>
-            <td width="200"><label>*First Name</label></td>
-            <td>
-              <%= f.text_field :first_name %>
-            </td>
-          </tr>
-          <tr>
-            <td width="200"><label>Last Name</label></td>
-            <td>
-              <%= f.text_field :last_name %>
-            </td>
-          </tr>
-          <tr>
-            <td width="200"><label>*Email Address</label></td>
-            <td>
-              <%= f.email_field :email %>
-            </td>
-          </tr>
-          <tr>
-            <td width="200" valign="top"><label>*Query / Comment</label></td>
-            <td>
-              <%= f.text_area :comments, :cols=>42, :rows => 7 %>
-            </td>
-          </tr>
-          <tr>
-            <td width="200"><label></label></td>
-            <td>
-              <%= recaptcha_tags %>
-            </td>
-          </tr>
-          <tr>
-            <td width="200">&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-         </table>
-         <a style="cursor:pointer;" id="reset-btn" class="blackInputBtn">Reset</a>
-        <%= f.submit 'Send', :class => "blackInputBtn" %>
-       <% end %>
+    <h2><span>What is </span>Share me</h2>
+    <div id="story-share-me">
+      <img src="images/what-is-share-me-step-1.jpg" alt="Share me an online respository database that stores crictial user information through SSL Encryption method" />
+      <img src="images/what-is-share-me-step-2.jpg" alt="Share me"/>      
+      <a href="#" class="get-share-me">Get Share me now</a>
     </div>
   </div>
 </div>
