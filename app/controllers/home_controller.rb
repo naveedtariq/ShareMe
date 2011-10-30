@@ -15,4 +15,35 @@ class HomeController < ApplicationController
 		end
   end
 
+
+  def about
+    if user_signed_in?
+      redirect_to user_home_path  
+    end
+		@user = User.new
+    if params[:confirmation_token]
+      @user = User.find_by_confirmation_token(params[:confirmation_token])
+      if @user.present?
+        @confirmation_token = @user.confirmation_token
+      else
+        flash[:error] = "There is no user with this Confirmation Code or The user is already confirmed."
+      end
+		end
+  end
+
+  def how
+    if user_signed_in?
+      redirect_to user_home_path  
+    end
+		@user = User.new
+    if params[:confirmation_token]
+      @user = User.find_by_confirmation_token(params[:confirmation_token])
+      if @user.present?
+        @confirmation_token = @user.confirmation_token
+      else
+        flash[:error] = "There is no user with this Confirmation Code or The user is already confirmed."
+      end
+		end
+  end
+
 end

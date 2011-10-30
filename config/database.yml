@@ -6,7 +6,7 @@ development:
   reconnect: false
   database: shareme_dev
   username: root
-  password: root
+  password: 
   host: localhost
 
 production:

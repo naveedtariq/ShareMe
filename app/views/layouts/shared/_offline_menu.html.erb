@@ -3,9 +3,17 @@
 </h1>
 <!--top navigation Starts here-->
 <ul class="header_navigation">
-	<li><a href="#" class="activeLink">Home</a></li>
-	<li><a href="#">About Share Me </a></li>
-	<li><a href="#"> How Share Me Works</a></li>
-	<li><a href="#"> Contact Us</a></li>
+  <li>
+    <%= link_to "Home", root_path,{:title=>"Home",:class=> (request.path == "/") ? "activeLink" : "normal"} %>
+  </li>
+  <li>
+    <%= link_to "About Share Me", "/what_is_share_me",{:title=>"About Share Me",:class=> (request.path == "/what_is_share_me") ? "activeLink" : "normal"} %>
+  </li>
+  <li>
+    <%= link_to "How Share Me Works", "/how_share_me_works",{:title=>"About Share Me",:class=> (request.path == "/how_share_me_works") ? "activeLink" : "normal"} %>
+  </li>
+  <li>
+      <%= link_to "Contact Us", new_feedback_path,{:title=>"Contact Us",:class=>request.fullpath.eql?("/feedbacks/new") ? "activeLink" : "normal"} %>
+  </li>
 </ul>
 <!--top navigation ends here--> 

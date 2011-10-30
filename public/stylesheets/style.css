@@ -1477,3 +1477,95 @@ a.social-myspace-already {
   left: -2px;
 }
 #import-contacts .submit:hover { background-position: bottom left; }
+.left_custom {
+  background-color: #FFFFFF;
+  border: 1px solid #FFE400;
+  float: left;
+  margin: 0 0 10px;
+  position: relative;
+  width: 710px;
+}
+.left_custom img {
+	float: left;
+	 margin: 20px 20px 20px 30px;
+	
+}
+.left_custom h2 {
+  background-color: #FFBA00;
+  padding: 5px 10px;
+  text-align: center;
+}
+.left_custom h3 {
+  float: left;
+  font-size: 10em;
+  margin: 0 0 0 20px;
+}
+#story-share-me {
+	width: 700px;
+	float: left;
+	
+	
+	
+}
+#story-share-me img {
+	margin: 0;
+	
+}
+a.get-share-me {
+  background: url("../images/get-share-me-btn.jpg") no-repeat scroll 0 0 transparent;
+  display: block;
+  float: left;
+  height: 47px;
+  margin: 32px 0 50px 200px;
+  text-align: center;
+  text-indent: -999em;
+  width: 312px;
+}
+table#userInfoTblCustom {
+  border-collapse: collapse;
+  color: #000000;
+  margin: 15px;
+  width: 579px;
+}
+table#userInfoTblCustom input {
+  background: url("../images/input_pattern_yellow.jpg") repeat scroll 0 0 transparent;
+  border: medium none;
+  float: left;
+  font-size: 1em;
+  height: 25px;
+  line-height: 25px;
+  margin: 2px 0;
+  padding: 0 5px;
+  width: 368px;
+}
+table#userInfoTblCustom textarea {
+  background:#ffb900;
+
+}
+table#userInfoTblCustom {
+  border-collapse: collapse;
+  color: #000000;
+  margin: 15px;
+  width: 679px;
+}
+table#userInfoTblCustom td{
+	padding:0;
+	vertical-align: top;
+	
+}
+table#userInfoTblCustom label {
+  float: left;
+  font-weight: bold;
+  margin: 5px 0;
+}
+table#userInfoTbl td {
+	padding: 2px;
+	
+	
+}
+.contact-us-sec {
+  float: left;
+  margin: 0 0 20px;
+  width: 600px;
+}
+

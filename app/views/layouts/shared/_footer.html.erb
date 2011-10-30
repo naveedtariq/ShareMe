@@ -1,9 +1,16 @@
 <ul class="footer_navigation">
-	<li><a href="#">Home</a></li>
-	<li><a href="#">About Share Me </a></li>
-	<li><a href="#"> How Share Me Works</a></li>
-	<li><%= link_to "Contact Us", { :controller => :feedbacks, :action => 'new'} %></li>
-	<li><a href="#"> Your Profile </a></li>
+	<li>
+    <%= link_to "Home", root_path %>
+  </li>
+	<li>
+    <%= link_to "About Share Me", "/what_is_share_me" %>
+  </li>
+	<li>
+    <%= link_to "How Share Me Works", "/how_share_me_works" %>
+  </li>
+	<li>
+    <%= link_to "Contact Us", new_feedback_path %>
+  </li>
 	<li><a href="#"> Privacy Policy </a></li>
 	<li><a href="#"> Terms & Conditions</a></li>
   <p class="copyright">ShareMe &copy; 2011. All Rights Reserved</p>
