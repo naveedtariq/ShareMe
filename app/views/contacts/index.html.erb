@@ -1,6 +1,10 @@
 <% content_for :top_js do %>
   <script type="text/javascript">
     $(function () {
+    	$('input.yellowInputBtndel').bind( 'click', function () 
+    	{
+			return confirm("Are you sure?");
+    	});
         $('.c_links').click(function () {
             var c_id = this.id;
             $.ajax({

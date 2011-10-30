@@ -1,15 +1,17 @@
 class ContactsController < ApplicationController
-	layout "default"
+  layout "default"
   before_filter :authenticate_user!
   before_filter :verify_contacts, :only =>[:show]
 
-  def index
+  def index	    
     @contacts = current_user.contacts
     
     if params[:selected]
       @contact = current_user.contacts.find(params[:selected])
+      @contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
     else
       @contact = current_user.contacts.first
+      @contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
     end
   end
 
@@ -92,6 +94,7 @@ class ContactsController < ApplicationController
   def show_basic_profile
     if params[:id]
       @contact = current_user.contacts.find(params[:id])
+	  @contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
       return render :partial => "profile_view_index",:locals=>{:contact=>@contact}
     end
   end
@@ -103,5 +106,10 @@ class ContactsController < ApplicationController
       flash[:notice] = "There is no such contact in your list"
       redirect_to contacts_path
     end
+  end
+  
+  def translate_group_id(id)
+    map = {1 => 'A', 2 => 'B', 3 => 'C', 4 => 'D', 5 => 'E'}
+	map[id]
   end
 end

@@ -40,22 +40,22 @@
   <!--<br /> -->
 <%# end %>
 <div class="profile_featured_section">
-	<h2><span>Change User Group </span>CONTACT</h2>
+	<h2><span>Change User Group</span></h2>
   <% form_for :groups, :url => '/group/update', :html => {:method => :post} do |u|  %>
     <table width="600" border="0" id="userInfoTbl" class="profile-table">
       <tr>
         <td width="200"><strong>Select new group</strong></td>
         <td>
         <input name="id" type="hidden" value=<%= @contact.id %> />
-        <%= radio_button_tag(:newgroup, "1") %>
+        <%= radio_button_tag(:newgroup, "1", @contactgroup==1?true:false) %>
 		<%= label_tag(:newgroup_A, "Group A") %>
-		<%= radio_button_tag(:newgroup, "2") %>
+		<%= radio_button_tag(:newgroup, "2", @contactgroup==2?true:false) %>
 		<%= label_tag(:newgroup_B, "Group B") %>
-		<%= radio_button_tag(:newgroup, "3") %>
+		<%= radio_button_tag(:newgroup, "3", @contactgroup==3?true:false) %>
 		<%= label_tag(:newgroup_C, "Group C") %>
-	    <%= radio_button_tag(:newgroup, "4") %>
+	    <%= radio_button_tag(:newgroup, "4", @contactgroup==4?true:false) %>
 		<%= label_tag(:newgroup_D, "Group D") %>
-		<%= radio_button_tag(:newgroup, "5") %>
+		<%= radio_button_tag(:newgroup, "5", @contactgroup==5?true:false) %>
 		<%= label_tag(:newgroup_E, "Group E") %>
 		</td>
       </tr>

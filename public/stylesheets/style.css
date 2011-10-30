@@ -313,6 +313,20 @@ input.yellowInputBtn {
   cursor: pointer;
   margin-bottom: 20px;
 }
+input.yellowInputBtndel {
+  background: url("../images/yellow_btn_bg.jpg") repeat-x scroll 0 0 transparent;
+  border: medium none;
+  color: #000000;
+  font-family: arial;
+  font-size: 1.1em;
+  font-weight: bold;
+  height: 27px;
+  line-height: 27px;
+  padding: 0 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
 a.blackInputBtn {
   background: url("../images/black_btn_bg.jpg") repeat-x scroll 0 0 transparent;
   border: medium none;
