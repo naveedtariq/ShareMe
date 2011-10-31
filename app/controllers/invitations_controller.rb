@@ -11,10 +11,11 @@ class InvitationsController < Devise::InvitationsController
 		
 		if @u.errors.empty?
 			#TODO: add to contacts
-			@u.add_contact @u.invited_by,true
+			@u.add_or_update_contact @u.invited_by.id
 			@u.send_confirmation_instructions
 			redirect_to root_path and return
 		end
+		@u.password = nil
 		render :edit
 	end
 end
