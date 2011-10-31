@@ -1,0 +1,15 @@
+<div class="profile_featured_section_full">
+  <img style="display:inline" src="images/ajax-loader.gif">
+  <h2><span><%= contact.name.capitalize %>'s </span>Share me Profile</h2>
+  <%= image_tag(contact.profile.picture_file_name.nil? ? "/images/profile_thumb.jpg" : contact.profile.picture.url(:contact_thumb)) %>
+  <h3><%= contact.name.capitalize %></h3>
+  <small><%= contact.email %></small>
+  <p>Contact Group: <strong><%= @contactgroup %></strong></p>
+  <p style="margin-bottom: 11px">ShareMe Code: <strong><%= contact.code %></strong></p>
+  
+  <%= button_to "Change", { :controller => :groups, :action=>:change, :id=>contact.id }, :class=>"yellowInputBtn" %>
+  <%= button_to "Delete", contact_path(contact) , :method=>:delete, :confirm => 'Are you sure?', :class=>"yellowInputBtndel" %>
+  <% if back_link %>
+    <%= link_to "Back to Contacts","/contacts?selected="+contact.id.to_s,{:class=>"moreBtnPlainLeft"} %>
+  <% end %>
+</div>

@@ -9,7 +9,12 @@ class FeedbacksController < ApplicationController
     @feedback = Feedback.new(params[:feedback])
     if verify_recaptcha
       if @feedback.save
-        redirect_to root_path and return
+      	flash[:success] = "Your feedback was submitted successfully!"
+      	if user_signed_in?
+      		redirect_to user_home_path and return
+      	else
+        	redirect_to root_path and return
+        end
       end
     end
     @feedback.valid?

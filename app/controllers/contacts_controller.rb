@@ -110,7 +110,7 @@ class ContactsController < ApplicationController
   end
   
   def translate_group_id(id)
-    map = {1 => 'A', 2 => 'B', 3 => 'C', 4 => 'D', 5 => 'E'}
+    map = {1 => 'Level 1', 2 => 'Level 2', 3 => 'Level 3', 4 => 'Level 4', 5 => 'Level 5'}
 	map[id]
   end
 end
