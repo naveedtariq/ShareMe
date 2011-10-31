@@ -1,18 +1,43 @@
-
+<br/> <br/>
+<br/> <br/>
+<div style="align:center">
+<div class="profile_featured_section_full">
 <%= render :partial => 'shared/errors', :locals => {:target => @u} %>
 
 <%= form_tag('/invitations/update', :method => 'post') do %>
 
-<%= label_tag 'email' %>
-<%= text_field_tag 'user[email]', @u.email %> <br/> <br/>
+<h2><span>YOUR </span>INFORMATION</h2>
 
-<%= label_tag 'name' %>
-<%= text_field_tag 'user[name]', @u.name %> <br/> <br/>
-
-<%= label_tag 'password' %>
-<%= password_field_tag 'user[password]' %><br/> <br/>
-
-<%= hidden_field_tag 'user[invitation_token]', @u.invitation_token %>
-<%= submit_tag 'Register' %>
-
+	<table width="600" border="0" id="userInfoTblEdit" class="profile-table">
+		<tr>
+			<td>	<%= label_tag 'email' %>  </td>
+			<td>	<%= text_field_tag 'user[email]', @u.email ,:class=>"textField" %></td> 
+		</tr>
+		<tr>
+			<td>	<%= label_tag 'name' %> </td>
+			<td>	<%= text_field_tag 'user[name]', @u.name ,:class=>"textField" %> </td>
+		</tr>
+		<tr>
+			<td>	<%= label_tag 'password' %> </td>
+			<td>	<%= password_field_tag 'user[password]',@u.password ,:class=>"textField" %> </td> 
+		</tr>
+	  <tr>	<td/><td>		<%= hidden_field_tag 'user[invitation_token]', @u.invitation_token %>   </td>
+		
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+						
+						 <tr> <td/> <td><%= submit_tag 'Register' ,:class=>"blackInputBtn" %> </td>  </tr>
+</table>
 <% end %>
+</div>
+<br/> <br/>
+<br/> <br/>
+<br/> <br/>
+<br/> <br/>
+<br/> <br/>
+<br/> <br/>
+<br/> <br/>
+<br/> <br/>
+</div>
