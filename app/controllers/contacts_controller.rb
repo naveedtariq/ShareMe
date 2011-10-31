@@ -12,7 +12,9 @@ class ContactsController < ApplicationController
       @contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
     else
       @contact = current_user.contacts.first
-      @contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
+      unless @contact.blank?
+        @contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
+      end
     end
   end
 
