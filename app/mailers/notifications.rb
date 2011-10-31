@@ -6,7 +6,7 @@ class Notifications < ActionMailer::Base
 	def send_email (feedback)
 		subject       "A Comment from #{feedback.first_name} #{feedback.last_name}"
 		from          "#{feedback.email}"
-		recipients    :To 
+		recipients    "admin@shareme.com" 
 		sent_on       Time.now
 		body          :feedback => feedback
   end
