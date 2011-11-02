@@ -11,8 +11,9 @@ class ContactsController < ApplicationController
       @contact = current_user.contacts.find(params[:selected])
       @contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
     else
-      @contact = current_user.contacts.first
-      @contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
+      if @contact = current_user.contacts.first
+     	@contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
+      end
     end
   end
 
@@ -94,8 +95,9 @@ class ContactsController < ApplicationController
 
   def show_basic_profile
     if params[:id]
-      @contact = current_user.contacts.find(params[:id])
-	  @contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
+      if @contact = current_user.contacts.find(params[:id])
+	  	@contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
+	  end
       return render :partial => "profile_view_index",:locals=>{:contact=>@contact}
     end
   end

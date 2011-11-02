@@ -146,7 +146,6 @@ var show_no_confirmation = function() {
 	  
 	</table>
 	<% end %>
-	</div>
   </div>
 </div>
 

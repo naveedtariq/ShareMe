@@ -46,6 +46,7 @@ ShareMe::Application.routes.draw do
   match '/group/update', :controller => 'groups', :action => 'update'
   match '/what_is_share_me', :controller => 'home', :action => 'about'
   match '/how_share_me_works', :controller => 'home', :action => 'how'
+  match '/invitation/accept', :controller => 'invitations', :action => 'edit'
 
 #  match '/users/update_user_for_password', :controller => 'users', :action => 'update_user_for_password'
 #	resources :user_sessions

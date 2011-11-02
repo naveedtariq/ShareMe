@@ -1,21 +1,20 @@
 class InvitationsController < Devise::InvitationsController
 	def edit 
-		@u = User.find_by_invitation_token(params[:invitation_token])
-		unless @u	
-			flash[:error] = 'invalid invitation token!'
+		@user = User.find_by_invitation_token(params[:invitation_token])
+		unless @user
+			flash[:error] = 'Invalid invitation token!'
 			redirect_to root_path and return
 		end
 	end
+	
 	def update
-		@u = User.accept_invitation!(params[:user])
-		
-		if @u.errors.empty?
-			#TODO: add to contacts
-			@u.add_or_update_contact @u.invited_by.id
-			@u.send_confirmation_instructions
+		@user = User.accept_invitation!(params[:user])
+
+		if @user.errors.empty?
+		  	flash[:success] =  "Registeration completed successfully!"
 			redirect_to root_path and return
+		else
+		  respond_with_navigational(@user){ render_with_scope :edit }
 		end
-		@u.password = nil
-		render :edit
 	end
 end
