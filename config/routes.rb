@@ -36,7 +36,11 @@ ShareMe::Application.routes.draw do
   match 'search/(:code)', :controller => 'contacts', :action => "search", :as => :search
   match 'import_contacts', :controller => 'contacts', :action => "import_contacts", :as => :import_contacts
   match 'get_facebook_friends', :controller => 'contacts', :action => "get_facebook_friends", :as => :get_facebook_friends
+  match 'get_twitter_followers', :controller => 'contacts', :action => "get_twitter_followers", :as => :get_twitter_followers
+  match 'get_linked_in_connections', :controller => 'contacts', :action => "get_linked_in_connections", :as => :get_linked_in_connections
   match 'post_on_wall', :controller => 'contacts', :action => "post_on_wall", :as => :post_on_wall
+  match 'direct_message', :controller => 'contacts', :action => "direct_message", :as => :direct_message
+  match 'mailbox_connection', :controller => 'contacts', :action => "mailbox_connection", :as => :mailbox_connection
   match 'show_basic_profile(:id)', :controller => 'contacts', :action => "show_basic_profile", :as => :show_basic_profile
   match '/get_facebook_feed', :controller => 'users', :action => 'get_facebook_feed', :as => :get_facebook_feed
   match '/get_tweets', :controller => 'users', :action => 'get_tweets', :as => :get_tweets

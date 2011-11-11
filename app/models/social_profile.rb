@@ -11,6 +11,7 @@ module SocialProfile
       self.user_tokens.find_by_provider(provider)
     end
 
+# START - Access Tokens to facebook, twitter and linked in
     def facebook_access_token
       if self.user_tokens.find_by_provider("facebook")
         token = self.user_tokens.find_by_provider("facebook").token
@@ -36,25 +37,9 @@ module SocialProfile
         access_token = OAuth::AccessToken.from_hash(consumer,{:oauth_token=>token,:oauth_token_secret=>secret})
       end
     end
+# END - Access Tokens to facebook, twitter and linked in
 
-		def fb_status_feed
-      if token = facebook_access_token
-        @fb_status_feed ||= JSON.parse(token.get("/me/home?limit=10"))["data"]
-      end
-		end
-
-		def tweets
-      if token = twitter_access_token
-        @tweets ||= JSON.parse(token.get("/1/statuses/home_timeline.json?count=10").body)
-      end
-		end
-
-		def linkedin_social_stream
-      if token = linked_in_access_token
-        @li_Stream||= JSON.parse(token.get("/v1/people/~/network/updates?type=SHAR", 'x-li-format' => 'json').body)["values"]
-      end
-		end
-
+# START - facebook, twitter and linked in profile infos
     def facebook
       if token = facebook_access_token
         @facebook ||= JSON.parse(token.get("/me"))
@@ -83,7 +68,29 @@ module SocialProfile
     def google
 #      @google ||= "" # todo
     end
+# END - facebook, twitter and linked in profile infos
 
+# START - Streams to facebook, twitter and linked in
+		def fb_status_feed
+      if token = facebook_access_token
+        @fb_status_feed ||= JSON.parse(token.get("/me/home?limit=10"))["data"]
+      end
+		end
+
+		def tweets
+      if token = twitter_access_token
+        @tweets ||= JSON.parse(token.get("/1/statuses/home_timeline.json?count=10").body)
+      end
+		end
+
+		def linkedin_social_stream
+      if token = linked_in_access_token
+        @li_Stream||= JSON.parse(token.get("/v1/people/~/network/updates?type=SHAR", 'x-li-format' => 'json').body)["values"]
+      end
+		end
+# END - Streams to facebook, twitter and linked in
+
+# START - facebook, twitter and linked in friends list, followers and connected profiles respectively
     def get_facebook_friends_list
       if authenticated_with("facebook")
         fb_friends ||= JSON.parse(self.facebook_access_token.get("/me/friends"))["data"]
@@ -91,6 +98,22 @@ module SocialProfile
       end
     end
 
+    def get_twitter_followers_list
+      if token = authenticated_with("twitter")
+        twitter_followers ||= JSON.parse(self.twitter_access_token.get("/1/statuses/followers/" + token.uid + ".json").body)
+        return twitter_followers 
+      end
+    end
+
+    def get_linked_in_connections
+      if token = authenticated_with("linked_in")
+        linked_in_connections ||= JSON.parse(self.linked_in_access_token.get("/v1/people/~/connections", 'x-li-format' => 'json').body)["values"]
+        return linked_in_connections
+      end
+    end
+# END - facebook, twitter and linked in friends list, followers and connected profiles respectively
+
+# START - facebook, twitter and linked in posting on wall, direct message and inbox respectively
 		def get_fb_name_from_id(id) 
       if token = facebook_access_token
         JSON.parse(token.get("/#{id}"))["name"]
@@ -99,14 +122,34 @@ module SocialProfile
 
     def post_on_fb(id)
       begin
-				invited_token = self.invite_fb_users(get_fb_name_from_id(id))
+				invited_token = self.invite_friend(get_fb_name_from_id(id))
         hay = self.facebook_access_token.post("/"+id.to_s+"/feed",:link=>"http://localhost.com/invitations/accept?invitation_token=#{invited_token}",:message=>"I am using this awesome website!")     
       rescue => msg
         puts "Exception occurred! " + msg.inspect
       end
     end
 
+    def direct_message_to_user(id)
+      begin
+				invited_token = self.invite_friend
+        hay = self.twitter_access_token.post("/1/direct_messages/new.json",:user_id => id, :wrap_links => true, :text => "I am using this awesome website! http://localhost.com/invitations/accept?invitation_token=#{invited_token}.")     
+      rescue => msg
+        puts "Exception occurred! " + msg.inspect
+      end
+    end
 
+    def mailbox_li_connection(options)
+      begin
+				invited_token = self.invite_friend
+        body = {:body => "I am using this awesome website! http://localhost.com/invitations/accept?invitation_token=#{invited_token}."}
+        options = options.merge(body)
+        hay = self.linked_in_access_token.post("/v1/people/~/mailbox", options.to_json,"Content-Type" => "application/json")     
+      rescue => msg
+        puts "Exception occurred! " + msg.inspect
+      end
+    end
+
+# END - facebook, twitter and linked in posting on wall, direct message and inbox respectively
     
     # primitive profile to show what's possible
     def social_profile

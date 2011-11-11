@@ -41,9 +41,9 @@ class User < ActiveRecord::Base
 	end
 
 		
-	def invite_fb_users(user_name)
+	def invite_friend(user_name = nil)
 		a = User.new
-		a.name = user_name
+		a.name = user_name unless user_name.blank?
 		a.invitation_token = generate_invitation_token 
 		a.invited_by = self
 		a.invitation_sent_at = Time.now.utc
@@ -64,14 +64,16 @@ class User < ActiveRecord::Base
 
 # update users' first name and last name
   def update_name
-    if self.f_name.blank? && self.l_name.blank?
-      names = self.name.split(' ')
-      if names.length > 1
-        fname = names[0]
-        lname = self.name.gsub(names[0]+" ","")
+    unless self.name.blank?
+      if self.f_name.blank? && self.l_name.blank?
+        names = self.name.split(' ')
+        if names.length > 1
+          fname = names[0]
+          lname = self.name.gsub(names[0]+" ","")
+        end
+        self.f_name = fname
+        self.l_name = lname
       end
-      self.f_name = fname
-      self.l_name = lname
     end
   end
 
