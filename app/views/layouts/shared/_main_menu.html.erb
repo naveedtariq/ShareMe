@@ -9,7 +9,7 @@
 <img src="<%= user_picturepath %>" alt="Profile User Thumbnail" style="margin-bottom: 10px;" />
   <br />
 	<h2><%= current_user.f_name %>&nbsp;<%= current_user.l_name %></h2>
-	<small><%= current_user.profile.address  %></small> 
+	<small><%= current_user.profile.address1  %></small> 
 
 	<%= link_to "Edit Profile", edit_user_path(current_user),{:title=>"Edit Profile",:class=>"editProfile"} %>
 	<%= link_to "Sign Out","/logout",{:class=>"editProfile"} %>

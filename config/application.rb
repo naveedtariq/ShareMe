@@ -38,6 +38,15 @@ module ShareMe
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    config.filter_parameters += [:creditcard_number]
+    config.filter_parameters += [:creditcard_cvv]
+    config.filter_parameters += [:creditcard_holder_name]
+    config.filter_parameters += [:creditcard_expiry]
+    config.filter_parameters += [:creditcard_zip]
+    config.filter_parameters += [:SSN]
+    config.filter_parameters += [:Tin_no]
+    config.filter_parameters += [:cr_id]
+    config.filter_parameters += [:passport_no]
     config.to_prepare do
       Devise::SessionsController.layout nil
     end

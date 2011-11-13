@@ -6,14 +6,12 @@
     		if($(this).attr('class') == 'closed')
     		{
     			$(".profile_featured_section").animate({height:780},"slow", function(){
-    				$("#show_more").html('Show less');
+    				$("#show_more").html('Show Less');
     			});
     		}
     		else
     		{
-    			$(".profile_featured_section").animate({height:200},"slow", function(){
-    				$("#show_more").html('Show more');
-    			});
+    			$(".profile_featured_section").animate({height:200},"slow");
     		}
     		
     		$('#expand_collapse_profile').toggleClass('closed open');

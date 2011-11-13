@@ -1,37 +1,135 @@
 <div class="profile_featured_section">
   <h2><span><%= contact.name.capitalize %>'S </span>CONTACT INFORMATION</h2>
   <table width="600" border="0" id="userInfoTbl">
-    <tr>
-      <td width="200"><strong>First Name</strong></td>
-      <td><%= contact.f_name %></td>
-    </tr>
-    <tr>
-      <td width="200"><strong>Last Name</strong></td>
-      <td><%= contact.l_name %></td>
-    </tr>
-    <tr>
-    <td width="200"><strong>Company Name</strong></td>
-    <td><%= contact.profile.company_name %></td>
-    </tr>
-    <tr>
-    <td width="200"><strong>Company Address</strong></td>
-    <td><%= contact.profile.company_address %></td>
-    </tr>
-    <tr>
-    <td width="200">&nbsp;</td>
-    <td>&nbsp;</td>
-    </tr>
-    <tr>
-    <td width="200"><strong>Email </strong></td>
-    <td><%= mail_to contact.email %></td>
-    </tr>
-    <tr>
-    <td width="200"><strong>Phone Number </strong></td>
-    <td><a href="callto:<%= contact.profile.phone %>"><%= contact.profile.phone%></a></td>
-    </tr>
-    <tr>
-    <td width="200"> <strong>Fax</strong></td>
-    <td><%= contact.profile.fax %></td>
-    </tr>
+	<div style="width:100%;height:12px;">
+	</div>
+	<tr>
+		<td width="200"><strong>First Name</strong></td>
+		<td><%= contact.f_name.blank? ? contact.social_profile[:first_name] : contact.f_name %></td>
+	</tr>
+	<tr>
+		<td width="200"><strong>Last Name</strong></td>
+		<td><%= contact.l_name.blank? ? contact.social_profile[:last_name] : contact.l_name   %></td>
+	</tr>
+	<tr>
+		<td width="200"><strong>Email </strong></td>
+		<td><%= contact.email.blank? ? contact.social_profile[:email] : contact.email %></td>
+	</tr>
+	<tr>
+		<td width="200"><strong>Company Name</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.company_name.blank?)? contact.social_profile[:company_name] : contact.profile.company_name %></td>
+	</tr>
+	<tr>
+		<td width="200"><strong>Phone Number </strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.phone.blank?)? contact.phone  : contact.profile.phone %></td>
+	</tr>
+	<tr>
+		<td width="200">&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<% if @fgroup.to_i > 1 %>
+	<tr>
+		<td width="200"><strong>Address 1</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.address1.blank?)? ""  : contact.profile.address1 %></td>
+	</tr>
+	<tr>
+		<td width="200"><strong>Address 2</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.address2.blank?)? ""  : contact.profile.address2 %></td>
+	</tr>
+	<tr>
+		<td width="200"><strong>City</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.city.blank?)? ""  : contact.profile.city %></td>
+	</tr>
+	<tr>
+		<td width="200"><strong>State</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.state.blank?)? ""  : contact.profile.state %></td>
+	</tr>
+	<tr>
+		<td width="200"><strong>Zip</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.zip.blank?)? ""  : contact.profile.zip %></td>
+	</tr>
+	<tr>
+		<td width="200"><strong>Country</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.country.blank?)? ""  : contact.profile.country %></td>
+	</tr>
+	<tr>
+		<td width="200"> <strong>Fax</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.fax.blank?)? ""  : contact.profile.fax %></td>
+	</tr>
+	<tr>
+		<td width="200">&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<% end %>
+	<% if @fgroup.to_i > 2 %>
+	<tr>
+		<td width="200"> <strong>Twitter</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.twitter.blank?)? ""  : contact.profile.twitter %></td>
+	</tr>
+	<tr>
+		<td width="200"> <strong>Facebook</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.facebook.blank?)? ""  : contact.profile.facebook %></td>
+	</tr>
+	<tr>
+		<td width="200"> <strong>Myspace</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.myspace.blank?)? ""  : contact.profile.myspace %></td>
+	</tr>
+	<tr>
+		<td width="200"> <strong>LinkedIn</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.linkedin.blank?)? ""  : contact.profile.linkedin %></td>
+	</tr>
+	<tr>
+		<td width="200">&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<% end %>
+	<% if @fgroup.to_i > 3 %>
+	<tr>
+		<td width="200"> <strong>Credit Card Number</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.creditcard_number.blank?)? ""  : contact.profile.creditcard_number %></td>
+	</tr>
+	<tr>
+		<td width="200"> <strong>Card Verification Value</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.creditcard_cvv.blank?)? ""  : contact.profile.creditcard_cvv %></td>
+	</tr>
+	<tr>
+		<td width="200"> <strong>Credit Card Holder</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.creditcard_holder_name.blank?)? ""  : contact.profile.creditcard_holder_name %></td>
+	</tr>
+	<tr>
+		<td width="200"> <strong>Credit Card Expiry Date</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.creditcard_expiry.blank?)? ""  : contact.profile.creditcard_expiry %></td>
+	</tr>
+	<tr>
+		<td width="200"> <strong>Credit Card Zip</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.creditcard_zip.blank?)? ""  : contact.profile.creditcard_zip %></td>
+	</tr>
+	<tr>
+		<td width="200"> <strong>PayPal Email</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.paypal_email_id.blank?)? ""  : contact.profile.paypal_email_id %></td>
+	</tr>
+	<tr>
+		<td width="200">&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<% end %>
+	<% if @fgroup.to_i > 4 %>
+	<tr>
+		<td width="200"> <strong>Social Security Number</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.SSN.blank?)? ""  : contact.profile.SSN %></td>
+	</tr>
+	<tr>
+		<td width="200"> <strong>Tax Identification Number</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.Tin_no.blank?)? ""  : contact.profile.Tin_no %></td>
+	</tr>
+	<tr>
+		<td width="200"> <strong>Credit References ID</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.cr_id.blank?)? ""  : contact.profile.cr_id %></td>
+	</tr>
+	<tr>
+		<td width="200"> <strong>Passport Number</strong></td>
+		<td><%= (contact.profile.blank? || contact.profile.passport_no.blank?)? ""  : contact.profile.passport_no %></td>
+	</tr>
+	<% end %>
   </table> 
 </div>

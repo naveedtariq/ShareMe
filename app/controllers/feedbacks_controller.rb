@@ -2,7 +2,7 @@ class FeedbacksController < ApplicationController
 
   def new
 	 @feedback = Feedback.new
- 	 	 
+   
   end
 	
 	def create
@@ -15,6 +15,7 @@ class FeedbacksController < ApplicationController
       	else
         	redirect_to root_path and return
         end
+				Notifications.send_email(@feedback).deliver	
       end
     end
     @feedback.valid?

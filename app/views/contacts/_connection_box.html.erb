@@ -1,0 +1,75 @@
+<script type="text/javascript">
+var importContactsFromFacebook = function(totalCheckBoxes){
+  params = "";
+  selected = $('#scroll-list :checked');
+  for(var i=0; i < selected.size(); i=i+1)
+  {
+    params = params + selected[i].value + ",";
+  }
+
+	$.ajax({
+		type: 'GET',
+		url: '/mailbox_connection',
+    data: "id="+params,
+		success: function(data) {
+      $('.loader').hide();
+      $('.close-reveal-modal').click();
+      $("#notif_container").notify("create", {
+          title: "Success!",
+          text: "Your selected friends are successfully invited to ShareMe.",
+          icon: "success"
+         },
+         {
+          click: function(e,instance){
+          instance.close();
+         }
+       });
+		}
+	});
+  return false;
+}
+$(function(){
+
+  //$("#import-contacts").reveal();
+  $('#import-contacts-submit').click(function(e){
+    e.preventDefault();
+    $('.loader').show();
+    importContactsFromFacebook('<%= @friends.length %>');
+  });
+
+});
+function selectAllCheckBoxes(formId){
+  if($("#selectAll").is(':checked')){
+    $("form#"+formId+" input[type='checkbox']").attr('checked', true);
+	}else{
+    $("form#"+formId+" input[type='checkbox']").attr('checked', false);
+	}
+}
+</script>
+<div id="import-contacts">
+  <h6>Import your Friends from Facebook</h6>
+  <div id="formData">
+    <form name='fbForm' id='fbForm' >
+      <label id="select-all-contacts" class="with-checkbox">
+        <input type='checkbox' name='selectAll' id='selectAll' onclick="selectAllCheckBoxes('fbForm')" /> Select All Contacts
+      </label>
+      <div id="scroll-list">
+        <ul>
+          <% @friends.each_with_index do |friend, index| %>
+          <li>
+            <input type="hidden" id="users[<%= friend["id"] %>]" name="users[<%= friend["id"] %>]" value="<%= friend["firstName"] %>" />
+           <!-- image_tag friend_pic -->
+            <img src="<%= friend["pictureUrl"] %>" />
+            <label class="with-checkbox">
+              <input type='checkbox' name='<%= index %>' id='<%= index %>' value='<%= friend["id"] %>' /> <%= friend["firstName"] %> <%= friend["lastName"] if friend["lastName"] %>
+            </label>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <input class="blackInputBtn" value="Invite" type="button" id="import-contacts-submit"/>
+      <div class="loader" style="display:none;float: right; margin: 14px 14px;"> <%= image_tag 'ajax-loader.gif' %></div>
+    </form>
+  </div>
+   <a class="close-reveal-modal">&#215;</a>
+</div>

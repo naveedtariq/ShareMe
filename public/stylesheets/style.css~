@@ -780,7 +780,7 @@ a.social-myspace{
 }
 div#expand_collapse_profile{
   cursor:pointer;
-  float:right;
+  float:left;
 }
 .leftBar {
   background: url("../images/white_dotted_pattrn.jpg") repeat scroll 0 0 transparent;

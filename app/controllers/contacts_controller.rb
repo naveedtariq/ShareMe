@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
 
-	layout "default"
+  layout "default"
   before_filter :authenticate_user!, :except =>[:search]
   before_filter :verify_contacts, :only =>[:show]
 
@@ -11,35 +11,36 @@ class ContactsController < ApplicationController
       @contact = current_user.contacts.find(params[:selected])
       @contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
     else
-      if @contact = current_user.contacts.first
-     	@contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
+      @contact = current_user.contacts.first
+      unless @contact.blank?
+        @contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
       end
     end
   end
 
   def show
     @contact =  current_user.contacts.find(params[:id])
+    unless @contact.blank?
+        @contactgroup = translate_group_id(current_user.links.where(:contact_id => @contact.id).first.group_id)
+    end
+    unless @contact.blank?
+	    @fgroup = Link.where(:user_id => @contact.id, :contact_id => current_user.id).first.group_id
+  	end
   end
 
   def new
   end
 
   def create
-    if verify_recaptcha
-      if params[:shareme_code].present? && (@user = User.find_by_code(params[:shareme_code]))
-        @contact = current_user.add_or_update_contact(@user.id)
-        @contacts = current_user.contacts
-        flash[:success] = "User \'#{@user.code}\' Is Successfully Added To Your Contact List!"
-        redirect_to contacts_path
-      else
-        flash[:error] = "There is no User with \'" + params[:shareme_code] + "\' ShareMe Code."
-        #render :new
-        redirect_to new_contact_path
-      end
+    if params[:shareme_code].present? && (@user = User.find_by_code(params[:shareme_code]))
+      @contact = current_user.add_or_update_contact(@user.id)
+      @contacts = current_user.contacts
+      flash[:success] = "User \'#{@user.code}\' Is Successfully Added To Your Contact List!"
+      redirect_to contacts_path
     else
-      flash[:error] = "Captcha Doesn't Match! Please Try again!" 
-      redirect_to new_contact_path
+      flash[:error] = "There is no User with \'" + params[:shareme_code] + "\' ShareMe Code."
       #render :new
+      redirect_to new_contact_path
     end
   end
 
@@ -88,9 +89,46 @@ class ContactsController < ApplicationController
     return render :json=>{:success=>true}
   end
 
+  def direct_message
+    ids = params["id"].split(",")
+    ids.each do |id|
+     current_user.direct_message_to_user(id) 
+    end
+    return render :json=>{:success=>true}
+  end
+
+  def mailbox_connection
+    ids = params["id"].split(",")
+    values = []
+    ids.each do |id|
+      person = {:_path => "/people/"+id}
+      values << {:person => person}
+#     current_user.mailbox_li_connection(id) 
+    end
+    recipients = {:values => values}
+    recipients = {:recipients => recipients}
+    subject = {:subject => "Join ShareMe"}
+    options = recipients.merge(subject)
+#    body = {:body => "join this network of mine"}
+#    final = recipients.merge(subject).merge(body)
+#    json = final.to_json
+    current_user.mailbox_li_connection(options)
+    return render :json=>{:success=>true}
+  end
+
   def get_facebook_friends
     @friends = current_user.get_facebook_friends_list
     render :partial => "friend_box" and return
+  end
+
+  def get_twitter_followers
+    @friends = current_user.get_twitter_followers_list
+    render :partial => "follower_box" and return
+  end
+
+  def get_linked_in_connections
+    @friends = current_user.get_linked_in_connections
+    render :partial => "connection_box" and return
   end
 
   def show_basic_profile

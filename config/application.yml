@@ -1,0 +1,14 @@
+---
+defaults: &defaults
+  app_name: ShareMe
+  encryption_key: '123456'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  encryption_key: 'JE<mmksadqwIDSAl'

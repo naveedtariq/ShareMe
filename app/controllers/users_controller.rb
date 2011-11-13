@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
-	layout "default", :except=> [:new, :create]
-  before_filter :authenticate_user!, :except => [:update_user_for_password]
-  before_filter :correct_redirect
 
-	def user_home
+	layout "default", :except=>[:new, :create]
+	before_filter :authenticate_user!, :except => [:update_user_for_password]
+	before_filter :correct_redirect
+
+	def user_home	
 	end
 
   def edit
@@ -15,8 +16,9 @@ class UsersController < ApplicationController
     @user = current_user
     @user.update_attributes(params[:user])
     @user.profile.update_attributes(params[:profile_attributes])
+    
     flash[:success] = "Your Profile Has Been Updated Successfully!"
-    redirect_to "/user_home" and return
+    redirect_to '/user_home' and return
     render :action => :user_home
   end
 

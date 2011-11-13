@@ -47,12 +47,7 @@
         <td width="200"><strong>ShareMe code</strong></td>
         <td><%= text_field_tag :shareme_code,nil,:class=>"textField", :style=>"text-transform: uppercase;", :maxlength => 4 %></td>
       </tr>
-      <tr>
-        <td width="200">&nbsp;</td>
-        <td><%= recaptcha_tags %></td>
     </table>
-    <div id="recaptcha-div">
-    </div>
     <p><%= u.submit "Add",:class=>"blackInputBtn" %></p>
   <% end %>
 	<%= link_to "Sign Out","/logout",{:class=>"moreBtnPlain"} %>

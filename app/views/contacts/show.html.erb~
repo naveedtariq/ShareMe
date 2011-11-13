@@ -3,6 +3,6 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-		$(".profile_featured_section").css('height','100%');
+		$(".profile_featured_section").css('height','780px');
     });
 </script>
