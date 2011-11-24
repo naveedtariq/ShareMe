@@ -816,6 +816,9 @@ ul.left_navigation li {
 	
 }
 ul.left_navigation li a {
+  background-color: #CCCCCC;
+  border-bottom: 1px solid #DDDDDD;
+  border-top: 1px solid #999999;
   display: block;
   padding: 5px 21px;
 }
@@ -823,11 +826,9 @@ ul.left_navigation li a.activeLeft {
   background-color: #FFBA00;
   display: block;
   padding: 5px 21px;
-  font-weight: bold;
 }
 ul.left_navigation_sub {
   float: left;
-  margin: 5px 0;
   width: 225px;
 }
 ul.left_navigation_sub li {
@@ -839,6 +840,8 @@ ul.left_navigation_sub li a {
   display: block;
   padding: 5px 30px;
   font-size: smaller;
+  /*border-bottom: 1px solid #DDDDDD;*/
+  background-color: #AAAAAA;
 }
 ul.left_navigation_sub li a.activeLeft {
   background-color: #FFBA00;
@@ -846,6 +849,7 @@ ul.left_navigation_sub li a.activeLeft {
   padding: 5px 30px;
   font-size: smaller;
   font-weight: bold;
+  border: none;
 }
 table#userInfoTbl {
 	width: 700px;
@@ -1574,4 +1578,72 @@ table#userInfoTbl td {
   margin: 0 0 20px;
   width: 600px;
 }
+#slider {
+  width: 710px; /* important to be same as image width */
+  height: 195px; /* important to be same as image height */
+  position: relative; /* important */
+  overflow: hidden; /* important */
+}
 
+#sliderContent {
+  width: 710px; /* important to be same as image width or wider */
+  position: absolute;
+  top: 0;
+  margin-left: 0;
+}
+
+.sliderImage {
+  float: left;
+  position: relative;
+  display: none;
+}
+
+
+
+.clear {
+  clear: both;
+}
+
+.sliderImage span strong {
+  font-size: 14px;
+}
+.profile_featured_section_full_custom {
+  background-color: #FFFFFF;
+  border: 1px solid #FFE400;
+  float: left;
+  margin: 0 0 10px;
+  position: relative;
+  width: 735px;
+}
+.profile_featured_section_full_custom h2 {
+  background-color: #000000;
+  padding: 5px 10px;
+  text-align: center;
+  width: 715px;
+}
+.profile_featured_section_full_custom h3 {
+  float: left;
+  font-size: 10em;
+  margin: 0 0 0 20px;
+}
+.profile_featured_section_full_custom img {
+  float: left;
+  margin: 20px 20px 20px 30px;
+}
+.profile_featured_section_full_custom a {
+  border: 1px solid #000000;
+  float: left;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 35px;
+  padding: 20px;
+  text-decoration: none;
+}
+.profile_featured_section_full_custom a:hover {
+  background-color: #FFB900;
+  color: #111111;
+}
+.no-contacts-sign-out {
+  top: 13px !important;
+  right: 15px !important;
+}

@@ -59,24 +59,30 @@
 <!--   </div>-->
 <!--  <br />-->
 <%# end %>
-<div class="profile_featured_section_full darkBg">
-  <h2>All Contacts</h2>
   <% if @contacts.size > 0 %>
-  <div class="scolling">
-    <% @contacts.each do |ct| %>
-      <% if ct.id == @contact.id %>
-        <% cl = "c_links selected_link" %>
-      <% else %>
-        <% cl = "c_links" %>
+  <div class="profile_featured_section_full darkBg">
+    <h2>All Contacts</h2>
+    <div class="scolling">
+      <% @contacts.each do |ct| %>
+        <% if ct.id == @contact.id %>
+          <% cl = "c_links selected_link" %>
+        <% else %>
+          <% cl = "c_links" %>
+        <% end %>
+        <%= link_to image_tag(ct.profile.picture_file_name.nil? ? "/images/all_contacts_thumb.jpg" : ct.profile.picture.url(:contact_list_thumb)) +ct.name,contact_path(ct),:class=>cl,:id=>ct.id %>
       <% end %>
-      <%= link_to image_tag(ct.profile.picture_file_name.nil? ? "/images/all_contacts_thumb.jpg" : ct.profile.picture.url(:contact_list_thumb)) +ct.name,contact_path(ct),:class=>cl,:id=>ct.id %>
-    <% end %>
+    </div>
+    <%= link_to "Sign Out","/logout",{:id=>"contact-signout",:class=>"moreBtnPlain"} %>
   </div>
   <% else %>
-    <div style="height: 25px; font-size: 20px; text-align: center; line-height: 25px;">Currently You Have No Contacts!!!</div>
+    <div class="profile_featured_section_full_custom">
+      <h2>No Contacts</h2>
+      <img alt="Profile User Thumbnail" src="/images/default-pro-avatar.jpg">
+      <h3>+</h3>
+      <%= link_to "Add your first ShareMe", new_contact_path %>
+    </div>
+    <%= link_to "Sign Out","/logout",{:id=>"contact-signout",:class=>"moreBtnPlain no-contacts-sign-out"} %>
   <% end %>
-	<%= link_to "Sign Out","/logout",{:id=>"contact-signout",:class=>"moreBtnPlain"} %>
-</div>
 <img class="loadingprof" style="display:none;margin-bottom:8px" src="images/ajax-loader.gif">
 <div id="basic_profile_info">
   <% unless @contact.blank? %>

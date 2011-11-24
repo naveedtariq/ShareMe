@@ -19,16 +19,15 @@
 			<%= link_to "Home", user_home_path,{:title=>"Home",:class=>request.fullpath.include?("home") ? "activeLeft" : "normal"} %>
 		</li>
 		<li>
-			<%= link_to "Contacts", contacts_path,{:title=>"Contacts",:class=>request.fullpath.eql?("/contacts") ? "activeLeft" : "normal"} %>
+			<%= link_to "ShareMe's", contacts_path,{:title=>"ShareMe's",:class=>request.fullpath.eql?("/contacts") ? "activeLeft" : "normal"} %>
       <% if request.fullpath.include?("contacts") %>
         <ul class="left_navigation_sub">
           <li>
-			      <%= link_to "Add Contact", new_contact_path,{:title=>"Add Contact",:class=>request.fullpath.eql?("/contacts/new") ? "activeLeft" : "normal"} %>
+			      <%= link_to "Add a ShareMe", new_contact_path,{:title=>"Add a ShareMe",:class=>request.fullpath.eql?("/contacts/new") ? "activeLeft" : "normal"} %>
           </li>
           <li>
 			      <%= link_to "Import Contacts", import_contacts_path,{:title=>"Imprt Contacts",:class=>request.fullpath.eql?("/import_contacts") ? "activeLeft" : "normal"} %>
           </li>
-          <li><a href="#">Upload Contacts</a></li>
         </ul>
       <% end %>
     </li>

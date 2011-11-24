@@ -2,8 +2,13 @@
 <% content_for :top_js do %>
   <%= javascript_include_tag "home_page" %>
   <%= javascript_include_tag "jquery.carousel.min" %>
+  <%= javascript_include_tag "s3Slider" %>
+
   <script type="text/javascript">
     $(document).ready(function() {
+      $('#slider').s3Slider({
+          timeOut: 8000
+        });
       $('#connect_with_facebook').click(function() {
         var left = (screen.width/2)-(900/2);
         var top = (screen.height/2)-(500/2);
@@ -112,15 +117,22 @@ var show_no_confirmation = function() {
 
 <div class="featured_section">
 
-<h2>HOW <span>Share Me</span> WILL MAKE YOUR LIFE SIMPLER</h2>
+  <h2>HOW <span>Share Me</span> WILL MAKE YOUR LIFE SIMPLER</h2>
 
-<img src="/images/abuot_share_me_thumb.jpg" alt="ABOUT SHARE ME" />
-
-<img src="/images/how_share_me_works_thumb.jpg" alt="HOW SHARE ME WORKS" />
-
-<img src="/images/how_share_me_helps_thumb.jpg" alt="HOW SHARE ME HELPS?" />
-
-<a href="/how_share_me_works" class="moreBtnWhite">more scenarios</a> </div>
+  <div id="slider">
+    <ul id="sliderContent">
+      <li class="sliderImage">
+        <a href=""><img src="/images/slider-img-01.jpg" alt="Slider Images" /></a>
+        <span class="top"><strong>Title text 1</strong><br />Content text...</span>
+      </li>
+      <li class="sliderImage">
+         <a href=""><img src="/images/slider-img-02.jpg" alt="Slider Images" /></a>
+         <span class="top"><strong>Title text 1</strong><br />Content text...</span>
+       </li>
+        <div class="clear sliderImage"></div>
+      </ul>
+  </div>
+</div>
 
 <!--Featured Section ends here--> 
 
@@ -276,6 +288,9 @@ get their ShareMe!
 <div class="already_a_member">
   <p>Already a Member ?</p>
   <a id="sign-in-btn" href="/users/sign_in?height=142&width=299&modal=true" class="blackInputBtn thickbox">Sign In</a>
+</div>
+<div class="already_a_member" style="padding-left: 45px; width: 200px;">
+  <img src="/images/find-me.png" />
 </div>
 
 <!--Already Member section ends here--> 

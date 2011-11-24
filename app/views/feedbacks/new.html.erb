@@ -113,57 +113,65 @@ var show_no_confirmation = function() {
   <div class="left_custom">
     <h2><span>Contact </span>Us</h2>
     <div class="contact-us-sec">
-      <div style="padding:5px;margin:5px;">
-        <h1 style="color:black;"><strong>ShareMe</strong></h1>
-        <p><strong>315 Meigs Rd, Suite A #403,</strong></p>
-        <p><strong>Santa Barbara, CA 93109 USA</strong></p>
-        <p style="color:black;"><strong>Telephone Toll Free:</strong></p>
-        <p><strong>1-877-711-3113</strong></p>
-        <p><strong>1-805-962-7614 (from outside the USA)</strong></p>
-        <p><strong><span style="color:black;">Fax:</span> 1-805-725-4490</strong></p>
-        <p><strong><span style="color:black;">Email:</span> <a href="mailto:sales@quantum-life.com">sales@quantum-life.com</a></strong></p>
+      <div id="container" style="width:700px; margin-bottom:10px;">
+        <div style="padding: 5px; margin: 5px; float: left; width: 283px;">
+          <h1 style="color:black;"><strong>ShareMe</strong></h1>
+          <p><strong>315 Meigs Rd, Suite A #403,</strong></p>
+          <p><strong>Santa Barbara, CA 93109 USA</strong></p>
+          <p style="color:black;"><strong>Telephone Toll Free:</strong></p>
+          <p><strong>1-877-711-3113</strong></p>
+          <p><strong>1-805-962-7614 (from outside the USA)</strong></p>
+          <p><strong><span style="color:black;">Fax:</span> 1-805-725-4490</strong></p>
+          <p><strong><span style="color:black;">Email:</span> <a href="mailto:sales@quantum-life.com">sales@quantum-life.com</a></strong></p>
+        </div>
+        <div style="float: right; width: 370px; margin: 5px;"> 
+          <img src="/images/share-me-is-easy.jpg" style="width:370px; margin: 0 !important; float: none !important;"/>
+        </div>
+        <div style="clear:both;"></div>
       </div>
-      <%= form_for @feedback do |f| %>
-        <%= render :partial => 'shared/errors', :locals => {:target => @feedback } %>
-        <table width="600" border="0" id="userInfoTblCustom">
-          <tr>
-            <td width="200"><label>*First Name</label></td>
-            <td>
-              <%= f.text_field :first_name %>
-            </td>
-          </tr>
-          <tr>
-            <td width="200"><label>Last Name</label></td>
-            <td>
-              <%= f.text_field :last_name %>
-            </td>
-          </tr>
-          <tr>
-            <td width="200"><label>*Email Address</label></td>
-            <td>
-              <%= f.email_field :email %>
-            </td>
-          </tr>
-          <tr>
-            <td width="200" valign="top"><label>*Query / Comment</label></td>
-            <td>
-              <%= f.text_area :comments, :cols=>42, :rows => 7 %>
-            </td>
-          </tr>
-          <tr>
-            <td width="200"><label></label></td>
-            <td>
-              <%= recaptcha_tags %>
-            </td>
-          </tr>
-          <tr>
-            <td width="200">&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-         </table>
-         <a style="cursor:pointer;" id="reset-btn" class="blackInputBtn">Reset</a>
-        <%= f.submit 'Send', :class => "blackInputBtn" %>
-       <% end %>
+      <div style="width:700px;">
+        <%= form_for @feedback do |f| %>
+          <%= render :partial => 'shared/errors', :locals => {:target => @feedback } %>
+          <table width="600" border="0" id="userInfoTblCustom">
+            <tr>
+              <td width="200"><label>*First Name</label></td>
+              <td>
+                <%= f.text_field :first_name %>
+              </td>
+            </tr>
+            <tr>
+              <td width="200"><label>Last Name</label></td>
+              <td>
+                <%= f.text_field :last_name %>
+              </td>
+            </tr>
+            <tr>
+              <td width="200"><label>*Email Address</label></td>
+              <td>
+                <%= f.email_field :email %>
+              </td>
+            </tr>
+            <tr>
+              <td width="200" valign="top"><label>*Query / Comment</label></td>
+              <td>
+                <%= f.text_area :comments, :cols=>42, :rows => 7 %>
+              </td>
+            </tr>
+            <tr>
+              <td width="200"><label></label></td>
+              <td>
+                <%= recaptcha_tags %>
+              </td>
+            </tr>
+            <tr>
+              <td width="200">&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+           </table>
+           <a style="cursor:pointer;" id="reset-btn" class="blackInputBtn">Reset</a>
+          <%= f.submit 'Send', :class => "blackInputBtn" %>
+         <% end %>
+       </div>
     </div>
   </div>
 </div>
@@ -258,6 +266,9 @@ var show_no_confirmation = function() {
 <div class="already_a_member">
   <p>Already a Member ?</p>
   <a id="sign-in-btn" href="/users/sign_in?height=142&width=299&modal=true" class="blackInputBtn thickbox">Sign In</a>  
+</div>
+<div class="already_a_member" style="padding-left: 45px; width: 200px;">
+  <img src="/images/find-me.png" />
 </div>
 
 <!--Already Member section ends here--> 
