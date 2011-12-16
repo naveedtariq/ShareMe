@@ -2,8 +2,39 @@
 <% content_for :top_js do %>
   <%= javascript_include_tag "home_page" %>
   <%= javascript_include_tag "jquery.carousel.min" %>
+  <%= javascript_include_tag "jquery-animate-css-rotate-scale" %>
+  <%= javascript_include_tag "jquery-css-transform" %>
   <script type="text/javascript">
     $(document).ready(function() {
+      $('p.born-what-text-block-2 ').animate({rotate: '3deg'}, 200);
+      $('p.born-what-text-block-2 ').hover(function(){
+        $(this).animate({rotate: '6deg'}, 200);
+      }, function() {
+        $(this).animate({rotate: '3deg'}, 200);
+      });
+
+      $('p.born-what-text-block-3 ').animate({rotate: '-3deg'}, 200);
+      $('p.born-what-text-block-3 ').hover(function(){
+        $(this).animate({rotate: '-6deg'}, 200);
+      }, function() {
+        $(this).animate({rotate: '-3deg'}, 200);
+      });
+
+      $('p.born-what-text-block-4 ').animate({rotate: '3deg'}, 200);
+
+      $('p.born-what-text-block-4 ').hover(function(){
+        $(this).animate({rotate: '6deg'}, 200);
+      }, function() {
+        $(this).animate({rotate: '3deg'}, 200);
+      });
+
+      $('p.born-what-text-block-6 ').animate({rotate: '5deg'}, 200);
+      $('p.born-what-text-block-6 ').hover(function(){
+        $(this).animate({rotate: '10deg'}, 200);
+      }, function() {
+        $(this).animate({rotate: '5deg'}, 200);
+      });
+
       $('#connect_with_facebook').click(function() {
         var left = (screen.width/2)-(900/2);
         var top = (screen.height/2)-(500/2);
@@ -106,11 +137,63 @@ var show_no_confirmation = function() {
 <div class="left_contents">
   <div class="left_custom">
     <h2><span>How Share me </span>Was Born</h2>
-    <div id="story-share-me">
-      <img src="/images/story-step-1.jpg" alt="how share me was born Story step one" />
-      <img src="/images/story-step-2.jpg" alt="how share me was born Story step two" />
-      <img src="/images/story-step-3.jpg" alt="how share me was born Story step three" />
-      <a href="#" class="get-share-me">Get Share me now</a>
+    <div id="born-story-share-me">
+      <p class="born-what-text-block-1-plain">
+        One day, driving datatimemy kids to
+        school I reveived a sales call
+        from the Middle East
+      </p>
+      <p class="born-what-text-block-2" style="-moz-transform: rotate(3deg);">
+        He was calling from Skype and I
+        was in a bad cellphone recep-
+        tion are, kids in the car and in
+        the middle of traffic!
+      </p>
+      <p class="born-what-text-block-3" style="-moz-transform: rotate(-3deg);">
+        "I want to buy! I decided whoever
+        answered the phone will get the
+        $7000 business! Please note
+        down my credit card information."
+      </p>
+      <a class="what-i-do-btn" href="#">What do i do know!?</a>
+      <p class="born-what-text-block-4" style="-moz-transform: rotate(3deg);">
+        All I can do is tell my kid to type it
+        down on his cell phone! Next, he tells
+        me his name and then: <br>
+        <br>
+        <strong>BOOM! Call dropped! And I've
+        lost a $7000 sale!</strong>
+      </p>
+      <p class="born-what-text-block-5-plain">
+        And the worst part, the credit card number isn't
+        complete and my cellphone didnlt register his
+        phone number!<br>
+        <br>
+        <strong>BUT THEN HE CALLS AGAIN!</strong>
+      </p>
+      <p class="born-what-text-block-6" style="-moz-transform: rotate(5deg);">
+        I thank him for calling back, but then in
+        trying to drive my way to good receoption;
+        and with the kids talking, his accent com-
+        pletely fails me!
+
+        "Sorry was that a yn or ym? Hello? Can
+        you hear me?! Hello! I am sorry, come
+        again! Hello!"<br>
+        <br>
+        <strong>BOOM! CALL DROPPED AGAIN!</strong>
+      </p>
+      <p class="born-what-text-block-7-plain">
+        <strong>SOUND FAMILIAR!?</strong><br>
+        <br>
+        As a business owner this had happened one too many times; and
+        hence Share Me was born! Now instead on getting lost in all the details
+        I just ask for their <strong>4-digit Share Me code.</strong><br>
+        <br>
+        <strong>Saves both parties time; gets rid of the stress; increases my
+        level of professionalism' and gurentees me that sale!</strong>
+      </p>
+      <a class="get-share-me" href="#">Get Share me now</a>
     </div>
   </div>
 </div>

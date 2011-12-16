@@ -2,8 +2,31 @@
 <% content_for :top_js do %>
   <%= javascript_include_tag "home_page" %>
   <%= javascript_include_tag "jquery.carousel.min" %>
+  <%= javascript_include_tag "jquery-animate-css-rotate-scale" %>
+  <%= javascript_include_tag "jquery-css-transform" %>
   <script type="text/javascript">
     $(document).ready(function() {
+      $('p.what-text-block-1').animate({rotate: '-5deg'}, 200);
+      $('p.what-text-block-1').hover(function(){
+        $(this).animate({rotate: '-12deg'}, 200);
+      }, function() {
+        $(this).animate({rotate: '-5deg'}, 200);
+      });
+
+      $('p.what-text-block-2').animate({rotate: '-3deg'}, 200);
+      $('p.what-text-block-2').hover(function(){
+        $(this).animate({rotate: '-10deg'}, 200);
+      }, function() {
+        $(this).animate({rotate: '-3deg'}, 200);
+      });
+
+      $('p.what-text-block-3').animate({rotate: '5deg'}, 200);
+      $('p.what-text-block-3').hover(function(){
+        $(this).animate({rotate: '12deg'}, 200);
+      }, function() {
+        $(this).animate({rotate: '5deg'}, 200);
+      });
+
       $('#connect_with_facebook').click(function() {
         var left = (screen.width/2)-(900/2);
         var top = (screen.height/2)-(500/2);
@@ -107,9 +130,23 @@ var show_no_confirmation = function() {
   <div class="left_custom">
     <h2><span>What is </span>Share me</h2>
     <div id="story-share-me">
-      <img src="images/what-is-share-me-step-1.jpg" alt="Share me an online respository database that stores crictial user information through SSL Encryption method" />
-      <img src="images/what-is-share-me-step-2.jpg" alt="Share me"/>      
-      <a href="#" class="get-share-me">Get Share me now</a>
+      <p class="what-text-block-1" style="-moz-transform: rotate(-5deg);">
+        Share Me is online repository
+        databse that stores critical user
+        information through a secure SSL
+        encryption method.
+      </p>
+      <p class="what-text-block-2" style="-moz-transform: rotate(-3deg);">
+        Each registered user is given their own personalized
+        4-digit Share Me code that they can give to whoever
+        they want to share their informtaion with.
+      </p>
+      <p class="what-text-block-3" style="-moz-transform: rotate(5deg);">
+        Each profile has 5 levels of personal data stored with
+        specified security levelss. So with Share Me you can
+        now choose exactly who sees what, and when!
+      </p>
+      <a class="get-share-me" href="#">Get Share me now</a>
     </div>
   </div>
 </div>
