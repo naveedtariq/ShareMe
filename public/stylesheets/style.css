@@ -1650,20 +1650,20 @@ table#userInfoTbl td {
 }
 img.lft {
   float: left;
-  margin: 10px 20px 0 0;
+  margin: 10px 20px 0 25px;
 }
 .quotes-container {
   box-shadow: 5px 7px 7px #DFDFDF;
   margin: 47px 19px;
   overflow: hidden;
   padding: 10px;
-  text-align: left;
-  width: 468px;
+  text-align: right;
+  width: 440px;
 }
 .intructory_section h4 {
   color: #FCAB00;
   font-family: 'lithospro-black-webfont';
-  font-size: 18px;
+  font-size: 14px;
 }
 .intructory_section h3 {
   color: #000000;
@@ -1884,4 +1884,17 @@ p.what-text-block-3 {
   position: absolute;
   text-align: center;
   width: 436px;
+}
+.intructory_section h5 {
+  color: #FCAB00;
+  font-family: 'lithospro-black-webfont';
+  font-size: 20px;
+}
+.quotes-container-rt {
+  box-shadow: 5px 7px 7px #DFDFDF;
+  margin: 47px 19px;
+  overflow: hidden;
+  padding: 10px;
+  text-align: left;
+  width: 440px;
 }
